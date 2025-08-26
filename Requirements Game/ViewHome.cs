@@ -1,0 +1,75 @@
+﻿using System.Windows.Forms;
+using System.Drawing;
+using Requirements_Game;
+
+public class ViewHome : CustomTableLayoutPanel {
+
+    public ViewHome() {
+
+        // View Properties
+
+        this.Dock = DockStyle.Fill;
+        this.Padding = new Padding(0);
+
+        this.ColumnCount = 2;
+        this.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
+        this.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));    
+        
+        this.RowCount = 2;
+        this.RowStyles.Add(new RowStyle(SizeType.Percent, 50f));
+        this.RowStyles.Add(new RowStyle(SizeType.Percent, 50f));
+
+        // Game Title
+
+        Label gameTitle = new Label();
+        gameTitle.Font = new Font(GlobalVariables.AppFontName, 30, FontStyle.Bold);
+        gameTitle.Text = "Requirements Elicitation Game";
+        gameTitle.Dock = DockStyle.Fill;
+        gameTitle.AutoSize = true;
+        gameTitle.TextAlign = ContentAlignment.BottomCenter;
+        gameTitle.Padding = new Padding(0, 0, 0, 50);
+
+        this.Controls.Add(gameTitle,0,0);
+        this.SetColumnSpan(gameTitle, 2);
+
+        // Play Button
+
+        CustomTextButton playButton = new CustomTextButton();
+        playButton.Name = "Play";
+        playButton.Text = "Play";
+        playButton.Dock = DockStyle.None;
+        playButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        playButton.Margin = new Padding(0, 0, 20, 0);
+        this.Controls.Add(playButton, 0, 1);
+
+        playButton.MouseClick += Button_MouseClick;
+
+        // Help Button
+
+        CustomTextButton helpButton = new CustomTextButton();
+        helpButton.Name = "Help";
+        helpButton.Text = "Help";
+        helpButton.Dock = DockStyle.None;
+        helpButton.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+        helpButton.Margin = new Padding(20, 0, 0, 0);
+        this.Controls.Add(helpButton, 1, 1);
+
+    }
+
+    private void Button_MouseClick(object sender, MouseEventArgs e) {
+
+        if (e.Button != MouseButtons.Left) return;
+
+        CustomTextButton button = (CustomTextButton)sender;
+        string buttonName = button.Name;
+
+        if (buttonName == "Play") {
+
+            Form1 form1 = (Form1)this.FindForm();
+            form1.ChangeView("Scenarios");
+
+        }
+
+    }
+
+}
