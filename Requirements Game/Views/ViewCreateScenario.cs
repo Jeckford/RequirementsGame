@@ -60,7 +60,7 @@ public class ViewCreateScenario : View {
 
         RebuildView_Label(ref subTableLayoutPanel, "Stakeholders");
 
-        foreach (Stakeholder stakeholder in Scenario.GetStakeholder()) {
+        foreach (Stakeholder stakeholder in Scenario.GetStakeholders()) {
 
             RebuildView_LabelledRichTextBox(ref subTableLayoutPanel, "Name", stakeholder.Name);
             RebuildView_LabelledRichTextBox(ref subTableLayoutPanel, "Role", stakeholder.Role);

@@ -32,6 +32,7 @@ namespace Requirements_Game {
             this.CurrentViewTitle = "";
             this.PreviousViewTitles = new List<string>();
 
+            Scenarios.LoadFromFile();
             // -- MainTableLayoutPanel
             // Split into two row parts, the title bar and the main sectin
             // Main section will be where the different views are added and removed

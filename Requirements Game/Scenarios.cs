@@ -2,103 +2,95 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-public static class Scenarios {
 
+public static class Scenarios
+{
     public static event EventHandler ScenariosChanged;
 
-    static private List<Scenario> ListOfScenarios;
+    private static List<Scenario> listOfScenarios;
 
-    static Scenarios() {
+    static Scenarios()
+    {
+        listOfScenarios = new List<Scenario>();
 
-        ListOfScenarios = new List<Scenario>();
+        // Temporary hardcoded scenario for UI testing
+        //var scenario1 = new Scenario
+        //{
+        //    Name = "Book Discussion Platform",
+        //    Description = "An online space for book clubs to chat, track reading progress, host discussions, and share notes in real time."
+        //};
 
-        // Manually creating the scenarios for ui implementation
-        // These should be loaded from a file instead, implement later
-
-        Scenario scenario1 = new Scenario();
-        scenario1.Name = "Book Discussion Platform";
-        scenario1.Description = "An online space for book clubs to chat, track reading progress, host discussions, and share notes in real time.";
-        ListOfScenarios.Add(scenario1);
-
-        Scenario scenario2 = new Scenario();
-        scenario2.Name = "Online Food Delivery Platform";
-        scenario2.Description = "A delivery app that connects users with local restaurants, offering real-time tracking, contactless delivery, and driver features.";
-        ListOfScenarios.Add(scenario2);
-
-        Scenario scenario3 = new Scenario();
-        scenario3.Name = "Course Registration System";
-        scenario3.Description = "A university system where students register for courses, view schedules, handle prerequisites, and manage academic plans.";
-        ListOfScenarios.Add(scenario3);
-
-        Scenario scenario4 = new Scenario();
-        scenario4.Name = "Smart Parking System";
-        scenario4.Description = "An IoT-enabled app that helps users locate, reserve, and pay for parking spots with live availability and sensor-based tracking.";
-        ListOfScenarios.Add(scenario4);
-
-        Scenario scenario5 = new Scenario();
-        scenario5.Name = "Mental Health App";
-        scenario5.Description = "A mobile platform providing mood tracking, journaling, mindfulness exercises, and access to certified mental health professionals.";
-        ListOfScenarios.Add(scenario5);
-
+        //listOfScenarios.Add(scenario1);
     }
-
-    static void Add(Scenario item) {
-
-        ListOfScenarios.Add(item);
-
-    }
-
-    static void Remove(Scenario item) {
-
-        ListOfScenarios.Remove(item);
-
+    public static void LoadFromFile()
+    {
+        listOfScenarios = FileManager.LoadScenarios();
         ScenariosChanged?.Invoke(null, EventArgs.Empty);
-
+    }
+    public static void SaveToFile()
+    {
+        FileManager.SaveScenarios(listOfScenarios);
     }
 
-     static public Scenario[] GetScenarios() { 
-    
-        return ListOfScenarios.ToArray();
-
+    public static void Add(Scenario item)
+    {
+        listOfScenarios.Add(item);
+        ScenariosChanged?.Invoke(null, EventArgs.Empty);
     }
 
+    public static void Remove(Scenario item)
+    {
+        listOfScenarios.Remove(item);
+        ScenariosChanged?.Invoke(null, EventArgs.Empty);
+    }
+
+    public static Scenario[] GetScenarios()
+    {
+        return listOfScenarios.ToArray();
+    }
+
+    public static List<Scenario> ScenarioList => listOfScenarios;
 }
 
-public class Scenario {
-
+// Houses a single Scenario, is managed by Scenarios.
+public class Scenario
+{
     public string Name { get; set; }
     public string Description { get; set; }
+    public string Prompt { get; set; }
+
     public Stakeholder SeniorSoftwareEngineer { get; }
     public List<Stakeholder> ListStakeholders { get; }
+    public List<string> FunctionalRequirements { get; }
+    public List<string> NonFunctionalRequirements { get; }
 
-    public Scenario() {
-
+    public Scenario()
+    {
         Name = "";
         Description = "";
+        Prompt = "";
         SeniorSoftwareEngineer = new Stakeholder();
         ListStakeholders = new List<Stakeholder>();
-
+        FunctionalRequirements = new List<string>();
+        NonFunctionalRequirements = new List<string>();
     }
 
-    public void AddStakeholder(Stakeholder Stakeholder) {
-
-        ListStakeholders.Add(Stakeholder);
-
+    public void AddStakeholder(Stakeholder stakeholder)
+    {
+        ListStakeholders.Add(stakeholder);
     }
 
-    public Stakeholder[] GetStakeholder() {
-
+    public Stakeholder[] GetStakeholders()
+    {
         return ListStakeholders.ToArray();
-
     }
-
 }
 
-public class Stakeholder {
 
+// Stakeholder class used by Scenario for senior engineer and other stakeholders.
+public class Stakeholder
+{
     public string Name { get; set; }
     public string Role { get; set; }
     public string Personality { get; set; }
-    public Image ProfilePicture { get; set; }
-
 }
