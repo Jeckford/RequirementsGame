@@ -1,90 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\",
+  "WorkspaceRootPath": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\viewchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\viewchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\scenariodetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\scenariodetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\viewscenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\viewscenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\profilelabel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\profilelabel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\customtextbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\customtextbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\custompanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\custompanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\customlabel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\customlabel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\customtextbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\customtextbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\views\\vieweditscenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\vieweditscenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\views\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\globalvariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\globalvariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\views\\viewhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\customtablelayoutpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\customtablelayoutpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\views\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\roundedcorners.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\roundedcorners.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\views\\viewscenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewscenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\custompicturebox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\custompicturebox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\customcontrols\\customlabelledrichtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\customcontrols\\customlabelledrichtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\requirements game\\requirements game\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\bitmapmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\bitmapmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\jarron.eckford\\downloads\\project 02-09-2025\\requirements game\\requirements game\\views\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -94,276 +46,123 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CustomTextButton.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomTextButton.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\CustomTextButton.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomTextButton.cs [Design]",
-              "RelativeToolTip": "Requirements Game\\CustomTextButton.cs [Design]",
+              "DocumentIndex": 2,
+              "Title": "ViewEditScenario.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewEditScenario.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewEditScenario.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewEditScenario.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\ViewEditScenario.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T05:45:20.606Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\Form1.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\Form1.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\Form1.cs [Design]",
-              "RelativeToolTip": "Requirements Game\\Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T05:37:23.674Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "CustomPictureBox.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomPictureBox.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\CustomPictureBox.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomPictureBox.cs",
-              "RelativeToolTip": "Requirements Game\\CustomPictureBox.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T04:53:42.427Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ChatLog.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ChatLog.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ChatLog.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ChatLog.cs [Design]",
-              "RelativeToolTip": "Requirements Game\\ChatLog.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T04:51:23.494Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "RoundedCorners.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\RoundedCorners.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\RoundedCorners.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\RoundedCorners.cs",
-              "RelativeToolTip": "Requirements Game\\RoundedCorners.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T03:44:25.241Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CustomTableLayoutPanel.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomTableLayoutPanel.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\CustomTableLayoutPanel.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomTableLayoutPanel.cs",
-              "RelativeToolTip": "Requirements Game\\CustomTableLayoutPanel.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAAD4AAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T02:50:54.779Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CustomPanel.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomPanel.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\CustomPanel.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomPanel.cs",
-              "RelativeToolTip": "Requirements Game\\CustomPanel.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T02:37:05.782Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CustomTextButton.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomTextButton.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\CustomTextButton.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomTextButton.cs",
-              "RelativeToolTip": "Requirements Game\\CustomTextButton.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:38:39.016Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CustomLabel.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomLabel.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\CustomLabel.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\CustomLabel.cs",
-              "RelativeToolTip": "Requirements Game\\CustomLabel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:35:18.134Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "View.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\View.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\View.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\View.cs",
-              "RelativeToolTip": "Requirements Game\\View.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:06:07.06Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProfileLabel.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ProfileLabel.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ProfileLabel.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ProfileLabel.cs",
-              "RelativeToolTip": "Requirements Game\\ProfileLabel.cs",
-              "ViewState": "AQIAAGkAAAAAAAAAAAAAAKMAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:45.574Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ChatLog.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ChatLog.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ChatLog.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ChatLog.cs",
-              "RelativeToolTip": "Requirements Game\\ChatLog.cs",
-              "ViewState": "AQIAAHIAAAAAAAAAAAAAAKQAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.748Z",
+              "WhenOpened": "2025-09-02T02:16:00.265Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ScenarioDetailsForm.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ScenarioDetailsForm.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ScenarioDetailsForm.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ScenarioDetailsForm.cs",
-              "RelativeToolTip": "Requirements Game\\ScenarioDetailsForm.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAAgAAAA",
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Form1.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Form1.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Form1.cs",
+              "RelativeToolTip": "Requirements Game\\Form1.cs",
+              "ViewState": "AQIAAHIAAAAAAAAAAAAAALAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.749Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Scenarios.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\Scenarios.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\Scenarios.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\Scenarios.cs",
-              "RelativeToolTip": "Requirements Game\\Scenarios.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.75Z",
+              "WhenOpened": "2025-09-02T02:12:15.523Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ViewChat.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewChat.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ViewChat.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewChat.cs",
-              "RelativeToolTip": "Requirements Game\\ViewChat.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAA4AAAA",
+              "Title": "Scenarios.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Scenarios.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Scenarios.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Scenarios.cs",
+              "RelativeToolTip": "Requirements Game\\Scenarios.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEsAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.752Z",
+              "WhenOpened": "2025-09-02T01:11:25.976Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ViewCreateScenario.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewCreateScenario.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ViewCreateScenario.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewCreateScenario.cs",
-              "RelativeToolTip": "Requirements Game\\ViewCreateScenario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "DocumentIndex": 7,
+              "Title": "CustomLabelledRichTextBox.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\CustomControls\\CustomLabelledRichTextBox.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\CustomControls\\CustomLabelledRichTextBox.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\CustomControls\\CustomLabelledRichTextBox.cs",
+              "RelativeToolTip": "Requirements Game\\CustomControls\\CustomLabelledRichTextBox.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABwAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.754Z",
+              "WhenOpened": "2025-09-01T23:34:01.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ViewCreateScenario.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewCreateScenario.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewCreateScenario.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewCreateScenario.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\ViewCreateScenario.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T23:10:12.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ViewScenarios.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewScenarios.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewScenarios.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewScenarios.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\ViewScenarios.cs",
+              "ViewState": "AQIAALcAAAAAAAAAAAAAANsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T22:45:07.101Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "ViewManageScenarios.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewManageScenarios.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ViewManageScenarios.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewManageScenarios.cs",
-              "RelativeToolTip": "Requirements Game\\ViewManageScenarios.cs",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAAAFgAAAAAAAAA",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewManageScenarios.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewManageScenarios.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewManageScenarios.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\ViewManageScenarios.cs",
+              "ViewState": "AQIAAHwAAAAAAAAAAAAAAKcAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.755Z",
+              "WhenOpened": "2025-09-01T22:45:02.118Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ViewScenarios.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewScenarios.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\ViewScenarios.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\ViewScenarios.cs",
-              "RelativeToolTip": "Requirements Game\\ViewScenarios.cs",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAAAG4AAAAAAAAA",
+              "DocumentIndex": 4,
+              "Title": "ViewHome.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewHome.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewHome.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\ViewHome.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\ViewHome.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.755Z",
+              "WhenOpened": "2025-09-01T22:44:12.034Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "GlobalVariables.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\GlobalVariables.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\GlobalVariables.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\GlobalVariables.cs",
-              "RelativeToolTip": "Requirements Game\\GlobalVariables.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABHAAAA",
+              "DocumentIndex": 8,
+              "Title": "View.cs",
+              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\View.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\View.cs",
+              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Project 02-09-2025\\Requirements Game\\Requirements Game\\Views\\View.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\View.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.757Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "BitmapManager.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\BitmapManager.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\BitmapManager.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\BitmapManager.cs",
-              "RelativeToolTip": "Requirements Game\\BitmapManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.757Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\Form1.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\Form1.cs",
-              "ToolTip": "C:\\Users\\jarron.eckford\\Downloads\\Requirements Game\\Requirements Game\\Form1.cs",
-              "RelativeToolTip": "Requirements Game\\Form1.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAFkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T23:03:48.758Z",
+              "WhenOpened": "2025-09-01T22:40:54.51Z",
               "EditorCaption": ""
             }
           ]

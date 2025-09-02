@@ -15,6 +15,9 @@ public class ChatLog : Panel {
 
         this.Margin = new Padding(0);
         this.AutoScroll = true;
+        this.HorizontalScroll.Maximum = 0;
+        this.HorizontalScroll.Visible = false;
+        this.AutoScrollMinSize = new Size(0, this.AutoScrollMinSize.Height);
 
         this.SizeChanged += ChatMessageBubble_SizeChanged;
 
@@ -49,6 +52,7 @@ public class ChatLog : Panel {
         }
 
         MessageBubble.Text = message;
+
     }
 
     // Adjust panel sizes if the form changes
@@ -58,9 +62,15 @@ public class ChatLog : Panel {
 
             if (control is Panel panel && panel.Controls.Count > 0) {
 
-                panel.Size = new Size(this.Width - 40, panel.Controls[0].Size.Height);
+                panel.Size = new Size(this.Width - 50, panel.Controls[0].Size.Height);
 
             }
+
+        }
+
+        if (this.VerticalScroll.Visible) {
+
+            this.AutoScrollPosition = new Point(0, this.VerticalScroll.Maximum);
 
         }
 

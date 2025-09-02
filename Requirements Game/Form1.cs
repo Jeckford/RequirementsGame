@@ -65,7 +65,7 @@ namespace Requirements_Game {
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
             TitleBarTableLayoutPanel.RowCount = 1;
             TitleBarTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
-            TitleBarTableLayoutPanel.BackColor = GlobalVariables.LightGrey;
+            TitleBarTableLayoutPanel.BackColor = GlobalVariables.ColorLight;
             TitleBarTableLayoutPanel.Margin = new Padding(0);
 
             MainTableLayoutPanel.Controls.Add(TitleBarTableLayoutPanel, 0, 0);
@@ -123,7 +123,7 @@ namespace Requirements_Game {
 
         }
 
-        public void ChangeView(string newViewTitle) {
+        public void ChangeView(string newViewTitle, Scenario Scenario = null) {
 
             // Freeze UI so that the user doesn't see flicker and to slightly improve performance
 
@@ -184,6 +184,12 @@ namespace Requirements_Game {
 
                 TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["create"], lastColumn - 1, 0);
                 TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["import"], lastColumn, 0);
+
+            } else if (newViewTitle == "Edit Scenario") {
+
+                ViewEditScenario editScenario = (ViewEditScenario)ViewDictionary["Edit Scenario"];
+
+                editScenario.ChangeScenario(ref Scenario);
 
             }
 

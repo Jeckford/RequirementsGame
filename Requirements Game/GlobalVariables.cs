@@ -6,11 +6,16 @@ class GlobalVariables {
     // Place holders, please change to what looks better
 
     static public string AppFontName { get => "Calibri"; }
-    static public Color LightGrey { get => Color.FromArgb(235, 235, 235); }
-    static public Color MediumGrey { get => Color.FromArgb(205, 205, 205); }
+
+    static public Color ColorPrimary { get => Color.White; }
+    static public Color ColorLight { get => Color.FromArgb(235, 235, 235); }
+    static public Color ColorMedium { get => Color.FromArgb(205, 205, 205); }
+    static public Color ColorDark { get => Color.FromArgb(0, 0, 0); }
 
     // For testing and design, to be removed at deployment
 
     static public bool DesignMode { get => false; }
+
+    static public string ChatReply;
   
 }

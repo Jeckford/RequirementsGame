@@ -80,6 +80,18 @@ public class Scenario {
 
     }
 
+    public void AddStakeholder(Stakeholder Stakeholder) {
+
+        ListStakeholders.Add(Stakeholder);
+
+    }
+
+    public Stakeholder[] GetStakeholder() {
+
+        return ListStakeholders.ToArray();
+
+    }
+
 }
 
 public class Stakeholder {
