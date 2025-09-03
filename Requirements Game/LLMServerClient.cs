@@ -26,6 +26,18 @@ public class LLMServerClient {
 
     }
 
+    public static void Shutdown()
+    {
+        try
+        {
+            ServerClient.StopServer();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Error shutting down LLM server: " + ex.Message);
+        }
+    }
+
     //
 
     private Process llamaProcess;
