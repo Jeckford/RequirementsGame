@@ -1,6 +1,7 @@
 ﻿using Requirements_Game;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Linq;
 
 class ScenarioDetailsForm : Form {
 
@@ -17,73 +18,115 @@ class ScenarioDetailsForm : Form {
 
     }
 
-    public ScenarioDetailsForm(Scenario scenario) {
-
+    public ScenarioDetailsForm(Scenario scenario)
+    {
         this.scenario = scenario;
         this.FormBorderStyle = FormBorderStyle.None;
-        this.Size = new Size(600,600);
+        this.Size = new Size(600, 600);
         this.BackColor = Color.AliceBlue;
         this.TransparencyKey = Color.AliceBlue;
 
-        // TableLayoutPanel
-
+        // Main layout
         CustomTableLayoutPanel tableLayoutPanel = new CustomTableLayoutPanel();
         tableLayoutPanel.CornerRadius = 10;
         tableLayoutPanel.Dock = DockStyle.Fill;
         tableLayoutPanel.BackColor = GlobalVariables.ColorMedium;
-        tableLayoutPanel.Padding = new Padding(0);
+        tableLayoutPanel.Padding = new Padding(10);
 
-        tableLayoutPanel.RowCount = 5;
-        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20f));
-        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30f));
-        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
-        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30f));
-        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20f));
+        tableLayoutPanel.RowCount = 3;
+        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 80f)); // Header
+        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f)); // Scrollable content
+        tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 40f)); // Footer
 
-        tableLayoutPanel.ColumnCount = 5;
-        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20f));
-        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
-        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130f));
-        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30f));
-        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20f));
+        tableLayoutPanel.ColumnCount = 3;
+        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20f)); // Left padding
+        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f)); // Main content
+        tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20f)); // Right padding
+
         this.Controls.Add(tableLayoutPanel);
 
-        //
+        
+        // title
+        TableLayoutPanel headerPanel = new TableLayoutPanel();
+        headerPanel.Dock = DockStyle.Fill;
+        headerPanel.ColumnCount = 2;
+        headerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+        headerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30f));
 
-        Label label = new Label();
-        label.Text = scenario.Name;
-        label.Font = new Font(GlobalVariables.AppFontName, 16, FontStyle.Bold);
-        label.Dock = DockStyle.Fill;
-        label.AutoSize = true;
-        label.TextAlign = ContentAlignment.MiddleLeft;
-        tableLayoutPanel.Controls.Add(label,1,1);
+        Label nameLabel = new Label();
+        nameLabel.Text = scenario.Name;
+        nameLabel.Font = new Font(GlobalVariables.AppFontName, 20, FontStyle.Bold);
+        nameLabel.ForeColor = Color.Black;
+        nameLabel.Dock = DockStyle.Fill;
+        nameLabel.TextAlign = ContentAlignment.MiddleLeft;
+        headerPanel.Controls.Add(nameLabel, 0, 0);
 
-        // Close
+        CustomPictureBox closeButton = new CustomPictureBox();
+        closeButton.IdleImage = (Image)Requirements_Game.Properties.Resources.ResourceManager.GetObject("close");
+        closeButton.SizeMode = PictureBoxSizeMode.CenterImage;
+        closeButton.Dock = DockStyle.Fill;
+        closeButton.MouseClick += CloseButton_MouseClick;
+        headerPanel.Controls.Add(closeButton, 1, 0);
 
-        CustomPictureBox pictureBox = new CustomPictureBox();
-        pictureBox.IdleImage = (Image)Requirements_Game.Properties.Resources.ResourceManager.GetObject("close");
-        tableLayoutPanel.Controls.Add(pictureBox, 3, 1);
+        tableLayoutPanel.Controls.Add(headerPanel, 1, 0);
 
-        pictureBox.MouseClick += CloseButton_MouseClick;
 
-        //
+        // main description content
+        Panel scrollPanel = new Panel();
+        scrollPanel.Dock = DockStyle.Fill;
+        scrollPanel.AutoScroll = true;
+        scrollPanel.BackColor = GlobalVariables.ColorMedium;
+        scrollPanel.Padding = new Padding(5);
 
-        CustomTextButton testButton = new CustomTextButton();
-        testButton.Text = "Begin Interviewing";
-        testButton.CornerRadius = 5;
-        testButton.TextAlign = ContentAlignment.MiddleCenter;
-        testButton.Padding = new Padding(0,0,0,3);
-        testButton.Font = new Font(GlobalVariables.AppFontName, 12, FontStyle.Bold);
-        testButton.IdleBackColor = Color.Black;
-        testButton.EnterBackColor = Color.Black;
-        testButton.DownBackColor = Color.Black;
-        testButton.ForeColor = Color.White;
-        testButton.Dock = DockStyle.Fill;
-        tableLayoutPanel.Controls.Add(testButton, 2,3);
-        tableLayoutPanel.SetColumnSpan(testButton, 2);
+        Label contentLabel = new Label();
+        contentLabel.AutoSize = true;
+        contentLabel.ForeColor = Color.Black;
+        contentLabel.Font = new Font(GlobalVariables.AppFontName, 11);
+        contentLabel.Dock = DockStyle.Top;
+        contentLabel.TextAlign = ContentAlignment.TopLeft;
+        contentLabel.MaximumSize = new Size(this.Width - 60, 0);
 
-        testButton.MouseClick += TestButton_MouseClick;
-     
+        string content = $"{scenario.Description}\n\n" +
+                         $"Senior Engineer:\n" +
+                         $"- {scenario.SeniorSoftwareEngineer.Name}\n" +
+                         $"  Role: {scenario.SeniorSoftwareEngineer.Role}\n" +
+                         $"  Personality: {scenario.SeniorSoftwareEngineer.Personality}\n\n" +
+                         $"Stakeholders:\n" +
+                         string.Join("\n", scenario.GetStakeholders().Select(s =>
+                             $"- {s.Name} ({s.Role}) — {s.Personality}")) + "\n\n" +
+                         "Displayed for now – remove later\n\n" +
+                         "Functional Requirements:\n" +
+                         string.Join("\n", scenario.GetFunctionalRequirements().Select(r => $"- {r}")) + "\n\n" +
+                         "Non-Functional Requirements:\n" +
+                         string.Join("\n", scenario.GetNonFunctionalRequirements().Select(r => $"- {r}"));
+
+        contentLabel.Text = content;
+        scrollPanel.Controls.Add(contentLabel);
+
+        tableLayoutPanel.Controls.Add(scrollPanel, 1, 1);
+
+        // begin interviewing button
+        TableLayoutPanel footerPanel = new TableLayoutPanel();
+        footerPanel.Dock = DockStyle.Fill;
+        footerPanel.ColumnCount = 2;
+        footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f)); // filler
+        footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160f)); // button width
+
+        CustomTextButton beginButton = new CustomTextButton();
+        beginButton.Text = "Begin Interviewing";
+        beginButton.CornerRadius = 5;
+        beginButton.TextAlign = ContentAlignment.MiddleCenter;
+        beginButton.Padding = new Padding(0, 0, 0, 3);
+        beginButton.Font = new Font(GlobalVariables.AppFontName, 12, FontStyle.Bold);
+        beginButton.IdleBackColor = Color.Black;
+        beginButton.EnterBackColor = Color.Black;
+        beginButton.DownBackColor = Color.Black;
+        beginButton.ForeColor = Color.White;
+        beginButton.Dock = DockStyle.Fill;
+        beginButton.MouseClick += TestButton_MouseClick;
+
+        footerPanel.Controls.Add(beginButton, 1, 0);
+        tableLayoutPanel.Controls.Add(footerPanel, 1, 2);
     }
 
     private void CloseButton_MouseClick(object sender, MouseEventArgs e) {
