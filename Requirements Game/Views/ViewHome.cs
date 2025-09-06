@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using Requirements_Game;
+using System.Linq;
 
 public class ViewHome : CustomTableLayoutPanel {
 
@@ -54,6 +55,8 @@ public class ViewHome : CustomTableLayoutPanel {
         helpButton.Margin = new Padding(20, 0, 0, 0);
         this.Controls.Add(helpButton, 1, 1);
 
+        helpButton.MouseClick += Button_MouseClick;
+
     }
 
     private void Button_MouseClick(object sender, MouseEventArgs e) {
@@ -68,6 +71,10 @@ public class ViewHome : CustomTableLayoutPanel {
             Form1 form1 = (Form1)this.FindForm();
             form1.ChangeView("Scenarios");
 
+        } else if (buttonName == "Help")
+        {
+            // Using the help button as a debug button, replace with a help view later
+            Scenarios.DebugPrintScenarios();
         }
 
     }

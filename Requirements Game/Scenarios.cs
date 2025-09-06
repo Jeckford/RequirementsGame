@@ -135,6 +135,14 @@ public static class Scenarios
             Debug.WriteLine("======================================\n");
         }
     }
+
+    /// <summary>
+    /// Prints detailed information about each scenario to the debug console.
+    /// </summary>
+    public static void DebugPrintScenarios()
+    {
+        DebugPrintScenarios(listOfScenarios);
+    }
 }
 
 /// <summary>

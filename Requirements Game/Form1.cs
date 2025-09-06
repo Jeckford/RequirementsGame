@@ -4,311 +4,315 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
+using Requirements_Game.Properties;
 
-namespace Requirements_Game {
 
-    public partial class Form1 : Form {
+public partial class Form1 : Form {
 
-        public Form1() { InitializeComponent(); }
+    public Form1() { InitializeComponent(); }
 
-        private TableLayoutPanel MainTableLayoutPanel;
-        private TableLayoutPanel TitleBarTableLayoutPanel;
-        private Label TitleLabel;
+    private TableLayoutPanel MainTableLayoutPanel;
+    private TableLayoutPanel TitleBarTableLayoutPanel;
+    private Label TitleLabel;
 
-        private string CurrentViewTitle;
-        private List<string> PreviousViewTitles;
+    private string CurrentViewTitle;
+    private List<string> PreviousViewTitles;
 
-        private Dictionary<string, Control> ViewDictionary;
-        private Dictionary<string, CustomPictureBox> CustomPictureBoxDictionary;
+    private Dictionary<string, Control> ViewDictionary;
+    private Dictionary<string, CustomPictureBox> CustomPictureBoxDictionary;
 
-        // On form load (on start-up)
+    // On form load (on start-up)
 
-        private void Form1_Load(object sender, EventArgs e) {
+    private void Form1_Load(object sender, EventArgs e) {
 
-            // -- Form1
-            // App specific properties and class initialisation
+        // -- Form1
+        // App specific properties and class initialisation
 
-            this.Text = "Requirements Elicitation Game";
-            this.ShowIcon = false;
-            this.BackColor = Color.White;
-            this.CurrentViewTitle = "";
-            this.PreviousViewTitles = new List<string>();
+        this.Text = "Requirements Elicitation Game";
+        this.ShowIcon = false;
+        this.BackColor = Color.White;
+        this.CurrentViewTitle = "";
+        this.PreviousViewTitles = new List<string>();
 
-            Scenarios.LoadFromFile(FileSystem.ScenariosFilePath);
-            // -- MainTableLayoutPanel
-            // Split into two row parts, the title bar and the main sectin
-            // Main section will be where the different views are added and removed
+        Scenarios.LoadFromFile(FileSystem.ScenariosFilePath);
+        // -- MainTableLayoutPanel
+        // Split into two row parts, the title bar and the main sectin
+        // Main section will be where the different views are added and removed
 
-            MainTableLayoutPanel = new TableLayoutPanel();
-            MainTableLayoutPanel.Dock = DockStyle.Fill;
-            MainTableLayoutPanel.Padding = new Padding(0);
-            MainTableLayoutPanel.ColumnCount = 1;
-            MainTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
-            MainTableLayoutPanel.RowCount = 2;
-            MainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 0));
-            MainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
+        MainTableLayoutPanel = new TableLayoutPanel();
+        MainTableLayoutPanel.Dock = DockStyle.Fill;
+        MainTableLayoutPanel.Padding = new Padding(0);
+        MainTableLayoutPanel.ColumnCount = 1;
+        MainTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+        MainTableLayoutPanel.RowCount = 2;
+        MainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 0));
+        MainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
 
-            Controls.Add(MainTableLayoutPanel);
+        Controls.Add(MainTableLayoutPanel);
 
-            // -- TitleBarTableLayoutPanel
-            // Except for the percent column, add columns to hold buttons, such as 'Back' button
-            // Add the same column on the other side regardless of whether it is holding a button so
-            // that the percent column (holds the view's title) is always centre
+        // -- TitleBarTableLayoutPanel
+        // Except for the percent column, add columns to hold buttons, such as 'Back' button
+        // Add the same column on the other side regardless of whether it is holding a button so
+        // that the percent column (holds the view's title) is always centre
 
-            TitleBarTableLayoutPanel = new TableLayoutPanel();
-            TitleBarTableLayoutPanel.Dock = DockStyle.Fill;
-            TitleBarTableLayoutPanel.Padding = new Padding(0);
-            TitleBarTableLayoutPanel.ColumnCount = 8;
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
-            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
-            TitleBarTableLayoutPanel.RowCount = 1;
-            TitleBarTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
-            TitleBarTableLayoutPanel.BackColor = GlobalVariables.ColorLight;
-            TitleBarTableLayoutPanel.Margin = new Padding(0);
+        TitleBarTableLayoutPanel = new TableLayoutPanel();
+        TitleBarTableLayoutPanel.Dock = DockStyle.Fill;
+        TitleBarTableLayoutPanel.Padding = new Padding(0);
+        TitleBarTableLayoutPanel.ColumnCount = 8;
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
+        TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
+        TitleBarTableLayoutPanel.RowCount = 1;
+        TitleBarTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
+        TitleBarTableLayoutPanel.BackColor = GlobalVariables.ColorLight;
+        TitleBarTableLayoutPanel.Margin = new Padding(0);
 
-            MainTableLayoutPanel.Controls.Add(TitleBarTableLayoutPanel, 0, 0);
+        MainTableLayoutPanel.Controls.Add(TitleBarTableLayoutPanel, 0, 0);
 
-            // -- TitleLabel
+        // -- TitleLabel
 
-            TitleLabel = new Label();
-            TitleLabel.Dock = DockStyle.Fill;
-            TitleLabel.Font = new Font(GlobalVariables.AppFontName, 16, FontStyle.Bold);
-            TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            TitleLabel.Text = "View Title";
+        TitleLabel = new Label();
+        TitleLabel.Dock = DockStyle.Fill;
+        TitleLabel.Font = new Font(GlobalVariables.AppFontName, 16, FontStyle.Bold);
+        TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        TitleLabel.Text = "View Title";
 
-            TitleBarTableLayoutPanel.Controls.Add(TitleLabel, 3, 0);
+        TitleBarTableLayoutPanel.Controls.Add(TitleLabel, 3, 0);
 
-            // -- Picture Buttons
-            // This are created an added to a dictionary for faster access later
-            // These buttons are not immediately added to the form, but will be added or removed as needed
+        // -- Picture Buttons
+        // This are created an added to a dictionary for faster access later
+        // These buttons are not immediately added to the form, but will be added or removed as needed
 
-            CustomPictureBoxDictionary = new Dictionary<string, CustomPictureBox>();
+        CustomPictureBoxDictionary = new Dictionary<string, CustomPictureBox>();
 
-            foreach (string resourceName in new[] {"back", "create", "edit", "import", "export"}) {
+        foreach (string resourceName in new[] { "back", "create", "edit", "import", "export" })
+        {
 
-                Bitmap icon = (Bitmap)Properties.Resources.ResourceManager.GetObject(resourceName);
+            Bitmap icon = (Bitmap)Resources.ResourceManager.GetObject(resourceName);
 
-                CustomPictureBox CustomPictureBox = new CustomPictureBox();
-                CustomPictureBox.Name = resourceName;
-                CustomPictureBox.Dock = DockStyle.Fill;
-                CustomPictureBox.IdleImage = BitmapManager.ChangeColor(icon, Color.FromArgb(0, 0, 0));
-                CustomPictureBox.EnterImage = BitmapManager.ChangeColor(icon, Color.FromArgb(100, 100, 100));
-                CustomPictureBox.DownImage = BitmapManager.ChangeColor(icon, Color.FromArgb(160, 160, 160));
+            CustomPictureBox CustomPictureBox = new CustomPictureBox();
+            CustomPictureBox.Name = resourceName;
+            CustomPictureBox.Dock = DockStyle.Fill;
+            CustomPictureBox.IdleImage = BitmapManager.ChangeColor(icon, Color.FromArgb(0, 0, 0));
+            CustomPictureBox.EnterImage = BitmapManager.ChangeColor(icon, Color.FromArgb(100, 100, 100));
+            CustomPictureBox.DownImage = BitmapManager.ChangeColor(icon, Color.FromArgb(160, 160, 160));
 
-                CustomPictureBox.MouseClick += CustomPictureBox_MouseClick;
+            CustomPictureBox.MouseClick += CustomPictureBox_MouseClick;
 
-                CustomPictureBoxDictionary.Add(resourceName, CustomPictureBox);
-
-            }
-
-            TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["back"], 1, 0);
-
-            // -- Views
-            // This are created an added to a dictionary for faster access later
-
-            ViewDictionary = new Dictionary<string, Control>();
-
-            ViewDictionary.Add("Home", new ViewHome());
-            ViewDictionary.Add("Scenarios", new ViewScenarios());
-            ViewDictionary.Add("Manage Scenarios", new ViewManageScenarios());
-            ViewDictionary.Add("Create Scenario", new ViewCreateScenario());
-            ViewDictionary.Add("Edit Scenario", new ViewEditScenario());
-            ViewDictionary.Add("Chat", new ViewChat());
-
-            // Display the 'Home' view
-
-            ChangeView("Home");
+            CustomPictureBoxDictionary.Add(resourceName, CustomPictureBox);
 
         }
 
-        public void ChangeView(string newViewTitle, Scenario Scenario = null) {
+        TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["back"], 1, 0);
 
-            // Freeze UI so that the user doesn't see flicker and to slightly improve performance
+        // -- Views
+        // This are created an added to a dictionary for faster access later
 
-            FreezeUi();
+        ViewDictionary = new Dictionary<string, Control>();
 
-            // Throw an exception if the view name does not exist in the dictionary
-            // This is mainly used for debugging, the users should never see this exception
-            // This can likely be removed on deployment once everything is tested
+        ViewDictionary.Add("Home", new ViewHome());
+        ViewDictionary.Add("Scenarios", new ViewScenarios());
+        ViewDictionary.Add("Manage Scenarios", new ViewManageScenarios());
+        ViewDictionary.Add("Create Scenario", new ViewCreateScenario());
+        ViewDictionary.Add("Edit Scenario", new ViewEditScenario());
+        ViewDictionary.Add("Chat", new ViewChat());
 
-            if (ViewDictionary.ContainsKey(newViewTitle) == false) { throw new Exception("View not found"); }
+        // Display the 'Home' view
 
-            // Remove current view from form, if it exists and update PreviousViewTitles list for back navigation
+        ChangeView("Home");
 
-            if (CurrentViewTitle != "") {
+    }
 
+    public void ChangeView(string newViewTitle, Scenario scenario = null, bool trackHistory = true) 
+    {
+
+        // Freeze UI so that the user doesn't see flicker and to slightly improve performance
+
+        FreezeUi();
+
+        // Throw an exception if the view name does not exist in the dictionary
+        // This is mainly used for debugging, the users should never see this exception
+        // This can likely be removed on deployment once everything is tested
+
+        if (ViewDictionary.ContainsKey(newViewTitle) == false) { throw new Exception("View not found"); }
+
+        // Remove current view from form, if it exists and update PreviousViewTitles list for back navigation
+
+        if (CurrentViewTitle != "") {
+            // Added this so that views such as CreateScenario once submitted the back button doesnt take back to it - Cory
+            if (trackHistory) 
+            {
                 PreviousViewTitles.Add(CurrentViewTitle);
-                MainTableLayoutPanel.Controls.Remove(ViewDictionary[CurrentViewTitle]);
-
             }
-          
-            // Add new view to form
-
-            CurrentViewTitle = newViewTitle;
-            MainTableLayoutPanel.Controls.Add(ViewDictionary[newViewTitle], 0, 1);
-
-            // Remove all icons expect the back button
-
-            foreach (CustomPictureBox CustomPictureBox in CustomPictureBoxDictionary.Values) {
-                
-                if (CustomPictureBox.Name == "back" || CustomPictureBox.Parent == null) continue;
-
-                TitleBarTableLayoutPanel.Controls.Remove(CustomPictureBox);
-
-            }
-
-            // Update title and hide the title bar if 'Home' view
-
-            if (newViewTitle == "Home") {
-
-                TitleBarVisible = false;
-
-            } else {
-
-                TitleBarVisible = true;
-                TitleLabel.Text = newViewTitle;
-
-            }
-         
-            // Add view specific picture buttons
-
-            int lastColumn = TitleBarTableLayoutPanel.ColumnCount - 2;
-          
-            if (newViewTitle == "Scenarios") {
-
-                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["edit"], lastColumn, 0);
-
-            } else if (newViewTitle == "Manage Scenarios") {
-
-                int exportColumn = lastColumn;
-                int importColumn = exportColumn - 1;
-                int createColumn = importColumn - 1;
-
-                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["create"], createColumn, 0);
-                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["import"], importColumn, 0);
-                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["export"], exportColumn, 0);
-                // Set export to have a background colour as the icon for some reason is not visible.
-                CustomPictureBoxDictionary["export"].BackColor = Color.Blue;
-
-            } else if (newViewTitle == "Edit Scenario") {
-
-                ViewEditScenario editScenario = (ViewEditScenario)ViewDictionary["Edit Scenario"];
-
-                editScenario.ChangeScenario(ref Scenario);
-
-            }
-
-            // Unfreeze Ui
-
-            UnfreezeUi();
+            MainTableLayoutPanel.Controls.Remove(ViewDictionary[CurrentViewTitle]);
 
         }
 
-        // Freeze and unfreeze UI
+        // Add new view to form
 
-        private void FreezeUi() {
+        CurrentViewTitle = newViewTitle;
+        MainTableLayoutPanel.Controls.Add(ViewDictionary[newViewTitle], 0, 1);
 
-            if (MainTableLayoutPanel == null) return;
+        // Remove all icons expect the back button
 
-            this.Cursor = Cursors.WaitCursor;
+        foreach (CustomPictureBox CustomPictureBox in CustomPictureBoxDictionary.Values) {
 
-            Message message = Message.Create(MainTableLayoutPanel.Handle, 11, IntPtr.Zero, IntPtr.Zero);
-            NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
+            if (CustomPictureBox.Name == "back" || CustomPictureBox.Parent == null) continue;
 
-            nativeWindow.DefWndProc(ref message);
-
-        }
-
-        private void UnfreezeUi() {
-
-            if (MainTableLayoutPanel == null) return;
-
-            IntPtr wparam = new IntPtr(1);
-            Message message = Message.Create(MainTableLayoutPanel.Handle, 11, wparam, IntPtr.Zero);
-            NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
-
-            nativeWindow.DefWndProc(ref message);
-
-            MainTableLayoutPanel.Invalidate();
-            MainTableLayoutPanel.Refresh();
-
-            this.Cursor = Cursors.Default;
+            TitleBarTableLayoutPanel.Controls.Remove(CustomPictureBox);
 
         }
 
-        // Function to hide or show the title bar
+        // Update title and hide the title bar if 'Home' view
 
-        private bool TitleBarVisible {
+        if (newViewTitle == "Home") {
 
-            set { MainTableLayoutPanel.RowStyles[0].Height = value ? 60 : 0; }
+            TitleBarVisible = false;
+
+        } else {
+
+            TitleBarVisible = true;
+            TitleLabel.Text = newViewTitle;
 
         }
 
-        // CustomPictureBox mouse click event
+        // Add view specific picture buttons
 
-        private void CustomPictureBox_MouseClick(object sender, MouseEventArgs e) {
+        int lastColumn = TitleBarTableLayoutPanel.ColumnCount - 2;
 
-            // Exit if not left mouse click
+        if (newViewTitle == "Scenarios") {
 
-            if (e.Button != MouseButtons.Left) return;
+            TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["edit"], lastColumn, 0);
 
-            // Assign sender as CustomPictureBox to access it's properties 
+        } else if (newViewTitle == "Manage Scenarios") {
 
-            CustomPictureBox CustomPictureBox = (CustomPictureBox)sender;
-            string CustomPictureBoxName = CustomPictureBox.Name;
-            
-            if (CustomPictureBoxName == "back") {
+            int exportColumn = lastColumn;
+            int importColumn = exportColumn - 1;
+            int createColumn = importColumn - 1;
 
-                // Change the view to the previos from the PreviousViewTitles list
+            TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["create"], createColumn, 0);
+            TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["import"], importColumn, 0);
+            TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["export"], exportColumn, 0);
+            // Set export to have a background colour as the icon for some reason is not visible.
+            CustomPictureBoxDictionary["export"].BackColor = Color.Blue;
 
-                ChangeView(PreviousViewTitles[PreviousViewTitles.Count - 1]);
+        } else if (newViewTitle == "Edit Scenario") {
 
-                // When changing the view the new view is added to the PreviousViewTitles list
-                // But as the back button was pressed, the previous and the current view can be removed
-                // This works as intended, but maybe a little confusing, maybe update this to something
-                // a little more intuitive
+            ViewEditScenario editScenario = (ViewEditScenario)ViewDictionary["Edit Scenario"];
 
-                PreviousViewTitles.RemoveAt(PreviousViewTitles.Count - 1);
-                PreviousViewTitles.RemoveAt(PreviousViewTitles.Count - 1);
+            editScenario.ChangeScenario(ref scenario);
 
-            } else if (CustomPictureBoxName == "edit") {
+        }
 
-                ChangeView("Manage Scenarios");
+        // Unfreeze Ui
 
-            } else if (CustomPictureBoxName == "create") {
+        UnfreezeUi();
 
-                ChangeView("Create Scenario");
+    }
 
-            } else if (CustomPictureBoxName == "import") {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+    // Freeze and unfreeze UI
+
+    private void FreezeUi() {
+
+        if (MainTableLayoutPanel == null) return;
+
+        this.Cursor = Cursors.WaitCursor;
+
+        Message message = Message.Create(MainTableLayoutPanel.Handle, 11, IntPtr.Zero, IntPtr.Zero);
+        NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
+
+        nativeWindow.DefWndProc(ref message);
+
+    }
+
+    private void UnfreezeUi() {
+
+        if (MainTableLayoutPanel == null) return;
+
+        IntPtr wparam = new IntPtr(1);
+        Message message = Message.Create(MainTableLayoutPanel.Handle, 11, wparam, IntPtr.Zero);
+        NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
+
+        nativeWindow.DefWndProc(ref message);
+
+        MainTableLayoutPanel.Invalidate();
+        MainTableLayoutPanel.Refresh();
+
+        this.Cursor = Cursors.Default;
+
+    }
+
+    // Function to hide or show the title bar
+
+    private bool TitleBarVisible {
+
+        set { MainTableLayoutPanel.RowStyles[0].Height = value ? 60 : 0; }
+
+    }
+
+    // CustomPictureBox mouse click event
+
+    private void CustomPictureBox_MouseClick(object sender, MouseEventArgs e) {
+
+        // Exit if not left mouse click
+
+        if (e.Button != MouseButtons.Left) return;
+
+        // Assign sender as CustomPictureBox to access it's properties 
+
+        CustomPictureBox CustomPictureBox = (CustomPictureBox)sender;
+        string CustomPictureBoxName = CustomPictureBox.Name;
+
+        if (CustomPictureBoxName == "back") {
+
+            // Change the view to the previos from the PreviousViewTitles list
+
+            ChangeView(PreviousViewTitles[PreviousViewTitles.Count - 1]);
+
+            // When changing the view the new view is added to the PreviousViewTitles list
+            // But as the back button was pressed, the previous and the current view can be removed
+            // This works as intended, but maybe a little confusing, maybe update this to something
+            // a little more intuitive
+
+            PreviousViewTitles.RemoveAt(PreviousViewTitles.Count - 1);
+            PreviousViewTitles.RemoveAt(PreviousViewTitles.Count - 1);
+
+        } else if (CustomPictureBoxName == "edit") {
+
+            ChangeView("Manage Scenarios");
+
+        } else if (CustomPictureBoxName == "create") {
+
+            ChangeView("Create Scenario");
+
+        } else if (CustomPictureBoxName == "import") {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "JSON Files (*.json)|*.json";
+                openFileDialog.Title = "Import Scenarios";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    openFileDialog.Filter = "JSON Files (*.json)|*.json";
-                    openFileDialog.Title = "Import Scenarios";
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string path = openFileDialog.FileName;
-                        Scenarios.LoadFromFile(path);
-                    }
+                    string path = openFileDialog.FileName;
+                    Scenarios.LoadFromFile(path);
                 }
-            } else if (CustomPictureBoxName == "export") {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                {
-                    saveFileDialog.Title = "Export Scenarios";
-                    saveFileDialog.Filter = "JSON Files (*.json)|*.json";
-                    saveFileDialog.FileName = "Scenarios_Requirements_Game.json";
+            }
+        } else if (CustomPictureBoxName == "export") {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Export Scenarios";
+                saveFileDialog.Filter = "JSON Files (*.json)|*.json";
+                saveFileDialog.FileName = "Scenarios_Requirements_Game.json";
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string selectedPath = saveFileDialog.FileName;
-                        Scenarios.SaveToFile(selectedPath, Scenarios.GetScenarios().ToList());
-                    }
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedPath = saveFileDialog.FileName;
+                    Scenarios.SaveToFile(selectedPath, Scenarios.GetScenarios().ToList());
                 }
             }
 
