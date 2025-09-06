@@ -2,6 +2,8 @@
 using System.Drawing;
 using System;
 using Requirements_Game;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 public class ViewManageScenarios : View {
 
@@ -141,6 +143,8 @@ public class ViewManageScenarios : View {
             exportButton.Margin = new Padding(0,3,0,0);
             this.Controls.Add(exportButton, 3, 3);
 
+            exportButton.MouseClick += Button_MouseClick;
+
             CustomTextButton deleteButton = new CustomTextButton();
             deleteButton.CornerRadius = 8;
             deleteButton.Dock = DockStyle.Fill;
@@ -155,22 +159,56 @@ public class ViewManageScenarios : View {
             deleteButton.Margin = new Padding(0, 3, 0, 0);
             this.Controls.Add(deleteButton, 5, 3);
 
-
+            deleteButton.MouseClick += Button_MouseClick;
         }
 
-        private void Button_MouseClick(object sender, MouseEventArgs e) {
-
+        /// <summary>
+        /// Handles mouse click events for scenario-specific buttons: Edit, Export, and Delete.
+        /// </summary>
+        private void Button_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Cast sender to CustomTextButton to access its label and context
             CustomTextButton textButton = (CustomTextButton)sender;
+            Debug.WriteLine($"Clicked button: {textButton.Text}");
 
-            if (textButton.Text == "Edit") {
-
+            // Navigate to the Edit Scenario view
+            if (textButton.Text == "Edit")
+            {
                 Form1 form1 = (Form1)this.FindForm();
                 form1.ChangeView("Edit Scenario", Scenario);
-
             }
 
+            // Export the current scenario to a user-selected JSON file
+            if (textButton.Text == "Export")
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Title = "Export Scenarios";
+                    saveFileDialog.Filter = "JSON Files (*.json)|*.json";
+                    saveFileDialog.FileName = $"{Scenario.Name}_Requirements.json";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string selectedPath = saveFileDialog.FileName;
+                        Scenarios.SaveToFile(selectedPath, new List<Scenario> { Scenario });
+                    }
+                }
+            }
+
+            // Confirm and delete the current scenario from the list
+            if (textButton.Text == "Delete")
+            {
+                var confirm = MessageBox.Show(
+                    $"Are you sure you want to delete '{Scenario.Name}'?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    Scenarios.Remove(Scenario);
+                }
+            }
         }
-
     }
-
 }

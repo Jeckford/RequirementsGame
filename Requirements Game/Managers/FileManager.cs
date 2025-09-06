@@ -9,7 +9,7 @@ public static class FileManager
 {
     private static readonly string filePath = FileSystem.ScenariosFilePath;
 
-    public static List<Scenario> LoadScenarios()
+    public static List<Scenario> LoadScenarios(string filePath)
     {
         if (!File.Exists(filePath))
             return new List<Scenario>();
@@ -17,7 +17,6 @@ public static class FileManager
         try
         {
             string json = File.ReadAllText(filePath);
-            Debug.WriteLine(json);
 
             return JsonSerializer.Deserialize<List<Scenario>>(json, new JsonSerializerOptions
             {
@@ -31,7 +30,7 @@ public static class FileManager
         }
     }
 
-    public static bool SaveScenarios(List<Scenario> scenarios)
+    public static bool SaveScenarios(List<Scenario> scenarios, string filePath)
     {
         try
         {

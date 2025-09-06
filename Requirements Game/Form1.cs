@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace Requirements_Game {
 
@@ -32,7 +34,7 @@ namespace Requirements_Game {
             this.CurrentViewTitle = "";
             this.PreviousViewTitles = new List<string>();
 
-            Scenarios.LoadFromFile();
+            Scenarios.LoadFromFile(FileSystem.ScenariosFilePath);
             // -- MainTableLayoutPanel
             // Split into two row parts, the title bar and the main sectin
             // Main section will be where the different views are added and removed
@@ -56,11 +58,12 @@ namespace Requirements_Game {
             TitleBarTableLayoutPanel = new TableLayoutPanel();
             TitleBarTableLayoutPanel.Dock = DockStyle.Fill;
             TitleBarTableLayoutPanel.Padding = new Padding(0);
-            TitleBarTableLayoutPanel.ColumnCount = 7;
+            TitleBarTableLayoutPanel.ColumnCount = 8;
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+            TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36));
             TitleBarTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 12));
@@ -87,7 +90,7 @@ namespace Requirements_Game {
 
             CustomPictureBoxDictionary = new Dictionary<string, CustomPictureBox>();
 
-            foreach (string resourceName in new[] {"back", "create", "edit", "import"}) {
+            foreach (string resourceName in new[] {"back", "create", "edit", "import", "export"}) {
 
                 Bitmap icon = (Bitmap)Properties.Resources.ResourceManager.GetObject(resourceName);
 
@@ -183,8 +186,15 @@ namespace Requirements_Game {
 
             } else if (newViewTitle == "Manage Scenarios") {
 
-                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["create"], lastColumn - 1, 0);
-                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["import"], lastColumn, 0);
+                int exportColumn = lastColumn;
+                int importColumn = exportColumn - 1;
+                int createColumn = importColumn - 1;
+
+                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["create"], createColumn, 0);
+                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["import"], importColumn, 0);
+                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["export"], exportColumn, 0);
+                // Set export to have a background colour as the icon for some reason is not visible.
+                CustomPictureBoxDictionary["export"].BackColor = Color.Blue;
 
             } else if (newViewTitle == "Edit Scenario") {
 
@@ -275,6 +285,31 @@ namespace Requirements_Game {
 
                 ChangeView("Create Scenario");
 
+            } else if (CustomPictureBoxName == "import") {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "JSON Files (*.json)|*.json";
+                    openFileDialog.Title = "Import Scenarios";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string path = openFileDialog.FileName;
+                        Scenarios.LoadFromFile(path);
+                    }
+                }
+            } else if (CustomPictureBoxName == "export") {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Title = "Export Scenarios";
+                    saveFileDialog.Filter = "JSON Files (*.json)|*.json";
+                    saveFileDialog.FileName = "Scenarios_Requirements_Game.json";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string selectedPath = saveFileDialog.FileName;
+                        Scenarios.SaveToFile(selectedPath, Scenarios.GetScenarios().ToList());
+                    }
+                }
             }
 
         }
