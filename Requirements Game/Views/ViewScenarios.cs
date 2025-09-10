@@ -216,6 +216,9 @@ public class ViewScenarios : View {
 
             Form1 form1 = (Form1)this.FindForm();
 
+            // Remember which scenario was selected
+            GlobalVariables.CurrentScenario = scenario;
+
             ScenarioDetailsForm.Show(scenario, form1);
 
         }

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Management;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Management;
 
 public class LLMServerClient {
 
@@ -15,14 +16,6 @@ public class LLMServerClient {
     static LLMServerClient() {
 
         ServerClient = new LLMServerClient();
-
-    }
-
-    public static async void SendMessage(String Question) {
-
-        string result = await ServerClient.Chat(Question);
-
-        GlobalVariables.ChatReply = result;
 
     }
 
@@ -38,10 +31,63 @@ public class LLMServerClient {
         }
     }
 
+    // Selects (or creates) the active persona and ensures it has a system prompt
+    // personaKey example: $"{scenarioName}|{personaName}"
+    public static void ActivatePersona(string personaKey, string systemPrompt)
+    {
+        ServerClient.ActivatePersonaInternal(personaKey, systemPrompt);
+    }
+
+    private void ActivatePersonaInternal(string personaKey, string systemPrompt)
+    {
+        if (string.IsNullOrWhiteSpace(personaKey)) personaKey = "default";
+        activeKey = personaKey;
+
+        if (!histories.TryGetValue(activeKey, out var _))
+            histories[activeKey] = new StringBuilder($"<|system|> {systemPrompt} ");
+    }
+
+    // Hard reset only that persona's conversation (keeps others)
+    public static void ResetConversationForPersona(string personaKey, string systemPrompt)
+    {
+        ServerClient.ResetConversationInternal(personaKey, systemPrompt);
+    }
+
+    private void ResetConversationInternal(string personaKey, string systemPrompt)
+    {
+        if (string.IsNullOrWhiteSpace(personaKey)) personaKey = "default";
+        histories[personaKey] = new StringBuilder($"<|system|> {systemPrompt} ");
+        activeKey = personaKey;
+    }
+
+
+    public static async void SendMessage(string personaKey, string question)
+    {
+        if (string.IsNullOrWhiteSpace(personaKey)) personaKey = "default";
+
+        // Use the stored prompt for this persona if we have it
+        // otherwise, fall back to the generic
+        ServerClient.ActivatePersonaInternal(personaKey, "You are a helpful assistant.");
+
+        // Reset only this persona’s live buffer
+        GlobalVariables.PersonaLiveReply[personaKey] = "";
+
+        await ServerClient.Chat(question, partial =>
+        {
+            if (!GlobalVariables.PersonaLiveReply.ContainsKey(personaKey))
+                GlobalVariables.PersonaLiveReply[personaKey] = "";
+            GlobalVariables.PersonaLiveReply[personaKey] += partial;
+        });
+    }
+
     //
 
     private Process llamaProcess;
     private StringBuilder conversationHistory;
+
+    // Persona aware conversation state
+    private readonly Dictionary<string, StringBuilder> histories = new Dictionary<string, StringBuilder>();
+    private string activeKey = null;
 
     public LLMServerClient() : this(6, 1024) {
     }
@@ -50,7 +96,7 @@ public class LLMServerClient {
 
         // Initialise conversation
 
-        conversationHistory = new StringBuilder("<|system|> You are a helpful assistant ");
+        // conversationHistory = new StringBuilder("<|system|> You are a helpful assistant ");
 
         // Get model based on available RAM
 
@@ -76,11 +122,15 @@ public class LLMServerClient {
 
         }
 
-        if (System.IO.File.Exists(modelPath) == false) {
+        Debug.WriteLine($"[LLM] RAM avail MB = {availableRamMB}, modelPath = {modelPath}");
 
-            throw new Exception($"Model '{System.IO.Path.GetFileName(modelPath)}' not found in '{System.IO.Path.GetDirectoryName(modelPath)}'");
-        
-        }
+        if (string.IsNullOrWhiteSpace(modelPath))
+            throw new InvalidOperationException(
+                $"Model path was not selected. Available RAM (MB): {availableRamMB}");
+
+        if (!File.Exists(modelPath))
+            throw new FileNotFoundException($"Model not found at: {modelPath}");
+
 
         // Check if server is already running, exit if so
 
@@ -120,6 +170,12 @@ public class LLMServerClient {
     }
 
     public async Task<string> Chat(string question, Action<string> onPartialResponse = null) {
+
+        // ensure an active persona exists (fallback "default")
+        if (string.IsNullOrEmpty(activeKey))
+            ActivatePersonaInternal("default", "You are a helpful assistant.");
+
+        var conversationHistory = histories[activeKey];
 
         conversationHistory.Append($"<|user|> {question} ");
 
@@ -167,8 +223,6 @@ public class LLMServerClient {
 
                             // Chat is written to the visual studio console as its recieved. Eventually this will need to written straight to a form control for display.
                             // I have not implemented that in this visual studio project due to the richtextbox recording the full chat
-
-                            GlobalVariables.ChatReply += partial;
 
                             onPartialResponse?.Invoke(partial);
 

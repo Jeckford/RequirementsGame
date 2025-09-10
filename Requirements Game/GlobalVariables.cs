@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 class GlobalVariables {
@@ -14,8 +15,28 @@ class GlobalVariables {
 
     // For testing and design, to be removed at deployment
 
-    static public bool DesignMode { get => false; }
+    public static bool DesignMode => false;
 
-    static public string ChatReply;
-  
+    public static Scenario CurrentScenario { get; set; }
+
+    public static string PersonaKey(Scenario s, Stakeholder p)
+        => $"{s?.Name ?? "(no-scenario)"}|{p?.Name ?? "(no-persona)"}";
+
+    // UI transcript entry
+    public class ChatMsg
+    {
+        public ChatLog.MessageActor Actor;
+        public string Text;
+        public ChatMsg(ChatLog.MessageActor actor, string text)
+        { Actor = actor; Text = text; }
+    }
+
+    // Per-persona chat history (personaKey -> ordered list of messages)
+    public static Dictionary<string, List<ChatMsg>> PersonaChatLogs
+        = new Dictionary<string, List<ChatMsg>>();
+
+    // Per-persona live streaming buffer (personaKey -> latest partial reply)
+    public static Dictionary<string, string> PersonaLiveReply
+        = new Dictionary<string, string>();
+
 }

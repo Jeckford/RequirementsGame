@@ -11,6 +11,15 @@ public class ChatLog : Panel {
     private Panel ChatPanel; // Used for chat message bubble stacking and auto left/right alignment
     private ChatMessageBubble MessageBubble;
 
+    // Wipes the chat UI back to an empty state
+    public void Clear()
+    {
+        this.Controls.Clear();
+        ChatPanel = null;
+        MessageBubble = null;
+        this.AutoScrollPosition = new Point(0, 0);
+    }
+
     public ChatLog() {
 
         this.Margin = new Padding(0);

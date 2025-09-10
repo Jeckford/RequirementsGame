@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Requirements_Game
@@ -10,6 +11,10 @@ namespace Requirements_Game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Load data needed at startup
+            Scenarios.LoadFromFile(FileSystem.ScenariosFilePath);
+            Debug.WriteLine($"[Startup] Loaded {Scenarios.GetScenarios().Length} scenarios.");
 
             Application.ApplicationExit += (s, e) =>
             {

@@ -152,67 +152,26 @@ public static class Scenarios
 /// </summary>
 public class Scenario
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string Prompt { get; set; }
+    public string Name { get; set; } = "";
+    public string Description { get; set; } = "";
+    public string Prompt { get; set; } = "";
 
-    public Stakeholder SeniorSoftwareEngineer { get; set; }
+    public Stakeholder SeniorSoftwareEngineer { get; set; } = new Stakeholder();
 
     /// <summary>
     /// List of additional stakeholders involved in the scenario.
     /// </summary>
-    public List<Stakeholder> ListStakeholders { get; set; }
+    public List<Stakeholder> ListStakeholders { get; set; } = new List<Stakeholder>();
 
     /// <summary>
     /// List of functional requirements for the scenario.
     /// </summary>
-    public List<string> FunctionalRequirements { get; set; }
+    public List<string> FunctionalRequirements { get; set; } = new List<string>();
 
     /// <summary>
     /// List of non-functional requirements for the scenario.
     /// </summary>
-    public List<string> NonFunctionalRequirements { get; set; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Scenario"/> class with empty attributes.
-    /// </summary>
-    public Scenario()
-    {
-        Name = "";
-        Description = "";
-        Prompt = "";
-        SeniorSoftwareEngineer = new Stakeholder();
-        ListStakeholders = new List<Stakeholder>();
-        FunctionalRequirements = new List<string>();
-        NonFunctionalRequirements = new List<string>();
-    }
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Scenario"/> class with values.
-    /// </summary>
-    /// <param name="name">The title of the scenario.</param>
-    /// <param name="description">A description of the scenario context.</param>
-    /// <param name="prompt">The prompt associated with the scenario.</param>
-    /// <param name="seniorSoftwareEngineer">The senior software engineer assigned to the scenario.</param>
-    /// <param name="stakeholders">A list of additional stakeholders involved.</param>
-    /// <param name="functionalRequirements">A list of functional requirements.</param>
-    /// <param name="nonFunctionalRequirements">A list of non-functional requirements.</param>
-    public Scenario(
-        string name,
-        string description,
-        string prompt,
-        Stakeholder seniorSoftwareEngineer,
-        List<Stakeholder> stakeholders,
-        List<string> functionalRequirements,
-        List<string> nonFunctionalRequirements)
-    {
-        Name = name;
-        Description = description;
-        Prompt = prompt;
-        SeniorSoftwareEngineer = seniorSoftwareEngineer ?? new Stakeholder();
-        ListStakeholders = stakeholders ?? new List<Stakeholder>();
-        FunctionalRequirements = functionalRequirements ?? new List<string>();
-        NonFunctionalRequirements = nonFunctionalRequirements ?? new List<string>();
-    }
+    public List<string> NonFunctionalRequirements { get; set; } = new List<string>();
 
     /// <summary>
     /// Adds a stakeholder to the scenario's stakeholder list.
