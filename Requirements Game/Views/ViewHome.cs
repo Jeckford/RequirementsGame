@@ -41,6 +41,9 @@ public class ViewHome : CustomTableLayoutPanel {
         playButton.Dock = DockStyle.None;
         playButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         playButton.Margin = new Padding(0, 0, 20, 0);
+        playButton.BackColor = GlobalVariables.ColorButtonBlack;
+        playButton.InteractionEffect = ButtonInteractionEffect.Lighten;
+        playButton.ForeColor = Color.White;
         this.Controls.Add(playButton, 0, 1);
 
         playButton.MouseClick += Button_MouseClick;
@@ -53,6 +56,9 @@ public class ViewHome : CustomTableLayoutPanel {
         helpButton.Dock = DockStyle.None;
         helpButton.Anchor = AnchorStyles.Top | AnchorStyles.Left;
         helpButton.Margin = new Padding(20, 0, 0, 0);
+        helpButton.BackColor = GlobalVariables.ColorButtonBlack;
+        helpButton.InteractionEffect = ButtonInteractionEffect.Lighten;
+        helpButton.ForeColor = Color.White;
         this.Controls.Add(helpButton, 1, 1);
 
         helpButton.MouseClick += Button_MouseClick;

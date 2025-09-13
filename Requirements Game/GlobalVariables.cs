@@ -12,6 +12,7 @@ class GlobalVariables {
     static public Color ColorLight { get => Color.FromArgb(235, 235, 235); }
     static public Color ColorMedium { get => Color.FromArgb(205, 205, 205); }
     static public Color ColorDark { get => Color.FromArgb(0, 0, 0); }
+    static public Color ColorButtonBlack { get => Color.FromArgb(40, 40, 40); }
 
     // For testing and design, to be removed at deployment
 
@@ -23,12 +24,10 @@ class GlobalVariables {
         => $"{s?.Name ?? "(no-scenario)"}|{p?.Name ?? "(no-persona)"}";
 
     // UI transcript entry
-    public class ChatMsg
-    {
+    public class ChatMsg {
         public ChatLog.MessageActor Actor;
         public string Text;
-        public ChatMsg(ChatLog.MessageActor actor, string text)
-        { Actor = actor; Text = text; }
+        public ChatMsg(ChatLog.MessageActor actor, string text) { Actor = actor; Text = text; }
     }
 
     // Per-persona chat history (personaKey -> ordered list of messages)
@@ -39,4 +38,13 @@ class GlobalVariables {
     public static Dictionary<string, string> PersonaLiveReply
         = new Dictionary<string, string>();
 
+
+
+}
+
+// Specifies how a button visually responds when interacted with (hover and click)
+public enum ButtonInteractionEffect {
+    Lighten,
+    Darken,
+    None
 }

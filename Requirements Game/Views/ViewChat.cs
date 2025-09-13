@@ -384,8 +384,7 @@ public class ViewChat : Panel {
 
         CustomTextButton CreatePillButton(string text)
         {
-            return new CustomTextButton
-            {
+            return new CustomTextButton {
                 Text = text,
                 AutoSize = true,
                 Dock = DockStyle.None,
@@ -393,9 +392,8 @@ public class ViewChat : Panel {
                 Font = new Font(GlobalVariables.AppFontName, 9f),
                 Padding = new Padding(10, 4, 10, 4),
                 Margin = new Padding(0),
-                IdleBackColor = Color.FromArgb(50, 50, 50),
-                EnterBackColor = Color.FromArgb(80, 80, 80),
-                DownBackColor = Color.FromArgb(100, 100, 100),
+                BackColor = Color.FromArgb(50, 50, 50),
+                InteractionEffect = ButtonInteractionEffect.Lighten,
                 ForeColor = Color.White,
                 CornerRadius = 12,
                 AccessibleName = text + " button"

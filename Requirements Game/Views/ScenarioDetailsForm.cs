@@ -118,9 +118,8 @@ class ScenarioDetailsForm : Form {
         beginButton.TextAlign = ContentAlignment.MiddleCenter;
         beginButton.Padding = new Padding(0, 0, 0, 3);
         beginButton.Font = new Font(GlobalVariables.AppFontName, 12, FontStyle.Bold);
-        beginButton.IdleBackColor = Color.Black;
-        beginButton.EnterBackColor = Color.Black;
-        beginButton.DownBackColor = Color.Black;
+        beginButton.BackColor = Color.Black;
+        beginButton.InteractionEffect = ButtonInteractionEffect.None;
         beginButton.ForeColor = Color.White;
         beginButton.Dock = DockStyle.Fill;
         beginButton.MouseClick += TestButton_MouseClick;

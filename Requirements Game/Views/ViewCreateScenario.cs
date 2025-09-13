@@ -79,9 +79,8 @@ public class ViewCreateScenario : View
         addStakeholderButton.Text = "+ Add Stakeholder";
         addStakeholderButton.Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Bold);
         addStakeholderButton.ForeColor = Color.White;
-        addStakeholderButton.IdleBackColor = Color.FromArgb(45, 45, 45);
-        addStakeholderButton.EnterBackColor = Color.FromArgb(85, 85, 85);
-        addStakeholderButton.DownBackColor = Color.FromArgb(125, 125, 125);
+        addStakeholderButton.BackColor = GlobalVariables.ColorButtonBlack;
+        addStakeholderButton.InteractionEffect = ButtonInteractionEffect.Lighten;
         addStakeholderButton.TextAlign = ContentAlignment.MiddleCenter;
         addStakeholderButton.CornerRadius = 5;
         addStakeholderButton.Size = new Size(170, 30);
@@ -116,9 +115,8 @@ public class ViewCreateScenario : View
         createButton.Text = isEditMode ? "Save" : "Create";
         createButton.Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Bold);
         createButton.ForeColor = Color.White;
-        createButton.IdleBackColor = Color.FromArgb(0, 136, 5);
-        createButton.EnterBackColor = ColorManager.DarkenColor(createButton.IdleBackColor, 0.1);
-        createButton.DownBackColor = ColorManager.DarkenColor(createButton.EnterBackColor, 0.1);
+        createButton.BackColor = Color.FromArgb(0, 136, 5);
+        createButton.InteractionEffect = ButtonInteractionEffect.Darken;
         createButton.TextAlign = ContentAlignment.MiddleCenter;
         createButton.CornerRadius = 5;
         createButton.Size = new Size(100, 30);

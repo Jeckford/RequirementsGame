@@ -24,6 +24,14 @@ public class ViewScenarios : View {
               
         RebuildView();
 
+        Scenarios.ScenariosChanged += Scenarios_ScenariosChanged;
+
+    }
+
+    public void Scenarios_ScenariosChanged(object sender, EventArgs e) {
+
+        RebuildView();
+
     }
 
     private void RebuildView() {
@@ -31,8 +39,9 @@ public class ViewScenarios : View {
         // Clear all controls and TableLayoutPanel rows to be rebuilt
 
         ViewTableLayoutPanel.Controls.Clear();
-        ViewTableLayoutPanel.RowCount = 0;      
-     
+        ViewTableLayoutPanel.RowStyles.Clear();
+        ViewTableLayoutPanel.RowCount = 0;
+        
         int columnIndex = 1;
 
         foreach (Scenario scenario in Scenarios.GetScenarios()) {

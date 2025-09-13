@@ -32,6 +32,7 @@ public class ViewManageScenarios : View {
     public void RebuildView() {
 
         ViewTableLayoutPanel.Controls.Clear();
+        ViewTableLayoutPanel.RowStyles.Clear();
         ViewTableLayoutPanel.RowCount = 0;
 
         foreach (Scenario scenario in Scenarios.GetScenarios()) {
@@ -119,9 +120,8 @@ public class ViewManageScenarios : View {
             editButton.Text = "Edit";
             editButton.Font = new Font(GlobalVariables.AppFontName, 10, FontStyle.Bold);
             editButton.ForeColor = Color.White;
-            editButton.IdleBackColor = Color.FromArgb(45,45,45);
-            editButton.EnterBackColor = Color.FromArgb(85, 85, 85);
-            editButton.DownBackColor = Color.FromArgb(125, 125, 125);
+            editButton.BackColor = GlobalVariables.ColorButtonBlack;
+            editButton.InteractionEffect = ButtonInteractionEffect.Lighten;
             editButton.AutoSize = true;
             editButton.Padding = new Padding(0);
             editButton.Margin = new Padding(0,3,0,0);
@@ -135,9 +135,8 @@ public class ViewManageScenarios : View {
             exportButton.Text = "Export";
             exportButton.Font = new Font(GlobalVariables.AppFontName, 10, FontStyle.Bold);
             exportButton.ForeColor = Color.White;
-            exportButton.IdleBackColor = Color.FromArgb(45, 45, 45);
-            exportButton.EnterBackColor = Color.FromArgb(85, 85, 85);
-            exportButton.DownBackColor = Color.FromArgb(125, 125, 125);
+            exportButton.BackColor = GlobalVariables.ColorButtonBlack;
+            exportButton.InteractionEffect = ButtonInteractionEffect.Lighten;
             exportButton.AutoSize = true;
             exportButton.Padding = new Padding(0);
             exportButton.Margin = new Padding(0,3,0,0);
@@ -151,9 +150,8 @@ public class ViewManageScenarios : View {
             deleteButton.Text = "Delete";
             deleteButton.Font = new Font(GlobalVariables.AppFontName, 10, FontStyle.Bold);
             deleteButton.ForeColor = Color.White;
-            deleteButton.IdleBackColor = Color.FromArgb(136, 0, 0);
-            deleteButton.EnterBackColor = Color.FromArgb(160, 0, 0);
-            deleteButton.DownBackColor = Color.FromArgb(195, 0, 0);
+            deleteButton.BackColor = Color.FromArgb(136, 0, 0);
+            deleteButton.InteractionEffect = ButtonInteractionEffect.Lighten;
             deleteButton.AutoSize = true;
             deleteButton.Padding = new Padding(0);
             deleteButton.Margin = new Padding(0, 3, 0, 0);
