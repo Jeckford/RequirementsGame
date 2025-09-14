@@ -88,9 +88,9 @@ class ScenarioDetailsForm : Form {
 
         string content = $"{scenario.Description}\n\n" +
                          $"Senior Engineer:\n" +
-                         $"- {scenario.SeniorSoftwareEngineer.Name}\n" +
-                         $"  Role: {scenario.SeniorSoftwareEngineer.Role}\n" +
-                         $"  Personality: {scenario.SeniorSoftwareEngineer.Personality}\n\n" +
+                         $"- {Scenario.SeniorSoftwareEngineer.Name}\n" +
+                         $"  Role: {Scenario.SeniorSoftwareEngineer.Role}\n" +
+                         $"  Personality: {Scenario.SeniorSoftwareEngineer.Personality}\n\n" +
                          $"Stakeholders:\n" +
                          string.Join("\n", scenario.GetStakeholders().Select(s =>
                              $"- {s.Name} ({s.Role}) — {s.Personality}")) + "\n\n" +

@@ -63,26 +63,53 @@ public class ViewHome : CustomTableLayoutPanel {
 
         helpButton.MouseClick += Button_MouseClick;
 
+        // Credits Button
+        CustomTextButton creditsButton = new CustomTextButton();
+        creditsButton.Name = "Credits";
+        creditsButton.Text = "Credits";
+        creditsButton.Dock = DockStyle.Fill;
+        creditsButton.Anchor = AnchorStyles.None;
+        creditsButton.Margin = new Padding(20, 10, 20, 10);
+        creditsButton.BackColor = GlobalVariables.ColorButtonBlack;
+        creditsButton.InteractionEffect = ButtonInteractionEffect.Lighten;
+        creditsButton.ForeColor = Color.White;
+        this.Controls.Add(creditsButton, 0, 2);
+        this.SetColumnSpan(creditsButton, 2); 
+
+        creditsButton.MouseClick += Button_MouseClick;
+
     }
 
-    private void Button_MouseClick(object sender, MouseEventArgs e) {
+    private void Button_MouseClick(object sender, MouseEventArgs e)
+    {
 
         if (e.Button != MouseButtons.Left) return;
 
         CustomTextButton button = (CustomTextButton)sender;
         string buttonName = button.Name;
 
-        if (buttonName == "Play") {
+        if (buttonName == "Play")
+        {
 
             Form1 form1 = (Form1)this.FindForm();
             form1.ChangeView("Scenarios");
 
-        } else if (buttonName == "Help")
+        }
+        else if (buttonName == "Help")
         {
             // Using the help button as a debug button, replace with a help view later
             Scenarios.DebugPrintScenarios();
         }
-
+        else if (buttonName == "Credits")
+        {
+            MessageBox.Show(
+                "Credits:\n\n" +
+                "Courtney Hemmett\nJarron Eckford\nCory Crombie\nMai Le",
+                "Game Credits",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
     }
 
 }

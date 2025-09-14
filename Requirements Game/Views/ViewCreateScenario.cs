@@ -38,9 +38,9 @@ public class ViewCreateScenario : View
         string name = isEditMode ? editingScenario.Name : "";
         string description = isEditMode ? editingScenario.Description : "";
 
-        string seniorName = isEditMode ? editingScenario.SeniorSoftwareEngineer.Name : "";
-        string seniorRole = isEditMode ? editingScenario.SeniorSoftwareEngineer.Role : "";
-        string seniorPersonality = isEditMode ? editingScenario.SeniorSoftwareEngineer.Personality : "";
+        //string seniorName = isEditMode ? editingScenario.SeniorSoftwareEngineer.Name : "";
+        //string seniorRole = isEditMode ? editingScenario.SeniorSoftwareEngineer.Role : "";
+        //string seniorPersonality = isEditMode ? editingScenario.SeniorSoftwareEngineer.Personality : "";
 
         List<Stakeholder> stakeholders = isEditMode ? editingScenario.GetStakeholders().ToList() : new List<Stakeholder> { new Stakeholder() };
         stakeholderCount = stakeholders.Count;
@@ -56,23 +56,31 @@ public class ViewCreateScenario : View
         ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         // Senior Engineer Block
-        var seniorBlock = CreateSectionBlock();
-        RebuildView_Label(ref seniorBlock, "Senior Software Engineer");
-        RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Name", seniorName);
-        RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Role", seniorRole);
-        RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Personality", seniorPersonality, 3);
-        ViewTableLayoutPanel.Controls.Add(seniorBlock, 1, ViewTableLayoutPanel.RowCount++);
-        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        //var seniorBlock = CreateSectionBlock();
+        //RebuildView_Label(ref seniorBlock, "Senior Software Engineer");
+        //RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Name", seniorName);
+        //RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Role", seniorRole);
+        //RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Personality", seniorPersonality, 3);
+        //ViewTableLayoutPanel.Controls.Add(seniorBlock, 1, ViewTableLayoutPanel.RowCount++);
+        //ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         // Stakeholders Block
         var stakeholderBlock = CreateSectionBlock();
+        string[] personalityOptions = new string[]
+        {
+            "Neutral",
+            "Friendly",
+            "Formal",
+            "Challenging",
+            "Skeptical"
+        };
         RebuildView_Label(ref stakeholderBlock, "Stakeholders");
         for (int i = 0; i < stakeholders.Count; i++)
         {
             int index = i + 1;
             RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Name_{index}", stakeholders[i].Name);
             RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Role_{index}", stakeholders[i].Role);
-            RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Personality_{index}", stakeholders[i].Personality, 3);
+            RebuildView_LabelledComboBox(ref stakeholderBlock, $"Personality_{index}", stakeholders[i].Personality, personalityOptions);
         }
 
         CustomTextButton addStakeholderButton = new CustomTextButton();
@@ -103,7 +111,7 @@ public class ViewCreateScenario : View
 
         // Requirements Block
         var requirementsBlock = CreateSectionBlock();
-        RebuildView_Label(ref requirementsBlock, "Requirements");
+        RebuildView_Label(ref requirementsBlock, "Requirements (Optional)");
         RebuildView_LabelledRichTextBox(ref requirementsBlock, "Functional Requirements", frText, 6);
         RebuildView_LabelledRichTextBox(ref requirementsBlock, "Non-Functional Requirements", nfrText, 6);
         ViewTableLayoutPanel.Controls.Add(requirementsBlock, 1, ViewTableLayoutPanel.RowCount++);
@@ -152,6 +160,46 @@ public class ViewCreateScenario : View
         inputFields[LabelText] = richTextBox;
     }
 
+    public void RebuildView_LabelledComboBox(ref CustomTableLayoutPanel SubTableLayoutPanel, string LabelText, string selectedValue, string[] options)
+    {
+        SubTableLayoutPanel.RowCount += 1;
+        SubTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        // Label
+        CustomLabel label = new CustomLabel();
+        label.Text = LabelText;
+        label.Dock = DockStyle.Top;
+        label.Font = new Font(GlobalVariables.AppFontName, 12, FontStyle.Bold);
+        label.AutoSize = true;
+
+        // ComboBox
+        ComboBox comboBox = new ComboBox();
+        comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        comboBox.Items.AddRange(options);
+        comboBox.SelectedItem = selectedValue ?? options.FirstOrDefault();
+        comboBox.Dock = DockStyle.Top;
+
+        // Wrap into a panel for consistency
+        Panel panel = new Panel { Dock = DockStyle.Top, AutoSize = true };
+        panel.Controls.Add(comboBox);
+        panel.Controls.Add(label);
+
+        SubTableLayoutPanel.Controls.Add(panel, 1, SubTableLayoutPanel.RowCount - 1);
+
+        // Store in inputFields for consistency
+        inputFields[LabelText] = new CustomLabelledRichTextBox
+        {
+            LabelText = LabelText,
+            TextboxText = comboBox.SelectedItem?.ToString() ?? ""
+        };
+
+        // Update binding on selection
+        comboBox.SelectedIndexChanged += (s, e) =>
+        {
+            inputFields[LabelText].TextboxText = comboBox.SelectedItem?.ToString() ?? "";
+        };
+    }
+
     public void RebuildView_Label(ref CustomTableLayoutPanel SubTableLayoutPanel, string LabelText)
     {
         SubTableLayoutPanel.RowCount += 1;
@@ -175,9 +223,9 @@ public class ViewCreateScenario : View
         target.Name = inputFields["Scenario Name"].TextboxText;
         target.Description = inputFields["Description"].TextboxText;
 
-        target.SeniorSoftwareEngineer.Name = inputFields["Senior Name"].TextboxText;
-        target.SeniorSoftwareEngineer.Role = inputFields["Senior Role"].TextboxText;
-        target.SeniorSoftwareEngineer.Personality = inputFields["Senior Personality"].TextboxText;
+        //target.SeniorSoftwareEngineer.Name = inputFields["Senior Name"].TextboxText;
+        //target.SeniorSoftwareEngineer.Role = inputFields["Senior Role"].TextboxText;
+        //target.SeniorSoftwareEngineer.Personality = inputFields["Senior Personality"].TextboxText;
 
         target.ListStakeholders.Clear();
 

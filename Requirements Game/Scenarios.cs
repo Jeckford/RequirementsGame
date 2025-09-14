@@ -87,9 +87,9 @@ public static class Scenarios
             Debug.WriteLine($"Prompt: {scenario.Prompt}");
 
             Debug.WriteLine("--- Senior Software Engineer ---");
-            Debug.WriteLine($"Name: {scenario.SeniorSoftwareEngineer.Name}");
-            Debug.WriteLine($"Role: {scenario.SeniorSoftwareEngineer.Role}");
-            Debug.WriteLine($"Personality: {scenario.SeniorSoftwareEngineer.Personality}");
+            Debug.WriteLine($"Name: {Scenario.SeniorSoftwareEngineer.Name}");
+            Debug.WriteLine($"Role: {Scenario.SeniorSoftwareEngineer.Role}");
+            Debug.WriteLine($"Personality: {Scenario.SeniorSoftwareEngineer.Personality}");
 
             Debug.WriteLine("--- Stakeholders ---");
             if (scenario.ListStakeholders.Count == 0)
@@ -156,7 +156,11 @@ public class Scenario
     public string Description { get; set; } = "";
     public string Prompt { get; set; } = "";
 
-    public Stakeholder SeniorSoftwareEngineer { get; set; } = new Stakeholder();
+    public static readonly Stakeholder SeniorSoftwareEngineer = new Stakeholder(
+        "Alex Johnson",                   // Name
+        "Senior Software Engineer",       // Role
+        "Pragmatic, detail-oriented"      // Personality
+    );
 
     /// <summary>
     /// List of additional stakeholders involved in the scenario.
