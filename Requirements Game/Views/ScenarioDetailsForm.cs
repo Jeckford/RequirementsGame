@@ -70,7 +70,6 @@ class ScenarioDetailsForm : Form {
 
         tableLayoutPanel.Controls.Add(headerPanel, 1, 0);
 
-
         // main description content
         Panel scrollPanel = new Panel();
         scrollPanel.Dock = DockStyle.Fill;
@@ -78,13 +77,14 @@ class ScenarioDetailsForm : Form {
         scrollPanel.BackColor = GlobalVariables.ColorMedium;
         scrollPanel.Padding = new Padding(5);
 
-        Label contentLabel = new Label();
-        contentLabel.AutoSize = true;
-        contentLabel.ForeColor = Color.Black;
-        contentLabel.Font = new Font(GlobalVariables.AppFontName, 11);
-        contentLabel.Dock = DockStyle.Top;
-        contentLabel.TextAlign = ContentAlignment.TopLeft;
-        contentLabel.MaximumSize = new Size(this.Width - 60, 0);
+        RichTextBox contentRichTextBox = new RichTextBox();
+        contentRichTextBox.AutoSize = true;
+        contentRichTextBox.ForeColor = Color.Black;
+        contentRichTextBox.Font = new Font(GlobalVariables.AppFontName, 11);
+        contentRichTextBox.Dock = DockStyle.Fill;
+        contentRichTextBox.BorderStyle = BorderStyle.None;
+        contentRichTextBox.BackColor = GlobalVariables.ColorMedium;
+        contentRichTextBox.MaximumSize = new Size(this.Width - 60, 0);
 
         string content = $"{scenario.Description}\n\n" +
                          $"Senior Engineer:\n" +
@@ -100,8 +100,8 @@ class ScenarioDetailsForm : Form {
                          "Non-Functional Requirements:\n" +
                          string.Join("\n", scenario.GetNonFunctionalRequirements().Select(r => $"- {r}"));
 
-        contentLabel.Text = content;
-        scrollPanel.Controls.Add(contentLabel);
+        contentRichTextBox.AppendText(content);
+        scrollPanel.Controls.Add(contentRichTextBox);
 
         tableLayoutPanel.Controls.Add(scrollPanel, 1, 1);
 
