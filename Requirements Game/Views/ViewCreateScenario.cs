@@ -214,33 +214,27 @@ public class ViewCreateScenario : View
         SubTableLayoutPanel.Controls.Add(label, 1, SubTableLayoutPanel.RowCount - 1);
     }
 
-    private void CreateButton_MouseClick(object sender, MouseEventArgs e)
-    {
-        Debug.WriteLine(isEditMode ? "Saving Edited Scenario" : "Creating New Scenario");
+    private Scenario GetScenario() {
 
-        Scenario target = isEditMode ? editingScenario : new Scenario();
+        Scenario target = new Scenario();
 
         target.Name = inputFields["Scenario Name"].TextboxText;
         target.Description = inputFields["Description"].TextboxText;
 
-        //target.SeniorSoftwareEngineer.Name = inputFields["Senior Name"].TextboxText;
-        //target.SeniorSoftwareEngineer.Role = inputFields["Senior Role"].TextboxText;
-        //target.SeniorSoftwareEngineer.Personality = inputFields["Senior Personality"].TextboxText;
+        for (int i = 1; i <= stakeholderCount; i++) {
 
-        target.ListStakeholders.Clear();
+            if (inputFields.ContainsKey($"Name_{i}")) {
 
-        for (int i = 1; i <= stakeholderCount; i++)
-        {
-            if (inputFields.ContainsKey($"Name_{i}"))
-            {
-                var stakeholder = new Stakeholder
-                {
+                var stakeholder = new Stakeholder {
                     Name = inputFields[$"Name_{i}"].TextboxText,
                     Role = inputFields[$"Role_{i}"].TextboxText,
                     Personality = inputFields[$"Personality_{i}"].TextboxText
                 };
+
                 target.AddStakeholder(stakeholder);
+
             }
+
         }
 
         // Parse Functional Requirements
@@ -253,13 +247,36 @@ public class ViewCreateScenario : View
             .Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
         target.NonFunctionalRequirements = nfrLines.ToList();
 
-        if (!isEditMode)
-        {
-            Scenarios.Add(target);
+        return target;
+
+    }
+
+    private void CreateButton_MouseClick(object sender, MouseEventArgs e) {
+
+        Scenario target = GetScenario();
+
+        if (target.ValidateScenario() == "Scenario is valid") {
+
+            if (isEditMode) {
+
+                Scenarios.ReplaceScenario(ref editingScenario, ref target);
+                editingScenario = target;
+
+            } else {
+
+                Scenarios.Add(target);
+
+            }
+
+            Form1 form1 = (Form1)this.FindForm();
+            form1.ChangeView("Manage Scenarios", trackHistory: false);
+
+        } else {
+            
+            MessageBox.Show(target.ValidateScenario(), "Scenario Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
-        Form1 form1 = (Form1)this.FindForm();
-        form1.ChangeView("Manage Scenarios", trackHistory: false);
     }
 
     private CustomTableLayoutPanel CreateSectionBlock()
@@ -277,6 +294,7 @@ public class ViewCreateScenario : View
         panel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30f));
 
         return panel;
+
     }
 }
 

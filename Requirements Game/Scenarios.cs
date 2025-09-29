@@ -68,6 +68,21 @@ public static class Scenarios
     {
         return listOfScenarios.ToArray();
     }
+
+    public static void ReplaceScenario(ref Scenario Current, ref Scenario New) {
+
+        int index = listOfScenarios.IndexOf(Current);
+
+        if (index >= 0) {
+
+            listOfScenarios[index] = New;
+            ScenariosChanged?.Invoke(null, EventArgs.Empty);
+            SaveToFile(FileSystem.ScenariosFilePath, listOfScenarios);
+
+        }
+
+    }
+
     /// <summary>
     /// Gets the internal scenario list.
     /// </summary>
@@ -177,6 +192,32 @@ public class Scenario
     /// </summary>
     public List<string> NonFunctionalRequirements { get; set; } = new List<string>();
 
+    public string ValidateScenario() {
+
+        if (string.IsNullOrWhiteSpace(this.Name))
+            return "Scenario name is incomplete";
+
+        if (string.IsNullOrWhiteSpace(this.Description))
+            return "Scenario description is incomplete";
+
+        if (string.IsNullOrWhiteSpace(SeniorSoftwareEngineer.Name) ||
+            string.IsNullOrWhiteSpace(SeniorSoftwareEngineer.Role) ||
+            string.IsNullOrWhiteSpace(SeniorSoftwareEngineer.Personality))
+            return "Senior Software Engineer details are incomplete";
+        
+        foreach (Stakeholder stakeholder in ListStakeholders) {
+
+            if (string.IsNullOrWhiteSpace(stakeholder.Name) ||
+                string.IsNullOrWhiteSpace(stakeholder.Role) ||
+                string.IsNullOrWhiteSpace(stakeholder.Personality))
+                return "One or more stakeholder details are incomplete";
+                        
+        }
+
+        return "Scenario is valid";
+
+    }
+
     /// <summary>
     /// Adds a stakeholder to the scenario's stakeholder list.
     /// </summary>
@@ -230,6 +271,7 @@ public class Scenario
     {
         return NonFunctionalRequirements.ToArray();
     }
+
 }
 
 
@@ -265,4 +307,11 @@ public class Stakeholder
         Role = role;
         Personality = personality;
     }
+
+    public override string ToString() {
+
+        return $"Name: {Name} | Role: {Role} | Personality: {Personality}";
+
+    }
+
 }
