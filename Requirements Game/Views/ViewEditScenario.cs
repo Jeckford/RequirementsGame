@@ -2,8 +2,9 @@
 
     public void ChangeScenario(ref Scenario scenario) {
 
-        this.editingScenario = scenario;
-        this.isEditMode = true;
+        this.referenceScenario = scenario;
+        this.editingScenario = new Scenario(scenario);
+        //this.isEditMode = true;
         this.RebuildView();
     }
 }

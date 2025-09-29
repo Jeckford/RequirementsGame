@@ -2,20 +2,24 @@
 using System;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 
 public class ViewCreateScenario : View
 {
-    protected Scenario editingScenario = null;
-    protected bool isEditMode = false;
+    protected Scenario referenceScenario = null;
+    protected Scenario editingScenario = null; // Holds a copy of referenceScenario. Allows editing without modifying the original until the changes are explicitly saved or committed
+    //protected bool isEditMode = false; // No longer required, can use (referenceScenario is null) to obtain the same information
 
     private Dictionary<string, CustomLabelledRichTextBox> inputFields = new Dictionary<string, CustomLabelledRichTextBox>();
-    private int stakeholderCount = 1;
+    //private int stakeholderCount = 1; // No longer required, can get the stakeholder count from editingScenario
 
     public ViewCreateScenario()
     {
+
+        editingScenario = new Scenario(); // Assign editingScenario with an empty instance. This removes the need for 'isEditMode ?' checks
+        referenceScenario = null;
+
         ViewTableLayoutPanel.Dock = DockStyle.Top;
         ViewTableLayoutPanel.AutoSize = true;
 
@@ -28,8 +32,117 @@ public class ViewCreateScenario : View
         RebuildView();
     }
 
-    public void RebuildView()
+    public void RebuildView() {
+
+        ControlFreezer.Freeze(this);
+
+        inputFields.Clear();
+        ViewTableLayoutPanel.Controls.Clear();
+        ViewTableLayoutPanel.RowStyles.Clear();
+        ViewTableLayoutPanel.RowCount = 0;
+
+        var name = editingScenario.Name;
+        var description = editingScenario.Description;
+        var stakeholders = editingScenario.GetStakeholders().ToList();
+        var stakeholderCount = stakeholders.Count;
+        var frText = string.Join("\n", editingScenario.FunctionalRequirements);
+        var nfrText = string.Join("\n", editingScenario.NonFunctionalRequirements);
+
+        // Scenario Info Block
+        var scenarioBlock = CreateSectionBlock();
+        RebuildView_LabelledRichTextBox(ref scenarioBlock, "Scenario Name", name);
+        RebuildView_LabelledRichTextBox(ref scenarioBlock, "Description", description, 6);
+        ViewTableLayoutPanel.Controls.Add(scenarioBlock, 1, ViewTableLayoutPanel.RowCount++);
+        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        // Stakeholders Block
+        var stakeholderBlock = CreateSectionBlock();
+        string[] personalityOptions = new string[]
+        {
+            "Neutral",
+            "Friendly",
+            "Formal",
+            "Challenging",
+            "Skeptical"
+        };
+        RebuildView_Label(ref stakeholderBlock, "Stakeholders");
+        for (int i = 0; i < stakeholders.Count; i++) {
+            int index = i + 1;
+            RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Name_{index}", stakeholders[i].Name);
+            RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Role_{index}", stakeholders[i].Role);
+            RebuildView_LabelledComboBox(ref stakeholderBlock, $"Personality_{index}", stakeholders[i].Personality, personalityOptions);
+        }
+
+        CustomTextButton addStakeholderButton = new CustomTextButton();
+        addStakeholderButton.Text = "+ Add Stakeholder";
+        addStakeholderButton.Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Bold);
+        addStakeholderButton.ForeColor = Color.White;
+        addStakeholderButton.BackColor = GlobalVariables.ColorButtonBlack;
+        addStakeholderButton.InteractionEffect = ButtonInteractionEffect.Lighten;
+        addStakeholderButton.TextAlign = ContentAlignment.MiddleCenter;
+        addStakeholderButton.CornerRadius = 5;
+        addStakeholderButton.Size = new Size(170, 30);
+        addStakeholderButton.Anchor = AnchorStyles.None;
+
+        addStakeholderButton.MouseClick += (s, e) => {
+
+            editingScenario = this.GetScenario();
+            editingScenario.AddStakeholder(new Stakeholder());
+
+            int scrollPosition = this.VerticalScroll.Value;
+
+            RebuildView();
+
+            this.VerticalScroll.Value = scrollPosition;
+
+        };
+
+        stakeholderBlock.RowCount += 1;
+        stakeholderBlock.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
+        stakeholderBlock.Controls.Add(addStakeholderButton, 1, stakeholderBlock.RowCount - 1);
+
+        ViewTableLayoutPanel.Controls.Add(stakeholderBlock, 1, ViewTableLayoutPanel.RowCount++);
+        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        // Requirements Block
+        var requirementsBlock = CreateSectionBlock();
+        RebuildView_Label(ref requirementsBlock, "Requirements (Optional)");
+        RebuildView_LabelledRichTextBox(ref requirementsBlock, "Functional Requirements", frText, 6);
+        RebuildView_LabelledRichTextBox(ref requirementsBlock, "Non-Functional Requirements", nfrText, 6);
+        ViewTableLayoutPanel.Controls.Add(requirementsBlock, 1, ViewTableLayoutPanel.RowCount++);
+        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        // Create/Save Button
+        var buttonBlock = CreateSectionBlock();
+        CustomTextButton createButton = new CustomTextButton();
+        createButton.Text = referenceScenario is null ? "Create" : "Save";
+        createButton.Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Bold);
+        createButton.ForeColor = Color.White;
+        createButton.BackColor = Color.FromArgb(0, 136, 5);
+        createButton.InteractionEffect = ButtonInteractionEffect.Darken;
+        createButton.TextAlign = ContentAlignment.MiddleCenter;
+        createButton.CornerRadius = 5;
+        createButton.Size = new Size(100, 30);
+        createButton.Anchor = AnchorStyles.Right;
+
+        createButton.MouseClick += CreateButton_MouseClick;
+        buttonBlock.RowCount += 1;
+        buttonBlock.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
+        buttonBlock.Controls.Add(createButton, 1, buttonBlock.RowCount - 1);
+
+        ViewTableLayoutPanel.Controls.Add(buttonBlock, 1, ViewTableLayoutPanel.RowCount++);
+        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        ControlFreezer.Unfreeze(this);
+
+    }
+
+    public void RebuildView_Store()
     {
+
+        bool isEditMode = false;
+        ControlFreezer.Freeze(this);
+
         inputFields.Clear();
         ViewTableLayoutPanel.Controls.Clear();
         ViewTableLayoutPanel.RowStyles.Clear();
@@ -43,7 +156,7 @@ public class ViewCreateScenario : View
         //string seniorPersonality = isEditMode ? editingScenario.SeniorSoftwareEngineer.Personality : "";
 
         List<Stakeholder> stakeholders = isEditMode ? editingScenario.GetStakeholders().ToList() : new List<Stakeholder> { new Stakeholder() };
-        stakeholderCount = stakeholders.Count;
+        var stakeholderCount = stakeholders.Count;
 
         string frText = isEditMode ? string.Join("\n", editingScenario.FunctionalRequirements) : "";
         string nfrText = isEditMode ? string.Join("\n", editingScenario.NonFunctionalRequirements) : "";
@@ -96,10 +209,20 @@ public class ViewCreateScenario : View
 
         addStakeholderButton.MouseClick += (s, e) =>
         {
-            stakeholderCount++;
-            RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Name_{stakeholderCount}", "");
-            RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Role_{stakeholderCount}", "");
-            RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Personality_{stakeholderCount}", "", 3);
+            //stakeholderCount++;
+            //RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Name_{stakeholderCount}", "");
+            //RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Role_{stakeholderCount}", "");
+            //RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Personality_{stakeholderCount}", "", 3);
+
+            editingScenario = this.GetScenario();
+            editingScenario.AddStakeholder(new Stakeholder());
+
+            int scrollPosition = this.VerticalScroll.Value;
+
+            RebuildView();
+
+            this.VerticalScroll.Value = scrollPosition;
+
         };
 
         stakeholderBlock.RowCount += 1;
@@ -137,6 +260,9 @@ public class ViewCreateScenario : View
 
         ViewTableLayoutPanel.Controls.Add(buttonBlock, 1, ViewTableLayoutPanel.RowCount++);
         ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        ControlFreezer.Unfreeze(this);
+
     }
 
     public void RebuildView_LabelledRichTextBox(ref CustomTableLayoutPanel SubTableLayoutPanel, string LabelText, string TextboxText, int RowCount = 1)
@@ -214,6 +340,7 @@ public class ViewCreateScenario : View
         SubTableLayoutPanel.Controls.Add(label, 1, SubTableLayoutPanel.RowCount - 1);
     }
 
+    // Builds and returns a Scenario object based on the current UI input fields
     private Scenario GetScenario() {
 
         Scenario target = new Scenario();
@@ -221,7 +348,7 @@ public class ViewCreateScenario : View
         target.Name = inputFields["Scenario Name"].TextboxText;
         target.Description = inputFields["Description"].TextboxText;
 
-        for (int i = 1; i <= stakeholderCount; i++) {
+        for (int i = 1; i <= editingScenario.ListStakeholders.Count; i++) {
 
             if (inputFields.ContainsKey($"Name_{i}")) {
 
@@ -253,18 +380,18 @@ public class ViewCreateScenario : View
 
     private void CreateButton_MouseClick(object sender, MouseEventArgs e) {
 
-        Scenario target = GetScenario();
+        Scenario target = GetScenario(); // Scenario as per current UI inputs
 
         if (target.ValidateScenario() == "Scenario is valid") {
 
-            if (isEditMode) {
+            if (referenceScenario is null) {
 
-                Scenarios.ReplaceScenario(ref editingScenario, ref target);
-                editingScenario = target;
+                Scenarios.Add(target);
 
             } else {
 
-                Scenarios.Add(target);
+                Scenarios.ReplaceScenario(ref referenceScenario, ref target);
+                editingScenario = target;
 
             }
 

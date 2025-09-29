@@ -171,6 +171,23 @@ public class Scenario
     public string Description { get; set; } = "";
     public string Prompt { get; set; } = "";
 
+    public Scenario() { }
+
+    // Copy constructor for Scenario.
+    // Creates a new instance with the same values as the source.
+    // Useful for editing a scenario without modifying the original
+    // until the changes are intentionally committed
+    public Scenario(Scenario Scenario) {
+
+        Name = Scenario.Name;
+        Description = Scenario.Description;
+        Prompt = Scenario.Prompt;
+        ListStakeholders = new List<Stakeholder>(Scenario.ListStakeholders);
+        FunctionalRequirements = new List<string>(Scenario.FunctionalRequirements);
+        NonFunctionalRequirements = new List<string>(Scenario.NonFunctionalRequirements);
+
+    }
+
     public static readonly Stakeholder SeniorSoftwareEngineer = new Stakeholder(
         "Alex Johnson",                   // Name
         "Senior Software Engineer",       // Role
