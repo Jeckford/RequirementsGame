@@ -227,6 +227,12 @@ namespace Requirements_Game
 
                 editScenario.ChangeScenario(ref Scenario);
 
+            } else if (newViewTitle == "Create Scenario") {
+
+                ViewCreateScenario createScenario = (ViewCreateScenario)ViewDictionary["Create Scenario"];
+
+                createScenario.Clear();
+
             }
 
             // Unfreeze Ui

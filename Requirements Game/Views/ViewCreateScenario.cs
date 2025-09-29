@@ -30,6 +30,15 @@ public class ViewCreateScenario : View
 
         ViewTableLayoutPanel.RowCount = 0;
         RebuildView();
+
+    }
+
+    public void Clear() {
+
+        editingScenario = new Scenario();
+
+        RebuildView();
+
     }
 
     public void RebuildView() {
