@@ -18,7 +18,7 @@ namespace Requirements_Game
         private Label TitleLabel;
 
         private string CurrentViewTitle;
-        private List<string> PreviousViewTitles;
+        private string BackViewTitle;
 
         private Dictionary<string, Control> ViewDictionary;
         private Dictionary<string, CustomPictureBox> CustomPictureBoxDictionary;
@@ -35,7 +35,7 @@ namespace Requirements_Game
             this.ShowIcon = false;
             this.BackColor = Color.White;
             this.CurrentViewTitle = "";
-            this.PreviousViewTitles = new List<string>();
+            this.BackViewTitle = "";
 
             Scenarios.LoadFromFile(FileSystem.ScenariosFilePath);
             // -- MainTableLayoutPanel
@@ -131,8 +131,14 @@ namespace Requirements_Game
 
         }
 
-        public void ChangeView(string newViewTitle, Scenario Scenario = null, bool trackHistory = true)
+        public void ChangeView(string newViewTitle, Scenario Scenario = null)
         {
+
+            // Update back button navigation
+
+            if (newViewTitle == "Scenarios") BackViewTitle = "Home";
+            if (newViewTitle == "Manage Scenarios") BackViewTitle = "Scenarios";
+            if (newViewTitle == "Edit Scenario" || newViewTitle == "Create Scenario") BackViewTitle = "Manage Scenarios";
 
             // Freeze UI so that the user doesn't see flicker and to slightly improve performance
 
@@ -145,7 +151,6 @@ namespace Requirements_Game
             // Remove current view
             if (!string.IsNullOrEmpty(CurrentViewTitle) && ViewDictionary.ContainsKey(CurrentViewTitle))
             {
-                PreviousViewTitles.Add(CurrentViewTitle);
                 MainTableLayoutPanel.Controls.Remove(ViewDictionary[CurrentViewTitle]);
             }
 
@@ -301,17 +306,7 @@ namespace Requirements_Game
             if (CustomPictureBoxName == "back")
             {
 
-                // Change the view to the previos from the PreviousViewTitles list
-
-                ChangeView(PreviousViewTitles[PreviousViewTitles.Count - 1]);
-
-                // When changing the view the new view is added to the PreviousViewTitles list
-                // But as the back button was pressed, the previous and the current view can be removed
-                // This works as intended, but maybe a little confusing, maybe update this to something
-                // a little more intuitive
-
-                PreviousViewTitles.RemoveAt(PreviousViewTitles.Count - 1);
-                PreviousViewTitles.RemoveAt(PreviousViewTitles.Count - 1);
+                ChangeView(BackViewTitle);
 
             }
             else if (CustomPictureBoxName == "edit")

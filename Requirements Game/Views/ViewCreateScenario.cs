@@ -405,7 +405,7 @@ public class ViewCreateScenario : View
             }
 
             Form1 form1 = (Form1)this.FindForm();
-            form1.ChangeView("Manage Scenarios", trackHistory: false);
+            form1.ChangeView("Manage Scenarios");
 
         } else {
             
