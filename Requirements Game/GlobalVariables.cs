@@ -6,6 +6,8 @@ class GlobalVariables {
 
     // Place holders, please change to what looks better
 
+    static public Requirements_Game.Form1 MainForm { get; set; }
+
     static public string AppFontName { get => "Calibri"; }
 
     static public Color ColorPrimary { get => Color.White; }

@@ -146,6 +146,7 @@
     <Compile Include="Views\ViewScenarios.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="VisualMessageManager.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

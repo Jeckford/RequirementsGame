@@ -106,6 +106,12 @@ public class LLMServerClient {
 
         if (availableRamMB < 4096) { // 4GB
 
+            if (availableRamMB < 1024) { // 1GB
+
+                VisualMessageManager.ShowMessage("Your computer has limited available RAM (less than 1 gigabyte), which may affect the LLM’s performance. Consider closing other applications and then restarting this application to improve performance");
+
+            }
+
             modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-1B-it-QAT-Q4_0.gguf";
 
         } else if (availableRamMB < 8192) { // 8GB

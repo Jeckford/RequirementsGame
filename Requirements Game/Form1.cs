@@ -28,6 +28,8 @@ namespace Requirements_Game
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            GlobalVariables.MainForm = this;
+
             // -- Form1
             // App specific properties and class initialisation
 
