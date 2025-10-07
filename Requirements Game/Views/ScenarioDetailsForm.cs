@@ -78,13 +78,11 @@ class ScenarioDetailsForm : Form {
         scrollPanel.Padding = new Padding(5);
 
         RichTextBox contentRichTextBox = new RichTextBox();
-        contentRichTextBox.AutoSize = true;
         contentRichTextBox.ForeColor = Color.Black;
         contentRichTextBox.Font = new Font(GlobalVariables.AppFontName, 11);
         contentRichTextBox.Dock = DockStyle.Fill;
         contentRichTextBox.BorderStyle = BorderStyle.None;
         contentRichTextBox.BackColor = GlobalVariables.ColorMedium;
-        contentRichTextBox.MaximumSize = new Size(this.Width - 60, 0);
 
         string content = $"{scenario.Description}\n\n" +
                          $"Senior Engineer:\n" +
@@ -93,12 +91,7 @@ class ScenarioDetailsForm : Form {
                          $"  Personality: {Scenario.SeniorSoftwareEngineer.Personality}\n\n" +
                          $"Stakeholders:\n" +
                          string.Join("\n", scenario.GetStakeholders().Select(s =>
-                             $"- {s.Name} ({s.Role}) — {s.Personality}")) + "\n\n" +
-                         "Displayed for now – remove later\n\n" +
-                         "Functional Requirements:\n" +
-                         string.Join("\n", scenario.GetFunctionalRequirements().Select(r => $"- {r}")) + "\n\n" +
-                         "Non-Functional Requirements:\n" +
-                         string.Join("\n", scenario.GetNonFunctionalRequirements().Select(r => $"- {r}"));
+                             $"- {s.Name} ({s.Role}) — {s.Personality}"));
 
         contentRichTextBox.AppendText(content);
         scrollPanel.Controls.Add(contentRichTextBox);
