@@ -334,9 +334,29 @@ namespace Requirements_Game
                     {
                         string path = openFileDialog.FileName;
                         var importedScenarios = FileManager.LoadScenarios(path);
+                        var existingScenarios = Scenarios.GetScenarios();
+
                         foreach (var scenario in importedScenarios)
                         {
-                            Scenarios.Add(scenario); // Appends each scenario
+                            // Simple check if exact scenario exists it skips adding it
+                            bool isDuplicate = existingScenarios.Any(existing =>
+                                existing.Name == scenario.Name &&
+                                existing.Description == scenario.Description &&
+                                existing.Prompt == scenario.Prompt &&
+                                Enumerable.SequenceEqual(existing.FunctionalRequirements, scenario.FunctionalRequirements) &&
+                                Enumerable.SequenceEqual(existing.NonFunctionalRequirements, scenario.NonFunctionalRequirements) &&
+                                existing.ListStakeholders.Count == scenario.ListStakeholders.Count &&
+                                !existing.ListStakeholders.Where((s, i) =>
+                                    s.Name != scenario.ListStakeholders[i].Name ||
+                                    s.Role != scenario.ListStakeholders[i].Role ||
+                                    s.Personality != scenario.ListStakeholders[i].Personality
+                                ).Any()
+                            );
+
+                            if (!isDuplicate)
+                            {
+                                Scenarios.Add(scenario);
+                            }
                         }
                     }
                 }
