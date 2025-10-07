@@ -224,6 +224,7 @@ public class ViewChat : Panel {
         chatAreaPanel.Controls.Add(messageTextBox, 0, 3);
 
         messageTextBox.PreviewKeyDown += MessageTextBox_PreviewKeyDown;
+        messageTextBox.KeyDown += TxtRequirement_KeyDown;
 
         rightPanel.Controls.Add(chatAreaPanel, 0, 0);
 
@@ -267,6 +268,8 @@ public class ViewChat : Panel {
             TabIndex = 0,
             AccessibleName = "Requirement text"
         };
+
+        txtRequirement.KeyDown += TxtRequirement_KeyDown;
 
         // Bottom row: Drop down + buttons
         TableLayoutPanel bottomRow = new TableLayoutPanel
@@ -915,4 +918,27 @@ public class ViewChat : Panel {
         return bmp;
     }
 
+    private void TxtRequirement_KeyDown(object sender, KeyEventArgs e)
+    {
+        var tb = sender as TextBox;
+        if (e.KeyCode == Keys.Back && e.Control)
+        {
+            int pos = tb.SelectionStart;
+            if (pos == 0) return;
+
+            // Skip whitespace before the cursor
+            int start = pos;
+            while (start > 0 && char.IsWhiteSpace(tb.Text[start - 1]))
+                start--;
+
+            // Find the start of the previous word
+            int wordStart = start;
+            while (wordStart > 0 && !char.IsWhiteSpace(tb.Text[wordStart - 1]))
+                wordStart--;
+
+            tb.Text = tb.Text.Remove(wordStart, pos - wordStart);
+            tb.SelectionStart = wordStart;
+            e.SuppressKeyPress = true;
+        }
+    }
 }
