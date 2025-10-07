@@ -333,7 +333,11 @@ namespace Requirements_Game
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string path = openFileDialog.FileName;
-                        Scenarios.LoadFromFile(path);
+                        var importedScenarios = FileManager.LoadScenarios(path);
+                        foreach (var scenario in importedScenarios)
+                        {
+                            Scenarios.Add(scenario); // Appends each scenario
+                        }
                     }
                 }
             }
