@@ -83,6 +83,8 @@ class ScenarioDetailsForm : Form {
         contentRichTextBox.Dock = DockStyle.Fill;
         contentRichTextBox.BorderStyle = BorderStyle.None;
         contentRichTextBox.BackColor = GlobalVariables.ColorMedium;
+        contentRichTextBox.ReadOnly = true;
+        contentRichTextBox.TabStop = false;
 
         string content = $"{scenario.Description}\n\n" +
                          $"Senior Engineer:\n" +
