@@ -40,6 +40,9 @@ class GlobalVariables {
     public static Dictionary<string, string> PersonaLiveReply
         = new Dictionary<string, string>();
 
+    // personaKey -> list of (Type, Text) tuples for the student's draft requirements
+    public static Dictionary<string, List<(string Type, string Text)>> PersonaRequirements
+        = new Dictionary<string, List<(string Type, string Text)>>();
 
 
 }

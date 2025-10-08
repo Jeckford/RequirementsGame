@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Windows.Forms;
 
 public class ViewChat : Panel {
@@ -259,6 +260,16 @@ public class ViewChat : Panel {
 
         reqStack.Controls.Add(gridRequirements, 0, 0);
 
+        // Restore previous requirements for this persona
+        if (GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var saved))
+        {
+            foreach (var (type, text) in saved)
+                gridRequirements.Rows.Add(true, type, text);
+
+            gridRequirements.ClearSelection();
+        }
+
+
         // Requirement input textbox
         TextBox txtRequirement = new TextBox
         {
@@ -287,19 +298,81 @@ public class ViewChat : Panel {
         bottomRow.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         // Type selector
+        // Create the ComboBox
         ComboBox cmbType = new ComboBox
         {
             DropDownStyle = ComboBoxStyle.DropDownList,
+            DrawMode = DrawMode.OwnerDrawFixed, 
             Width = 160,
             Margin = new Padding(0, 0, 12, 0),
             TabIndex = 1,
             AccessibleName = "Requirement type"
         };
-        cmbType.Items.AddRange(new object[] { "Requirements Type", "Functional", "Non-Functional" });
-        cmbType.SelectedIndex = 0;
 
-        // Delete button
-        CustomTextButton btnRemove = CreatePillButton("Delete");
+        // Add real items (no placeholder item)
+        cmbType.Items.AddRange(new object[] { "Functional", "Non-Functional" });
+        cmbType.SelectedIndex = -1;
+
+        // Draw placeholder when no selection
+        cmbType.DrawItem += (s, e) =>
+        {
+            // Nothing to draw
+            if (e.Index < -1) return;
+
+            bool hasSelection = cmbType.SelectedIndex >= 0;
+            bool isEditPortion = (e.State & DrawItemState.ComboBoxEdit) == DrawItemState.ComboBoxEdit;
+            bool isHoverInList = (e.Index >= 0) &&
+                                  ((e.State & DrawItemState.Selected) == DrawItemState.Selected) &&
+                                  !isEditPortion;
+
+            // Placeholder (no selection, edit portion)
+            if (e.Index < 0 && !hasSelection)
+            {
+                using (var bg = new SolidBrush(cmbType.BackColor))
+                    e.Graphics.FillRectangle(bg, e.Bounds);
+
+                using (var brush = new SolidBrush(SystemColors.GrayText))
+                    e.Graphics.DrawString("Requirement Type", e.Font, brush, e.Bounds);
+
+                return;
+            }
+
+            // Edit area showing current selection (no highlight)
+            if (e.Index < 0 && hasSelection)
+            {
+                using (var bg = new SolidBrush(cmbType.BackColor))
+                    e.Graphics.FillRectangle(bg, e.Bounds);
+
+                using (var brush = new SolidBrush(cmbType.ForeColor))
+                    e.Graphics.DrawString(cmbType.GetItemText(cmbType.SelectedItem), e.Font, brush, e.Bounds);
+
+                return;
+            }
+
+            // Items in the dropdown list
+            if (isHoverInList)
+            {
+                // Hovered item - show highlight
+                e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+                using (var brush = new SolidBrush(SystemColors.HighlightText))
+                    e.Graphics.DrawString(cmbType.GetItemText(cmbType.Items[e.Index]), e.Font, brush, e.Bounds);
+            }
+            else
+            {
+                // Non-hovered item - normal background
+                using (var bg = new SolidBrush(cmbType.BackColor))
+                    e.Graphics.FillRectangle(bg, e.Bounds);
+
+                using (var brush = new SolidBrush(cmbType.ForeColor))
+                    e.Graphics.DrawString(cmbType.GetItemText(cmbType.Items[e.Index]), e.Font, brush, e.Bounds);
+            }
+        };
+
+        // Ensure placeholder repaints when value changes
+        cmbType.SelectedIndexChanged += (s, e) => cmbType.Invalidate();
+
+    // Delete button
+    CustomTextButton btnRemove = CreatePillButton("Delete");
         btnRemove.Margin = new Padding(0, 0, 12, 0);
         btnRemove.TabIndex = 2;
 
@@ -363,7 +436,7 @@ public class ViewChat : Panel {
                 Name = "colType",
                 HeaderText = "Type",
                 Width = 120,
-                ReadOnly = false,
+                ReadOnly = true,
                 SortMode = DataGridViewColumnSortMode.NotSortable
             };
 
@@ -372,7 +445,7 @@ public class ViewChat : Panel {
                 Name = "colDescription",
                 HeaderText = "Requirement",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                ReadOnly = false,
+                ReadOnly = true,
                 SortMode = DataGridViewColumnSortMode.NotSortable
             };
 
@@ -441,20 +514,38 @@ public class ViewChat : Panel {
             var text = txtRequirement.Text.Trim();
             if (string.IsNullOrEmpty(text)) return;
             var type = cmbType.SelectedItem?.ToString() ?? "Functional";
+
             gridRequirements.Rows.Add(true, type, text);
             txtRequirement.Clear();
-            cmbType.SelectedIndex = 0;
+            cmbType.SelectedIndex = -1;
+            cmbType.Invalidate();
+            gridRequirements.ClearSelection();
+
+            // ✅ Persist this requirement per persona key (not scenario)
+            if (!GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var list))
+            {
+                list = new List<(string Type, string Text)>();
+                GlobalVariables.PersonaRequirements[_personaKey] = list;
+            }
+
+            list.Add((type, text));
         };
 
         btnRemove.Click += (s, e) =>
         {
+            if (!GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var list))
+                return;
+
             for (int i = gridRequirements.Rows.Count - 1; i >= 0; i--)
             {
                 var row = gridRequirements.Rows[i];
                 if (row.Cells[0] is DataGridViewCheckBoxCell chk &&
-                    chk.Value is bool isChecked &&
-                    isChecked)
+                    chk.Value is bool isChecked && isChecked)
                 {
+                    string type = row.Cells[1].Value?.ToString();
+                    string desc = row.Cells[2].Value?.ToString();
+
+                    list.RemoveAll(x => x.Type == type && x.Text == desc);
                     gridRequirements.Rows.RemoveAt(i);
                 }
             }

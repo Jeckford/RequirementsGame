@@ -141,6 +141,7 @@ namespace Requirements_Game
             if (newViewTitle == "Scenarios") BackViewTitle = "Home";
             if (newViewTitle == "Manage Scenarios") BackViewTitle = "Scenarios";
             if (newViewTitle == "Edit Scenario" || newViewTitle == "Create Scenario") BackViewTitle = "Manage Scenarios";
+            if (newViewTitle == "Chat") BackViewTitle = "Scenarios";
 
             // Freeze UI so that the user doesn't see flicker and to slightly improve performance
 
