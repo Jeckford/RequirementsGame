@@ -86,100 +86,15 @@ public class ChatLog : Panel {
     }
 
     // ChatMessageBubble Class
-    private class ChatMessageBubble : Label {
-
-        public enum Corners { TopLeft, TopRight, BottomRight, BottomLeft }
-
-        private int CornerRadius = 15; // Change the corner roundness on the bubble
-
-        // Using static variables for quick bitmap access
-        private static Bitmap TopLeftPiece;
-        private static Bitmap TopRightPiece;
-        private static Bitmap BottomLeftPiece;
-        private static Bitmap BottomRightPiece;
-        private static Color ParentBackColor = Color.Black;
+    private class ChatMessageBubble : CustomLabel {
 
         public ChatMessageBubble() {
             this.AutoSize = true;
             this.Padding = new Padding(5);
             this.MaximumSize = new Size(400, 0);
             this.Font = new Font("Calibri", 12, FontStyle.Regular);
+            this.CornerRadius = 15;
         }
 
-        private Bitmap GetRoundedCorner(Corners corner) {
-
-            if (TopLeftPiece == null || (this.Parent != null && this.Parent.BackColor != ParentBackColor)) {
-
-                if (this.Parent != null) ParentBackColor = this.Parent.BackColor;
-
-                // Using the 4 quarters of a circle to create the rounded corners
-
-                int diameter = CornerRadius * 2;
-                Bitmap circleBitmap = new Bitmap(diameter, diameter, PixelFormat.Format32bppArgb);
-
-                using (Graphics g = Graphics.FromImage(circleBitmap)) {
-
-                    g.Clear(Color.Transparent);
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.FillEllipse(Brushes.Black, new Rectangle(-1, -1, diameter + 1, diameter + 1));
-
-                }
-
-                for (int x = 0; x < circleBitmap.Width; x++) {
-
-                    for (int y = 0; y < circleBitmap.Height; y++) {
-
-                        Color pixel = circleBitmap.GetPixel(x, y);
-                        int newAlpha = 255 - pixel.A;
-                        circleBitmap.SetPixel(x, y, Color.FromArgb(newAlpha, ParentBackColor));
-
-                    }
-
-                }
-
-                TopLeftPiece = circleBitmap.Clone(new Rectangle(0, 0, CornerRadius, CornerRadius), circleBitmap.PixelFormat);
-                TopRightPiece = circleBitmap.Clone(new Rectangle(CornerRadius, 0, CornerRadius, CornerRadius), circleBitmap.PixelFormat);
-                BottomLeftPiece = circleBitmap.Clone(new Rectangle(0, CornerRadius, CornerRadius, CornerRadius), circleBitmap.PixelFormat);
-                BottomRightPiece = circleBitmap.Clone(new Rectangle(CornerRadius, CornerRadius, CornerRadius, CornerRadius), circleBitmap.PixelFormat);
-
-            }
-
-            switch (corner) {
-
-                case Corners.TopLeft:
-
-                    return TopLeftPiece;
-
-                case Corners.TopRight:
-
-                    return TopRightPiece;
-
-                case Corners.BottomLeft:
-
-                    return BottomLeftPiece;
-
-                case Corners.BottomRight:
-
-                    return BottomRightPiece;
-
-                default:
-
-                    throw new Exception("Unknown corner");
-
-            }
-
-        }
-
-        // Draw rounded corners
-        protected override void OnPaint(PaintEventArgs e) {
-
-            e.Graphics.DrawImage(GetRoundedCorner(Corners.TopLeft), new Rectangle(0, 0, CornerRadius, CornerRadius));
-            e.Graphics.DrawImage(GetRoundedCorner(Corners.TopRight), new Rectangle(this.Width - CornerRadius, 0, CornerRadius, CornerRadius));
-            e.Graphics.DrawImage(GetRoundedCorner(Corners.BottomLeft), new Rectangle(0, this.Height - CornerRadius, CornerRadius, CornerRadius));
-            e.Graphics.DrawImage(GetRoundedCorner(Corners.BottomRight), new Rectangle(this.Width - CornerRadius, this.Height - CornerRadius, CornerRadius, CornerRadius));
-
-            base.OnPaint(e);
-
-        }
     }
 }

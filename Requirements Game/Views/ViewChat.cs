@@ -553,6 +553,12 @@ public class ViewChat : Panel {
 
         _btnSubmit.Click += (s, e) =>
         {
+
+            if (LLMServerClient.IsBusy) {
+                VisualMessageManager.ShowMessage("LLM is busy, please wait", true);
+                return;
+            }
+
             // Build a message from all rows
             var lines = new List<string>();
             foreach (DataGridViewRow row in gridRequirements.Rows)
@@ -857,6 +863,10 @@ public class ViewChat : Panel {
     private void MessageTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
     {
         if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Return) return;
+        if (LLMServerClient.IsBusy) {
+            VisualMessageManager.ShowMessage("LLM is busy, please wait", true);
+            return;
+        }
 
         var tb = (TextBox)sender;
         var userText = tb.Text;

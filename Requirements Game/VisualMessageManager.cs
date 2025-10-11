@@ -46,7 +46,7 @@ class VisualMessageManager {
 
     }
 
-    public static void ShowMessage(string Message) {
+    public static void ShowMessage(string Message, bool AutoClose = false) {
 
         var messageTableLayoutPanel = new CustomTableLayoutPanel();
         messageTableLayoutPanel.CornerRadius = 10;
@@ -102,6 +102,30 @@ class VisualMessageManager {
             UpdateMessageFormPosition();
 
         };
+    
+        if (AutoClose) {
+
+            closeButton.Dispose();
+
+            var timer = new System.Windows.Forms.Timer();
+            timer.Interval = 3000;
+            timer.Tick += (sender, e) => {
+
+                timer.Stop();
+                timer.Dispose();
+
+                if (!messageTableLayoutPanel.IsDisposed) {
+
+                    messageTableLayoutPanel.Dispose();
+                    UpdateMessageFormPosition();
+
+                }
+
+            };
+
+            timer.Start();
+
+        }
 
         UpdateMessageFormPosition();
 

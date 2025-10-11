@@ -13,9 +13,12 @@ public class LLMServerClient {
 
     private static LLMServerClient ServerClient;
 
+    public static bool IsBusy { get; private set; }
+
     static LLMServerClient() {
 
         ServerClient = new LLMServerClient();
+        IsBusy = false;
 
     }
 
@@ -61,8 +64,12 @@ public class LLMServerClient {
     }
 
 
-    public static async void SendMessage(string personaKey, string question)
-    {
+    public static async void SendMessage(string personaKey, string question) {
+
+        if (IsBusy) { throw new Exception("LLM is busy"); }
+
+        IsBusy = true;
+
         if (string.IsNullOrWhiteSpace(personaKey)) personaKey = "default";
 
         // Use the stored prompt for this persona if we have it
@@ -72,15 +79,17 @@ public class LLMServerClient {
         // Reset only this persona’s live buffer
         GlobalVariables.PersonaLiveReply[personaKey] = "";
 
-        await ServerClient.Chat(question, partial =>
-        {
+        await ServerClient.Chat(question, partial => {
             if (!GlobalVariables.PersonaLiveReply.ContainsKey(personaKey))
                 GlobalVariables.PersonaLiveReply[personaKey] = "";
             GlobalVariables.PersonaLiveReply[personaKey] += partial;
         });
+
+        IsBusy = false;
+
     }
 
-    //
+    //  
 
     private Process llamaProcess;
     private StringBuilder conversationHistory;
