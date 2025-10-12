@@ -192,5 +192,8 @@
   <ItemGroup>
     <None Include="Resources\export.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_thick.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

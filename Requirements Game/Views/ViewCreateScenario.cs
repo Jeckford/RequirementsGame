@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Diagnostics;
+using Requirements_Game.Properties;
 
 public class ViewCreateScenario : View
 {
@@ -77,9 +80,12 @@ public class ViewCreateScenario : View
         RebuildView_Label(ref stakeholderBlock, "Stakeholders");
         for (int i = 0; i < stakeholders.Count; i++) {
             int index = i + 1;
+
+            RebuildView_StackholderLabelWithClose(ref stakeholderBlock, index);
             RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Name_{index}", stakeholders[i].Name);
             RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Role_{index}", stakeholders[i].Role);
             RebuildView_LabelledComboBox(ref stakeholderBlock, $"Personality_{index}", stakeholders[i].Personality, personalityOptions);
+
         }
 
         CustomTextButton addStakeholderButton = new CustomTextButton();
@@ -280,7 +286,8 @@ public class ViewCreateScenario : View
         SubTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         CustomLabelledRichTextBox richTextBox = new CustomLabelledRichTextBox();
-        richTextBox.LabelText = LabelText;
+        richTextBox.Name = LabelText;
+        richTextBox.LabelText = LabelText.Split('_')[0];
         richTextBox.Dock = DockStyle.Top;
 
         if (RowCount > 1)
@@ -302,7 +309,8 @@ public class ViewCreateScenario : View
 
         // Label
         CustomLabel label = new CustomLabel();
-        label.Text = LabelText;
+        label.Name = LabelText;
+        label.Text = LabelText.Split('_')[0];
         label.Dock = DockStyle.Top;
         label.Font = new Font(GlobalVariables.AppFontName, 12, FontStyle.Bold);
         label.AutoSize = true;
@@ -335,18 +343,71 @@ public class ViewCreateScenario : View
         };
     }
 
-    public void RebuildView_Label(ref CustomTableLayoutPanel SubTableLayoutPanel, string LabelText)
-    {
+    public void RebuildView_StackholderLabelWithClose(ref CustomTableLayoutPanel SubTableLayoutPanel, int StakeholderNumber) {
+
+        string stakeholderText = $"Stakeholder {StakeholderNumber}";
+
         SubTableLayoutPanel.RowCount += 1;
         SubTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         CustomLabel label = new CustomLabel();
+        label.Text = stakeholderText;
+        label.Dock = DockStyle.Top;
+        label.Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Italic | FontStyle.Bold);
+        label.Margin = new Padding(0,20,0,0);
+        label.AutoSize = true;
+
+        var closeIcon = (Bitmap)Resources.ResourceManager.GetObject("close_thick");
+        closeIcon = new Bitmap(closeIcon, 18, 18);
+
+        var closeButton = new CustomPictureBox();
+        closeButton.Dock = DockStyle.Right;
+        closeButton.Size = new Size(20, 20);
+        closeButton.Padding = new Padding(0,5,0,0);
+        closeButton.SizeMode = PictureBoxSizeMode.CenterImage;
+        closeButton.Image = closeIcon;
+        closeButton.IdleImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(0, 0, 0));
+        closeButton.EnterImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(100, 100, 100));
+        closeButton.DownImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(160, 160, 160));
+        label.Controls.Add(closeButton);
+
+        closeButton.Click += (sender, e) => {
+
+            DialogResult result = MessageBox.Show($"Are you sure you want to delete '{stakeholderText}'?", "Delete Stakeholder", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes) {
+
+                editingScenario = this.GetScenario();
+                editingScenario.DeleteStakeHolderByIndex(StakeholderNumber - 1);
+
+                int scrollPosition = this.VerticalScroll.Value;
+
+                RebuildView();
+
+                this.VerticalScroll.Value = scrollPosition;
+
+            }
+
+        };
+
+        SubTableLayoutPanel.Controls.Add(label, 1, SubTableLayoutPanel.RowCount - 1);
+
+    }
+
+    public void RebuildView_Label(ref CustomTableLayoutPanel SubTableLayoutPanel, string LabelText) {
+
+        SubTableLayoutPanel.RowCount += 1;
+        SubTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        CustomLabel label = new CustomLabel();       
         label.Text = LabelText;
         label.Dock = DockStyle.Top;
         label.Font = new Font(GlobalVariables.AppFontName, 16, FontStyle.Bold);
+        label.Margin = new Padding(0,5,0,0);
         label.AutoSize = true;
 
         SubTableLayoutPanel.Controls.Add(label, 1, SubTableLayoutPanel.RowCount - 1);
+
     }
 
     // Builds and returns a Scenario object based on the current UI input fields

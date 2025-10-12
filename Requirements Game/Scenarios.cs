@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 
 /// <summary>
 /// Static manager class for handling a collection of scenarios.
@@ -242,6 +243,12 @@ public class Scenario
     public void AddStakeholder(Stakeholder stakeholder)
     {
         ListStakeholders.Add(stakeholder);
+    }
+
+    public void DeleteStakeHolderByIndex(int Index) {
+
+        ListStakeholders.RemoveAt(Index);
+
     }
 
     /// <summary>
