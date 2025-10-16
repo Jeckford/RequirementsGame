@@ -127,15 +127,15 @@ public class LLMServerClient {
 
             modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-4b-it-Q4_K_M.gguf";
 
-        } else if (availableRamMB < 16384) { // 16GB
+        } else { // if (availableRamMB < 16384) { // 16GB
 
             modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-12b-it-Q4_K_M.gguf";
 
-        } else { // 16GB or more
+        } /* else { // 16GB or more
 
             modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-27B-it-QAT-Q4_0.gguf";
 
-        }
+        } */
 
         Debug.WriteLine($"[LLM] RAM avail MB = {availableRamMB}, modelPath = {modelPath}");
 
