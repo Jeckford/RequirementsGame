@@ -93,7 +93,7 @@ class ScenarioDetailsForm : Form {
                          $"  Personality: {Scenario.SeniorSoftwareEngineer.Personality}\n\n" +
                          $"Stakeholders:\n" +
                          string.Join("\n", scenario.GetStakeholders().Select(s =>
-                             $"- {s.Name} ({s.Role}) — {s.Personality}"));
+                             $"- {s.Name} ({s.Role}) — Personality: { s.Personality} "));
 
         contentRichTextBox.AppendText(content);
         scrollPanel.Controls.Add(contentRichTextBox);
