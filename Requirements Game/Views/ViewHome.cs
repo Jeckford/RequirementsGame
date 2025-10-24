@@ -97,8 +97,9 @@ public class ViewHome : CustomTableLayoutPanel {
         }
         else if (buttonName == "Help")
         {
-            // Using the help button as a debug button, replace with a help view later
-            Scenarios.DebugPrintScenarios();
+            // Navigate to Help view (page with back button in the app title bar)
+            Form1 form1 = (Form1)this.FindForm();
+            form1.ChangeView("Help");
         }
         else if (buttonName == "Credits")
         {
