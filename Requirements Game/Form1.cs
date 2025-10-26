@@ -336,7 +336,7 @@ namespace Requirements_Game
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string path = openFileDialog.FileName;
-                        var importedScenarios = FileManager.LoadScenarios(path);
+                        var importedScenarios = JsonFileManager.LoadScenarios(path);
                         var existingScenarios = Scenarios.GetScenarios();
 
                         foreach (var scenario in importedScenarios)

@@ -84,7 +84,7 @@
     <Compile Include="CustomControls\CustomLabelledRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="JsonBuilder.cs" />
+    <Compile Include="ApplicationServices\JsonBuilder.cs" />
     <Compile Include="LLMServerClient.cs" />
     <Compile Include="ChatLog.cs">
       <SubType>Component</SubType>
@@ -111,15 +111,15 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
-    <Compile Include="ControlFreezer.cs" />
-    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="ApplicationServices\ControlFreezer.cs" />
+    <Compile Include="ApplicationServices\JsonFileManager.cs" />
     <Compile Include="ProfileLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Managers\ColorManager.cs" />
-    <Compile Include="FileSystem.cs" />
+    <Compile Include="ApplicationServices\ColorManager.cs" />
+    <Compile Include="ApplicationServices\FileSystem.cs" />
     <Compile Include="Views\ScenarioDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>

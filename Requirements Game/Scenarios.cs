@@ -28,7 +28,7 @@ public static class Scenarios
     /// <param name="filePath">Path to the JSON file.</param>
     public static void LoadFromFile(string filePath)
     {
-        listOfScenarios = FileManager.LoadScenarios(filePath);
+        listOfScenarios = JsonFileManager.LoadScenarios(filePath);
         ScenariosChanged?.Invoke(null, EventArgs.Empty);
         SaveToFile(FileSystem.ScenariosFilePath, listOfScenarios);
     }
@@ -39,7 +39,7 @@ public static class Scenarios
     /// <param name="scenarios">List of scenarios to save.</param>
     public static void SaveToFile(string filePath, List<Scenario> scenarios)
     {
-        FileManager.SaveScenarios(scenarios, filePath);
+        JsonFileManager.SaveScenarios(scenarios, filePath);
     }
     /// <summary>
     /// Adds a scenario to the internal list and saves the updated list.
