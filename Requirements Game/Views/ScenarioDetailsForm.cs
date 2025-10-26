@@ -62,7 +62,8 @@ class ScenarioDetailsForm : Form {
         headerPanel.Controls.Add(nameLabel, 0, 0);
 
         CustomPictureBox closeButton = new CustomPictureBox();
-        closeButton.IdleImage = (Image)Requirements_Game.Properties.Resources.ResourceManager.GetObject("close");
+        closeButton.Image = (Image)Requirements_Game.Properties.Resources.ResourceManager.GetObject("close");
+        closeButton.InteractionEffect = ButtonInteractionEffect.Lighten;
         closeButton.SizeMode = PictureBoxSizeMode.CenterImage;
         closeButton.Dock = DockStyle.Fill;
         closeButton.MouseClick += CloseButton_MouseClick;

@@ -127,7 +127,7 @@ class CustomTextButton : CustomLabel {
 
     /// <summary>
     /// Restores the mouse enter color when the mouse button is released.
-    /// If mouse is no longer over button on release, the MouseLeave event will trigger
+    /// If mouse cursor is no longer over button on release, the MouseLeave event will trigger
     /// returning it back to the original color
     /// </summary>
     private void Me_MouseUp(object sender, MouseEventArgs e) {

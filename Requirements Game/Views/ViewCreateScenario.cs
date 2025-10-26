@@ -366,9 +366,7 @@ public class ViewCreateScenario : View
         closeButton.Padding = new Padding(0,5,0,0);
         closeButton.SizeMode = PictureBoxSizeMode.CenterImage;
         closeButton.Image = closeIcon;
-        closeButton.IdleImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(0, 0, 0));
-        closeButton.EnterImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(100, 100, 100));
-        closeButton.DownImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(160, 160, 160));
+        closeButton.InteractionEffect = ButtonInteractionEffect.Lighten;
         label.Controls.Add(closeButton);
 
         closeButton.Click += (sender, e) => {

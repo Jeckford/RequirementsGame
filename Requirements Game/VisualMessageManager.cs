@@ -90,9 +90,7 @@ class VisualMessageManager {
         closeButton.Dock = DockStyle.Fill;
         closeButton.SizeMode = PictureBoxSizeMode.CenterImage;
         closeButton.Image = closeIcon;
-        closeButton.IdleImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(0, 0, 0));
-        closeButton.EnterImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(100, 100, 100));
-        closeButton.DownImage = BitmapManager.ChangeColor(closeIcon, Color.FromArgb(160, 160, 160));
+        closeButton.InteractionEffect = ButtonInteractionEffect.Lighten;
 
         messageTableLayoutPanel.Controls.Add(closeButton, 1, 0);
 

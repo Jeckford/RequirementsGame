@@ -139,7 +139,7 @@ public class ViewHelp : View
         {
             Dock = DockStyle.Fill,
             SizeMode = PictureBoxSizeMode.Zoom,
-            IdleImage = images[0],
+            Image = images[0],
             Margin = new Padding(0),
             BackColor = Color.White
         };
@@ -193,7 +193,7 @@ public class ViewHelp : View
     {
         if (index < 0 || index >= images.Count) return;
         currentIndex = index;
-        mainPicture.IdleImage = images[index];
+        mainPicture.Image = images[index];
 
         // update page label
         pageLabel.Text = string.Format("{0} / {1}", currentIndex + 1, images.Count);

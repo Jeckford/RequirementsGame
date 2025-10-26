@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
 using Requirements_Game.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Requirements_Game
 {
@@ -103,9 +104,8 @@ namespace Requirements_Game
                 CustomPictureBox CustomPictureBox = new CustomPictureBox();
                 CustomPictureBox.Name = resourceName;
                 CustomPictureBox.Dock = DockStyle.Fill;
-                CustomPictureBox.IdleImage = BitmapManager.ChangeColor(icon, Color.FromArgb(0, 0, 0));
-                CustomPictureBox.EnterImage = BitmapManager.ChangeColor(icon, Color.FromArgb(100, 100, 100));
-                CustomPictureBox.DownImage = BitmapManager.ChangeColor(icon, Color.FromArgb(160, 160, 160));
+                CustomPictureBox.InteractionEffect = ButtonInteractionEffect.Lighten;
+                CustomPictureBox.Image = icon;
 
                 CustomPictureBox.MouseClick += CustomPictureBox_MouseClick;
 
