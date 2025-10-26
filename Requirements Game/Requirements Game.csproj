@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="JsonBuilder.cs" />
     <Compile Include="LLMServerClient.cs" />
-    <Compile Include="Managers\BitmapManager.cs" />
     <Compile Include="ChatLog.cs">
       <SubType>Component</SubType>
     </Compile>
