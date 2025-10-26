@@ -137,6 +137,9 @@
     <Compile Include="Views\ViewEditScenario.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\ViewHelp.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\ViewHome.cs">
       <SubType>Component</SubType>
     </Compile>
