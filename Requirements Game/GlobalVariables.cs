@@ -16,10 +16,6 @@ class GlobalVariables {
     static public Color ColorDark { get => Color.FromArgb(0, 0, 0); }
     static public Color ColorButtonBlack { get => Color.FromArgb(40, 40, 40); }
 
-    // For testing and design, to be removed at deployment
-
-    public static bool DesignMode => false;
-
     public static Scenario CurrentScenario { get; set; }
 
     public static string PersonaKey(Scenario s, Stakeholder p)

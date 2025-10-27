@@ -66,7 +66,7 @@ public class LLMServerClient {
 
     public static async void SendMessage(string personaKey, string question) {
 
-        if (IsBusy) { throw new Exception("LLM is busy"); }
+        if (IsBusy) throw new Exception("LLM is busy");
 
         IsBusy = true;
 
@@ -109,17 +109,13 @@ public class LLMServerClient {
 
         // Get model based on available RAM
 
-        double totalRam = GetTotalMemory();
-        double availableRamMB = GetAvailableMemory();
+        double totalRam = ComputerInfo.GetTotalMemory();
+        double availableRamMB = ComputerInfo.GetAvailableMemory();
         string modelPath = "";
 
         if (availableRamMB < 4096) { // 4GB
 
-            if (availableRamMB < 1024) { // 1GB
-
-                VisualMessageManager.ShowMessage("Your computer has limited available RAM (less than 1 gigabyte), which may affect the LLM’s performance. Consider closing other applications and then restarting this application to improve performance");
-
-            }
+            VisualMessageManager.ShowMessage("Your computer currently has less than 4 GB of available RAM, which may affect the LLM’s performance. If your system has more total RAM than what is currently available, try closing other applications and restarting this program to improve performance");
 
             modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-1B-it-QAT-Q4_0.gguf";
 
@@ -260,73 +256,6 @@ public class LLMServerClient {
             return $"Error: {ex.Message}";
 
         }
-
-    }
-
-    // Original Chat
-
-    public async Task<string> Chat_WaitForEntireResponse(string question) {
-
-        conversationHistory.Append($"<|user|> {question} ");
-
-        string url = "http://localhost:8080/completion";
-
-        var jsonBody = new JsonBuilder();
-        jsonBody.Items.Add("prompt", $"{conversationHistory} <|assistant|>");
-        jsonBody.Items.Add("n_predict", 100);
-        jsonBody.Items.Add("temperature", 0.2);
-        jsonBody.Items.Add("top_k", 20);
-        jsonBody.Items.Add("top_p", 0.8);
-        jsonBody.Items.Add("stop", new string[] { "<|user|>", "<|assistant|>", "<|system|>" });
-
-        var content = new StringContent(jsonBody.ToString(), Encoding.UTF8, "application/json");
-
-        try {
-
-            var client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync(url, content);
-            response.EnsureSuccessStatusCode();
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-            JsonDocument json = JsonDocument.Parse(responseBody);
-            string result = json.RootElement.GetProperty("content").GetString();
-
-            conversationHistory.Append($" <|assistant|> {result} ");
-
-            return result;
-
-        } catch (Exception ex) {
-
-            return $"Error: {ex.Message}";
-
-        }
-    }
-
-    private double GetTotalMemory() {
-
-        var searcher = new ManagementObjectSearcher("SELECT TotalVisibleMemorySize FROM Win32_OperatingSystem");
-
-        foreach (var obj in searcher.Get()) {
-
-            return Convert.ToDouble(obj["TotalVisibleMemorySize"]) / 1024;
-
-        }
-
-        return 0;
-
-    }
-
-    private double GetAvailableMemory() {
-
-        var searcher = new ManagementObjectSearcher("SELECT FreePhysicalMemory FROM Win32_OperatingSystem");
-
-        foreach (var obj in searcher.Get()) {
-
-            return Convert.ToDouble(obj["FreePhysicalMemory"]) / 1024;
-
-        }
-
-        return 0;
 
     }
 

@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationServices\ComputerInfo.cs" />
     <Compile Include="CustomControls\CustomLabelledRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
