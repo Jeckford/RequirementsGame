@@ -86,7 +86,7 @@
     </Compile>
     <Compile Include="ApplicationServices\JsonBuilder.cs" />
     <Compile Include="LLMServerClient.cs" />
-    <Compile Include="ChatLog.cs">
+    <Compile Include="CustomControls\ChatLog.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomControls\CustomLabel.cs">
@@ -148,7 +148,7 @@
     <Compile Include="Views\ViewScenarios.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="VisualMessageManager.cs" />
+    <Compile Include="ApplicationServices\VisualMessageManager.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
