@@ -288,13 +288,17 @@ public class ViewChat : Panel {
             Dock = DockStyle.Top,
             AutoSize = true,
             AutoSizeMode = AutoSizeMode.GrowAndShrink,
-            ColumnCount = 4,
+            ColumnCount = 5,
             RowCount = 1,
+            Margin = new Padding(0),
+            Padding = new Padding(0),
         };
+
         bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Combo
         bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Delete
         bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Add
         bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Submit
+        bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Export
         bottomRow.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         // Type selector
@@ -371,8 +375,8 @@ public class ViewChat : Panel {
         // Ensure placeholder repaints when value changes
         cmbType.SelectedIndexChanged += (s, e) => cmbType.Invalidate();
 
-    // Delete button
-    CustomTextButton btnRemove = CreatePillButton("Delete");
+        // Delete button
+        CustomTextButton btnRemove = CreatePillButton("Delete");
         btnRemove.Margin = new Padding(0, 0, 12, 0);
         btnRemove.TabIndex = 2;
 
@@ -385,12 +389,25 @@ public class ViewChat : Panel {
         _btnSubmit = CreatePillButton("Submit");
         _btnSubmit.TabIndex = 4;
         UpdateSubmitVisibility(); // Show/hide based on active persona
+        
+        // Export button
+        CustomTextButton btnExport = CreatePillButton("Export");
+        btnExport.Margin = new Padding(0, 0, 12, 0);
+        btnExport.TabIndex = 5;
 
         // Compose bottom row
         bottomRow.Controls.Add(cmbType, 0, 0);
         bottomRow.Controls.Add(btnRemove, 1, 0);
         bottomRow.Controls.Add(btnAdd, 2, 0);
         bottomRow.Controls.Add(_btnSubmit, 3, 0);
+        bottomRow.Controls.Add(btnExport, 4, 0);
+
+        // Margins
+        cmbType.Margin = new Padding(0, 0, 12, 0);
+        btnAdd.Margin = new Padding(0, 0, 12, 0);
+        btnRemove.Margin = new Padding(0, 0, 12, 0);
+        _btnSubmit.Margin = new Padding(0, 0, 12, 0);
+        btnExport.Margin = new Padding(0);
 
         // Compose stack
         reqStack.Controls.Add(gridRequirements, 0, 0);
@@ -477,30 +494,6 @@ public class ViewChat : Panel {
             };
         }
 
-        // Build bottom row
-        bottomRow.AutoSize = true;
-        bottomRow.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        bottomRow.Margin = new Padding(0);
-        bottomRow.ColumnStyles.Clear();
-        bottomRow.ColumnCount = 4;
-        bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Combo
-        bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Add
-        bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Delete
-        bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // Submit
-        bottomRow.RowStyles.Clear();
-        bottomRow.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-        // Tighten spacing
-        cmbType.Margin = new Padding(0, 0, 12, 0);
-        btnAdd.Margin = new Padding(0, 0, 12, 0);
-        btnRemove.Margin = new Padding(0, 0, 12, 0);
-
-        // Add controls in the new order
-        bottomRow.Controls.Add(cmbType, 0, 0);
-        bottomRow.Controls.Add(btnAdd, 1, 0);
-        bottomRow.Controls.Add(btnRemove, 2, 0);
-        bottomRow.Controls.Add(_btnSubmit, 3, 0);
-
         // Assemble the stack
         reqStack.Controls.Add(gridRequirements, 0, 0);
         reqStack.Controls.Add(txtRequirement, 0, 1);
@@ -521,7 +514,7 @@ public class ViewChat : Panel {
             cmbType.Invalidate();
             gridRequirements.ClearSelection();
 
-            // ✅ Persist this requirement per persona key (not scenario)
+            // Persist this requirement per persona key (not scenario)
             if (!GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var list))
             {
                 list = new List<(string Type, string Text)>();
@@ -655,6 +648,49 @@ public class ViewChat : Panel {
             };
             timer.Start();
         };
+
+        btnExport.Click += (s, e) =>
+        {
+            if (gridRequirements.Rows.Count == 0)
+            {
+                MessageBox.Show("No requirements to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                saveFileDialog.Title = "Export Requirements";
+                saveFileDialog.FileName = $"{_activeScenario.Name}_Requirements.txt";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
+                    {
+                        writer.WriteLine($"Scenario: {_activeScenario.Name}");
+                        writer.WriteLine("\nRequirements List");
+                        writer.WriteLine(new string('-', 18));
+
+                        foreach (DataGridViewRow row in gridRequirements.Rows)
+                        {
+                            if (row.IsNewRow) continue;
+
+                            string type = row.Cells["colType"]?.Value?.ToString() ?? "";
+                            string desc = row.Cells["colDescription"]?.Value?.ToString() ?? "";
+
+                            if (!string.IsNullOrWhiteSpace(desc))
+                                writer.WriteLine($"[{type}] {desc}");
+                        }
+
+                        writer.WriteLine($"\nExported on {DateTime.Now}");
+                    }
+
+                    MessageBox.Show("Requirements exported successfully!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        };
+
+
 
         // Alow checkbox click
         gridRequirements.SelectionMode = DataGridViewSelectionMode.CellSelect;
