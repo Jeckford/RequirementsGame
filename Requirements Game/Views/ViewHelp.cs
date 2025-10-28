@@ -11,7 +11,7 @@ public class ViewHelp : View
     private List<Image> images;
     private int currentIndex;
     private CustomPictureBox mainPicture;
-    private FlowLayoutPanel thumbnailPanel; // left in field list for compatibility but not used as preview any more
+    private FlowLayoutPanel thumbnailPanel;
     private Label pageLabel;
 
     public ViewHelp()
@@ -32,18 +32,20 @@ public class ViewHelp : View
 
         images = new List<Image>();
 
-        // Hardcoded ordered filenames (change these to match files in your resources folder)
-        // Use file names including extension, e.g. "Help_scenarioSelectPage.png"
+        // Hardcoded ordered filenames, include file extension
         string[] orderedFileNames = new[] {
-            "Help_scenarioSelectPage.png",
-            "Help_scenarioDetails.png",
-            "Help_manageScenarioPage.png",
-            "Help_chatPage1.png",
-            "Help_chatPage2.png",
-            "Help_chatPage3.png"
+            "Help_TitlePage.png", // 1
+            "Help_ScenarioSelectionPage.png",
+            "Help_ScenarioDetailsPage.png",
+            "Help_ManageScenarioPage.png",
+            "Help_CreateScenarioPage.png",
+            "Help_EditScenarioPage.png",
+            "Help_ChatPage_Left.png",
+            "Help_ChatPage_Top.png",
+            "Help_ChatPage_bottom.png"
+
         };
 
-        // Look for physical resources folder next to the install directory.
         string[] candidateDirs = new[]
         {
             Path.Combine(FileSystem.InstallDirectory, "resources"),
@@ -74,16 +76,15 @@ public class ViewHelp : View
                 }
             }
 
-            if (images.Count > 0) break; // stop after loading from first matching folder
+            if (images.Count > 0) break;
         }
 
-        // If no PNG images found, show instruction label (no fallback)
+        // If no PNG images found, show instruction label
         if (images.Count == 0)
         {
             Label noImages = new Label
             {
-                Text = "No help PNG images found in the 'resources' folder.\n" +
-                       "Place the files named in orderedFileNames into that folder and set each file's __Copy to Output Directory__ to __Copy if newer__ in __Solution Explorer__.",
+                Text = "No help PNG images found in the 'resources' folder.",
                 Dock = DockStyle.Fill,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Font = new Font(GlobalVariables.AppFontName, 12),
