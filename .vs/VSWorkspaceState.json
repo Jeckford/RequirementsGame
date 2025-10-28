@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Requirements Game",
+    "\\Requirements Game\\Views"
   ],
-  "SelectedNode": "\\Requirements Game.sln",
+  "SelectedNode": "\\Requirements Game\\Views\\ViewChat.cs",
   "PreviewInSolutionExplorer": false
 }

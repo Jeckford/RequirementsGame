@@ -89,8 +89,7 @@ public class LLMServerClient {
 
     }
 
-    //  
-
+    
     private Process llamaProcess;
     private StringBuilder conversationHistory;
 
@@ -103,9 +102,7 @@ public class LLMServerClient {
 
     public LLMServerClient(int threads, int tokenSize) {
 
-        // Initialise conversation
-
-        // conversationHistory = new StringBuilder("<|system|> You are a helpful assistant ");
+        // Initialise conversation        
 
         // Get model based on available RAM
 
@@ -117,7 +114,7 @@ public class LLMServerClient {
 
             VisualMessageManager.ShowMessage("Your computer currently has less than 4 GB of available RAM, which may affect the LLM’s performance. If your system has more total RAM than what is currently available, try closing other applications and restarting this program to improve performance");
 
-            modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-1B-it-QAT-Q4_0.gguf";
+            modelPath = $"{FileSystem.ModelsFolderPath}\\gemma-3-4b-it-QAT-Q4_0.gguf";
 
         } else if (availableRamMB < 8192) { // 8GB
 
@@ -198,8 +195,9 @@ public class LLMServerClient {
         jsonBody.Items.Add("temperature", 0.2);
         jsonBody.Items.Add("top_k", 20);
         jsonBody.Items.Add("top_p", 0.8);
-        jsonBody.Items.Add("stop", new string[] { "<|user|>", "<|system|>" });
+        jsonBody.Items.Add("stop", new string[] { "<|user|>", "<|system|>", "<|assistant|>" });
         jsonBody.Items.Add("stream", true);
+        jsonBody.Items.Add("repeat_penalty", 1.1);
 
         var content = new StringContent(jsonBody.ToString(), Encoding.UTF8, "application/json");
 
@@ -231,9 +229,7 @@ public class LLMServerClient {
                             string partial = contentProp.GetString();
 
                             fullResponse += partial;
-
-                            // Chat is written to the visual studio console as its recieved. Eventually this will need to written straight to a form control for display.
-                            // I have not implemented that in this visual studio project due to the richtextbox recording the full chat
+                                                     
 
                             onPartialResponse?.Invoke(partial);
 

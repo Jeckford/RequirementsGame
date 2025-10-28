@@ -127,8 +127,7 @@ namespace Requirements_Game
             ViewDictionary.Add("Edit Scenario", new ViewEditScenario());
             ViewDictionary.Add("Help", new ViewHelp());
             ViewDictionary.Add("Credits", new ViewCredits());
-            // ViewDictionary.Add("Chat", new ViewChat());
-
+            
             // Display the 'Home' view
 
             ChangeView("Home");

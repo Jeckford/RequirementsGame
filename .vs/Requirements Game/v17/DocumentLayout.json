@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\meist\\source\\repos\\requirementsgame\\requirements game\\views\\viewchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\viewchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,32 +11,48 @@
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\llmserverclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\scenariodetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\scenariodetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\viewscenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewscenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewmanagescenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\controlfreezer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:requirements game\\controlfreezer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:requirements game\\chatlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\scenariodetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\scenariodetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\viewhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\scenarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|c:\\users\\meist\\source\\repos\\requirementsgame\\requirements game\\views\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\viewcreatescenario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,28 +63,12 @@
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\globalvariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\filesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\filesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\controlfreezer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\controlfreezer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\views\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\views\\view.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\customcontrols\\customlabelledrichtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D1994E8-07C2-4B2E-BFD2-6F5E4F659081}|Requirements Game\\Requirements Game.csproj|solutionrelative:requirements game\\customcontrols\\customlabelledrichtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\meist\\source\\repos\\RequirementsGame\\requirements game\\filesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:requirements game\\filesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,8 +78,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ViewChat.cs",
+              "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewChat.cs",
+              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewChat.cs",
+              "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewChat.cs",
+              "RelativeToolTip": "Requirements Game\\Views\\ViewChat.cs",
+              "ViewState": "AQIAAGIDAAAAAAAAAAAAADoDAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T12:03:06.662Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -106,69 +120,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ViewChat.cs",
-              "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewChat.cs",
-              "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewChat.cs",
-              "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewChat.cs",
-              "RelativeToolTip": "Requirements Game\\Views\\ViewChat.cs",
-              "ViewState": "AQIAAEoDAAAAAAAAAAAAAEkDAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T12:03:06.662Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Form1.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Form1.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Form1.cs",
               "RelativeToolTip": "Requirements Game\\Form1.cs",
-              "ViewState": "AQIAAGMAAAAAAAAAAAAowAAAAAAAAAAA",
+              "ViewState": "AQIAAG0AAAAAAAAAAAAIwIAAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T02:12:15.523Z"
+              "WhenOpened": "2025-09-02T02:12:15.523Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "ViewCreateScenario.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewCreateScenario.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewCreateScenario.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewCreateScenario.cs",
               "RelativeToolTip": "Requirements Game\\Views\\ViewCreateScenario.cs",
-              "ViewState": "AQIAAGABAAAAAAAAAAAwwNcBAAAMAAAA",
+              "ViewState": "AQIAAMUBAAAAAAAAAAAkwBAAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T23:10:12.93Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ScenarioDetailsForm.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ScenarioDetailsForm.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Views\\ScenarioDetailsForm.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ScenarioDetailsForm.cs",
               "RelativeToolTip": "Requirements Game\\Views\\ScenarioDetailsForm.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAAAEsAAAAmAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEsAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T11:57:52.532Z"
+              "WhenOpened": "2025-09-10T11:57:52.532Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ViewHome.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewHome.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewHome.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewHome.cs",
               "RelativeToolTip": "Requirements Game\\Views\\ViewHome.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAswGkAAAAgAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGkAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T22:44:12.034Z"
+              "WhenOpened": "2025-09-01T22:44:12.034Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Program.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Program.cs",
@@ -180,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "GlobalVariables.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\GlobalVariables.cs",
               "RelativeDocumentMoniker": "Requirements Game\\GlobalVariables.cs",
@@ -198,26 +202,27 @@
               "RelativeDocumentMoniker": "Requirements Game\\LLMServerClient.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\LLMServerClient.cs",
               "RelativeToolTip": "Requirements Game\\LLMServerClient.cs",
-              "ViewState": "AQIAAMIAAAAAAAAAAAAmwMcAAABNAAAA",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAkwMcAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T12:41:03.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "Scenarios.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Scenarios.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Scenarios.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Scenarios.cs",
               "RelativeToolTip": "Requirements Game\\Scenarios.cs",
-              "ViewState": "AQIAALAAAAAAAAAAAAAcwMIAAABIAAAA",
+              "ViewState": "AQIAAEIBAAAAAAAAAAAcwMIAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T01:11:25.976Z"
+              "WhenOpened": "2025-09-02T01:11:25.976Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Form1.Designer.cs",
@@ -225,11 +230,12 @@
               "RelativeToolTip": "Requirements Game\\Form1.Designer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T13:06:55.195Z"
+              "WhenOpened": "2025-09-10T13:06:55.195Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "FileSystem.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\FileSystem.cs",
               "RelativeDocumentMoniker": "Requirements Game\\FileSystem.cs",
@@ -241,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 5,
               "Title": "ControlFreezer.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\ControlFreezer.cs",
               "RelativeDocumentMoniker": "Requirements Game\\ControlFreezer.cs",
@@ -249,11 +255,12 @@
               "RelativeToolTip": "Requirements Game\\ControlFreezer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T12:29:39.562Z"
+              "WhenOpened": "2025-09-10T12:29:39.562Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "ChatLog.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\ChatLog.cs",
               "RelativeDocumentMoniker": "Requirements Game\\ChatLog.cs",
@@ -261,35 +268,38 @@
               "RelativeToolTip": "Requirements Game\\ChatLog.cs",
               "ViewState": "AQIAABgAAAAAAAAAAADwvwAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T12:28:52.203Z"
+              "WhenOpened": "2025-09-10T12:28:52.203Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 7,
               "Title": "View.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\View.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Views\\View.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\View.cs",
               "RelativeToolTip": "Requirements Game\\Views\\View.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T22:40:54.51Z"
+              "WhenOpened": "2025-09-01T22:40:54.51Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "ViewManageScenarios.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewManageScenarios.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewManageScenarios.cs",
               "ToolTip": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewManageScenarios.cs",
               "RelativeToolTip": "Requirements Game\\Views\\ViewManageScenarios.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAcwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T22:45:02.118Z"
+              "WhenOpened": "2025-09-01T22:45:02.118Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "ViewScenarios.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\Views\\ViewScenarios.cs",
               "RelativeDocumentMoniker": "Requirements Game\\Views\\ViewScenarios.cs",
@@ -297,11 +307,12 @@
               "RelativeToolTip": "Requirements Game\\Views\\ViewScenarios.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T22:45:07.101Z"
+              "WhenOpened": "2025-09-01T22:45:07.101Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "CustomLabelledRichTextBox.cs",
               "DocumentMoniker": "C:\\Users\\meist\\source\\repos\\RequirementsGame\\Requirements Game\\CustomControls\\CustomLabelledRichTextBox.cs",
               "RelativeDocumentMoniker": "Requirements Game\\CustomControls\\CustomLabelledRichTextBox.cs",

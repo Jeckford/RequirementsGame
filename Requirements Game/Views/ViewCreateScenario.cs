@@ -12,11 +12,9 @@ public class ViewCreateScenario : View
 {
     protected Scenario referenceScenario = null;
     protected Scenario editingScenario = null; // Holds a copy of referenceScenario. Allows editing without modifying the original until the changes are explicitly saved or committed
-    //protected bool isEditMode = false; // No longer required, can use (referenceScenario is null) to obtain the same information
-
+    
     private Dictionary<string, CustomLabelledRichTextBox> inputFields = new Dictionary<string, CustomLabelledRichTextBox>();
-    //private int stakeholderCount = 1; // No longer required, can get the stakeholder count from editingScenario
-
+    
     public ViewCreateScenario()
     {
 
@@ -75,7 +73,9 @@ public class ViewCreateScenario : View
             "Friendly",
             "Formal",
             "Challenging",
-            "Skeptical"
+            "Skeptical",
+            "Enthusiastic",
+            "Detail-Oriented"
         };
         RebuildView_Label(ref stakeholderBlock, "Stakeholders");
         for (int i = 0; i < stakeholders.Count; i++) {
@@ -165,11 +165,7 @@ public class ViewCreateScenario : View
 
         string name = isEditMode ? editingScenario.Name : "";
         string description = isEditMode ? editingScenario.Description : "";
-
-        //string seniorName = isEditMode ? editingScenario.SeniorSoftwareEngineer.Name : "";
-        //string seniorRole = isEditMode ? editingScenario.SeniorSoftwareEngineer.Role : "";
-        //string seniorPersonality = isEditMode ? editingScenario.SeniorSoftwareEngineer.Personality : "";
-
+        
         List<Stakeholder> stakeholders = isEditMode ? editingScenario.GetStakeholders().ToList() : new List<Stakeholder> { new Stakeholder() };
         var stakeholderCount = stakeholders.Count;
 
@@ -182,16 +178,7 @@ public class ViewCreateScenario : View
         RebuildView_LabelledRichTextBox(ref scenarioBlock, "Description", description, 6);
         ViewTableLayoutPanel.Controls.Add(scenarioBlock, 1, ViewTableLayoutPanel.RowCount++);
         ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-        // Senior Engineer Block
-        //var seniorBlock = CreateSectionBlock();
-        //RebuildView_Label(ref seniorBlock, "Senior Software Engineer");
-        //RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Name", seniorName);
-        //RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Role", seniorRole);
-        //RebuildView_LabelledRichTextBox(ref seniorBlock, "Senior Personality", seniorPersonality, 3);
-        //ViewTableLayoutPanel.Controls.Add(seniorBlock, 1, ViewTableLayoutPanel.RowCount++);
-        //ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
+               
         // Stakeholders Block
         var stakeholderBlock = CreateSectionBlock();
         string[] personalityOptions = new string[]
@@ -223,12 +210,7 @@ public class ViewCreateScenario : View
         addStakeholderButton.Anchor = AnchorStyles.None;
 
         addStakeholderButton.MouseClick += (s, e) =>
-        {
-            //stakeholderCount++;
-            //RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Name_{stakeholderCount}", "");
-            //RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Role_{stakeholderCount}", "");
-            //RebuildView_LabelledRichTextBox(ref stakeholderBlock, $"Personality_{stakeholderCount}", "", 3);
-
+        {          
             editingScenario = this.GetScenario();
             editingScenario.AddStakeholder(new Stakeholder());
 
