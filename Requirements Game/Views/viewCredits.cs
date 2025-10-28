@@ -40,10 +40,10 @@ public class ViewCredits : View
         contentPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Mai
 
         contentPanel.Controls.Add(CreateHeaderLabel("Developed by:"), 0, 0);
-        contentPanel.Controls.Add(CreateNameWithLink("Courtney Hemmett", "https://github.com/courtneyhemmett"), 0, 1);
-        contentPanel.Controls.Add(CreateNameWithLink("Jarron Eckford", "https://github.com/jarroneckford"), 0, 2);
-        contentPanel.Controls.Add(CreateNameWithLink("Cory Crombie", "https://github.com/corycrombie"), 0, 3);
-        contentPanel.Controls.Add(CreateNameWithLink("Mai Le", "https://github.com/maile"), 0, 4);
+        contentPanel.Controls.Add(CreateNameWithLink("Courtney Hemmett", "https://github.com/Pleewto"), 0, 1);
+        contentPanel.Controls.Add(CreateNameWithLink("Jarron Eckford", "https://github.com/Jeckford"), 0, 2);
+        contentPanel.Controls.Add(CreateNameWithLink("Cory Crombie", "https://github.com/KorraOne"), 0, 3);
+        contentPanel.Controls.Add(CreateNameWithLink("Mai Le", "https://github.com/ttle11"), 0, 4);
 
         ViewTableLayoutPanel.Controls.Add(contentPanel, 1, 1);
 

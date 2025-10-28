@@ -190,7 +190,7 @@ public class Scenario
     }
 
     public static readonly Stakeholder SeniorSoftwareEngineer = new Stakeholder(
-        "Elon Musk",                   // Name
+        "Alex Riemann",                   // Name
         "Senior Software Engineer",       // Role
         "Experienced, professional and detailed-oriented" // Personality
     );
