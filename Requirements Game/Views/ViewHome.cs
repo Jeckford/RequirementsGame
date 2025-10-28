@@ -103,13 +103,8 @@ public class ViewHome : CustomTableLayoutPanel {
         }
         else if (buttonName == "Credits")
         {
-            MessageBox.Show(
-                "Credits:\n\n" +
-                "Courtney Hemmett\nJarron Eckford\nCory Crombie\nMai Le",
-                "Game Credits",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            Form1 form1 = (Form1)this.FindForm();
+            form1.ChangeView("Credits");
         }
     }
 

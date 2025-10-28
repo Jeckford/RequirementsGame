@@ -126,6 +126,7 @@ namespace Requirements_Game
             ViewDictionary.Add("Create Scenario", new ViewCreateScenario());
             ViewDictionary.Add("Edit Scenario", new ViewEditScenario());
             ViewDictionary.Add("Help", new ViewHelp());
+            ViewDictionary.Add("Credits", new ViewCredits());
             // ViewDictionary.Add("Chat", new ViewChat());
 
             // Display the 'Home' view
@@ -144,6 +145,7 @@ namespace Requirements_Game
             if (newViewTitle == "Edit Scenario" || newViewTitle == "Create Scenario") BackViewTitle = "Manage Scenarios";
             if (newViewTitle == "Chat") BackViewTitle = "Scenarios";
             if (newViewTitle == "Help") BackViewTitle = "Home";
+            if (newViewTitle == "Credits") BackViewTitle = "Home";
 
             // Freeze UI so that the user doesn't see flicker and to slightly improve performance
 
