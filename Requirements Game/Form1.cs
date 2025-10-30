@@ -36,7 +36,7 @@ namespace Requirements_Game
             // App specific properties and class initialisation
 
             this.Text = "Requirements Elicitation Game";
-            this.ShowIcon = false;
+            this.Icon = Resources.AppIcon;
             this.BackColor = Color.White;
             this.CurrentViewTitle = "";
             this.BackViewTitle = "";
