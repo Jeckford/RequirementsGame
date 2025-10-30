@@ -1,13 +1,16 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using Requirements_Game;
-using System.Linq;
 
+/// <summary>
+/// Home screen view displayed when the application launches.
+/// Provides navigation buttons for Play, Help, and Credits
+/// </summary>
 public class ViewHome : CustomTableLayoutPanel {
 
     public ViewHome() {
 
-        // View Properties
+        // -- Base Layout Setup --
 
         this.Dock = DockStyle.Fill;
         this.Padding = new Padding(0);
@@ -20,7 +23,7 @@ public class ViewHome : CustomTableLayoutPanel {
         this.RowStyles.Add(new RowStyle(SizeType.Percent, 50f));
         this.RowStyles.Add(new RowStyle(SizeType.Percent, 50f));
 
-        // Game Title
+        // -- Game Title --
 
         Label gameTitle = new Label();
         gameTitle.Font = new Font(GlobalVariables.AppFontName, 30, FontStyle.Bold);
@@ -33,7 +36,7 @@ public class ViewHome : CustomTableLayoutPanel {
         this.Controls.Add(gameTitle,0,0);
         this.SetColumnSpan(gameTitle, 2);
 
-        // Play Button
+        // -- Play Button --
 
         CustomTextButton playButton = new CustomTextButton();
         playButton.Name = "Play";
@@ -48,7 +51,7 @@ public class ViewHome : CustomTableLayoutPanel {
 
         playButton.MouseClick += Button_MouseClick;
 
-        // Help Button
+        // -- Help Button --
 
         CustomTextButton helpButton = new CustomTextButton();
         helpButton.Name = "Help";
@@ -63,7 +66,8 @@ public class ViewHome : CustomTableLayoutPanel {
 
         helpButton.MouseClick += Button_MouseClick;
 
-        // Credits Button
+        // -- Credits Button --
+
         CustomTextButton creditsButton = new CustomTextButton();
         creditsButton.Name = "Credits";
         creditsButton.Text = "Credits";
@@ -80,32 +84,33 @@ public class ViewHome : CustomTableLayoutPanel {
 
     }
 
-    private void Button_MouseClick(object sender, MouseEventArgs e)
-    {
+    /// <summary>
+    /// Misc button click event method
+    /// </summary>
+    private void Button_MouseClick(object sender, MouseEventArgs e) {
 
-        if (e.Button != MouseButtons.Left) return;
+        if (e.Button != MouseButtons.Left) return; // Exit if mouse button isn't left button
 
-        CustomTextButton button = (CustomTextButton)sender;
-        string buttonName = button.Name;
+        CustomTextButton button = (CustomTextButton)sender; // Get sender button control
+        string buttonName = button.Name; // Get sender button name
 
-        if (buttonName == "Play")
-        {
+        if (buttonName == "Play") { // Navigate to Scenarios view
 
             Form1 form1 = (Form1)this.FindForm();
             form1.ChangeView("Scenarios");
 
-        }
-        else if (buttonName == "Help")
-        {
-            // Navigate to Help view (page with back button in the app title bar)
+        } else if (buttonName == "Help") { // Navigate to Help view
+
             Form1 form1 = (Form1)this.FindForm();
             form1.ChangeView("Help");
-        }
-        else if (buttonName == "Credits")
-        {
+
+        } else if (buttonName == "Credits") { // Navigate to Credits view
+
             Form1 form1 = (Form1)this.FindForm();
             form1.ChangeView("Credits");
+
         }
+
     }
 
 }

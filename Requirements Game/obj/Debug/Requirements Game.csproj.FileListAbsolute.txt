@@ -194,3 +194,14 @@ C:\Users\Repti\Desktop\Applied Project\RequirementElicatationGame10\Requirements
 C:\Users\Repti\Desktop\Applied Project\RequirementElicatationGame10\Requirements Game\obj\Debug\Requirem.EA31D4C6.Up2Date
 C:\Users\Repti\Desktop\Applied Project\RequirementElicatationGame10\Requirements Game\obj\Debug\Requirements Game.exe
 C:\Users\Repti\Desktop\Applied Project\RequirementElicatationGame10\Requirements Game\obj\Debug\Requirements Game.pdb
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ChatPage_bottom.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ChatPage_Left.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ChatPage_top.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_CreateScenarioPage.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_EditScenarioPage.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_manageScenarioPage.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ScenarioDetailsPage.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ScenarioSelectionPage.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_TitlePage.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\manual.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\packages.config
