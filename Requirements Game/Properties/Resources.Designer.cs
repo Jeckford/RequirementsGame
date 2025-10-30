@@ -129,5 +129,25 @@ namespace Requirements_Game.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap manual {
+            get {
+                object obj = ResourceManager.GetObject("manual", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] UserManual {
+            get {
+                object obj = ResourceManager.GetObject("UserManual", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Drawing;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Requirements_Game.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
@@ -96,9 +97,8 @@ namespace Requirements_Game
 
             CustomPictureBoxDictionary = new Dictionary<string, CustomPictureBox>();
 
-            foreach (string resourceName in new[] { "back", "create", "edit", "import", "export" })
+            foreach (string resourceName in new[] { "back", "create", "edit", "import", "export", "manual" })
             {
-
                 Bitmap icon = (Bitmap)Resources.ResourceManager.GetObject(resourceName);
 
                 CustomPictureBox CustomPictureBox = new CustomPictureBox();
@@ -106,11 +106,12 @@ namespace Requirements_Game
                 CustomPictureBox.Dock = DockStyle.Fill;
                 CustomPictureBox.InteractionEffect = ButtonInteractionEffect.Lighten;
                 CustomPictureBox.Image = icon;
+                CustomPictureBox.Cursor = Cursors.Hand;
+                CustomPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 
                 CustomPictureBox.MouseClick += CustomPictureBox_MouseClick;
 
                 CustomPictureBoxDictionary.Add(resourceName, CustomPictureBox);
-
             }
 
             TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["back"], 1, 0);
@@ -238,12 +239,20 @@ namespace Requirements_Game
 
                 editScenario.ChangeScenario(ref Scenario);
 
-            } else if (newViewTitle == "Create Scenario") {
+            } 
+            else if (newViewTitle == "Create Scenario") {
 
                 ViewCreateScenario createScenario = (ViewCreateScenario)ViewDictionary["Create Scenario"];
 
                 createScenario.Clear();
 
+            }
+            else if (newViewTitle == "Help")
+            {
+                TitleBarVisible = true;
+                TitleLabel.Text = newViewTitle;
+
+                TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["manual"], 6, 0);
             }
 
             // Unfreeze Ui
@@ -380,6 +389,24 @@ namespace Requirements_Game
                     }
                 }
 
+            }
+            else if (CustomPictureBoxName == "manual")
+            {
+                try
+                {
+                    string tempPath = Path.Combine(Path.GetTempPath(), "UserManual.pdf");
+                    File.WriteAllBytes(tempPath, Resources.UserManual); // Embedded PDF as byte[]
+
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = tempPath,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to open manual: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
         }

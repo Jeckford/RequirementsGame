@@ -7,37 +7,27 @@ public class ViewCredits : View
 {
     public ViewCredits()
     {
-        // Full layout fills available space
         ViewTableLayoutPanel.Dock = DockStyle.Fill;
-        ViewTableLayoutPanel.Padding = new Padding(10);
         ViewTableLayoutPanel.BackColor = GlobalVariables.ColorPrimary;
 
+        // Center content horizontally
         ViewTableLayoutPanel.ColumnCount = 3;
-        ViewTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
-        ViewTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 900f));
-        ViewTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+        ViewTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
+        ViewTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        ViewTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
 
-        ViewTableLayoutPanel.RowCount = 3;
-        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 45f));   // top spacer
-        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));       // main content
-        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 55f));   // footer
+        ViewTableLayoutPanel.RowCount = 2;
+        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90f));
+        ViewTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10f));
 
-        // Main content panel (centered)
         var contentPanel = new TableLayoutPanel
         {
-            Dock = DockStyle.Fill,
             ColumnCount = 1,
             RowCount = 5,
-            BackColor = GlobalVariables.ColorPrimary,
             AutoSize = true,
+            BackColor = GlobalVariables.ColorPrimary,
             Anchor = AnchorStyles.None
         };
-
-        contentPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // "Developed by:"
-        contentPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Courtney
-        contentPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Jarron
-        contentPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Cory
-        contentPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Mai
 
         contentPanel.Controls.Add(CreateHeaderLabel("Developed by:"), 0, 0);
         contentPanel.Controls.Add(CreateNameWithLink("Courtney Hemmett", "https://github.com/Pleewto"), 0, 1);
@@ -45,27 +35,21 @@ public class ViewCredits : View
         contentPanel.Controls.Add(CreateNameWithLink("Cory Crombie", "https://github.com/KorraOne"), 0, 3);
         contentPanel.Controls.Add(CreateNameWithLink("Mai Le", "https://github.com/ttle11"), 0, 4);
 
-        ViewTableLayoutPanel.Controls.Add(contentPanel, 1, 1);
+        ViewTableLayoutPanel.Controls.Add(contentPanel, 1, 0);
 
-        // Footer panel pinned to bottom
         var footerPanel = new TableLayoutPanel
         {
-            Dock = DockStyle.Bottom,
             ColumnCount = 1,
             RowCount = 2,
+            AutoSize = true,
             BackColor = GlobalVariables.ColorPrimary,
-            Padding = new Padding(0),
-            Margin = new Padding(0),
-            AutoSize = true
+            Anchor = AnchorStyles.None
         };
 
-        footerPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        footerPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-        footerPanel.Controls.Add(CreateFooterLabel(DateTime.Now.ToString("dd MMMM yyyy") + " – ECU"), 0, 0);
+        footerPanel.Controls.Add(CreateFooterLabel("29/10/2025 – ECU"), 0, 0);
         footerPanel.Controls.Add(CreateFooterLabel("Thank you to Martin and Luke"), 0, 1);
 
-        ViewTableLayoutPanel.Controls.Add(footerPanel, 1, 2);
+        ViewTableLayoutPanel.Controls.Add(footerPanel, 1, 1);
     }
 
     private Label CreateHeaderLabel(string text)
@@ -73,33 +57,37 @@ public class ViewCredits : View
         return new Label
         {
             Text = text,
-            Dock = DockStyle.Fill,
             TextAlign = ContentAlignment.MiddleCenter,
             Font = new Font(GlobalVariables.AppFontName, 20, FontStyle.Bold),
             ForeColor = GlobalVariables.ColorDark,
-            AutoSize = true
+            AutoSize = true,
+            Anchor = AnchorStyles.None
         };
     }
 
     private LinkLabel CreateNameWithLink(string name, string url)
     {
-        string fullText = $"{name} — GitHub";
-        int linkStart = fullText.IndexOf("GitHub");
-
         var linkLabel = new LinkLabel
         {
-            Text = fullText,
-            Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Regular),
-            LinkColor = Color.Blue,
-            ActiveLinkColor = Color.DarkBlue,
-            Dock = DockStyle.Top,
+            Text = name,
             TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = true,
+            Font = new Font(GlobalVariables.AppFontName, 14, FontStyle.Regular),
+            LinkColor = GlobalVariables.ColorDark,
+            ActiveLinkColor = GlobalVariables.ColorDark,
+            LinkBehavior = LinkBehavior.NeverUnderline,
             BackColor = GlobalVariables.ColorPrimary,
-            ForeColor = GlobalVariables.ColorDark
+            ForeColor = GlobalVariables.ColorDark,
+            Cursor = Cursors.Hand,
+            AutoSize = true,
+            Anchor = AnchorStyles.None
         };
 
-        linkLabel.Links.Add(linkStart, "GitHub".Length, url);
+        linkLabel.Links.Add(0, name.Length, url);
+
+        // Tooltip
+        var tooltip = new ToolTip();
+        tooltip.SetToolTip(linkLabel, "View GitHub profile");
+
         linkLabel.LinkClicked += (s, e) =>
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
@@ -117,11 +105,11 @@ public class ViewCredits : View
         return new Label
         {
             Text = text,
-            Dock = DockStyle.Fill,
             TextAlign = ContentAlignment.MiddleCenter,
             Font = new Font(GlobalVariables.AppFontName, 10, FontStyle.Italic),
             ForeColor = Color.Gray,
-            AutoSize = true
+            AutoSize = true,
+            Anchor = AnchorStyles.None
         };
     }
 }
