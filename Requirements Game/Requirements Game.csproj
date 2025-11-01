@@ -114,10 +114,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalVariables.cs" />
+    <Compile Include="ApplicationServices\GlobalVariables.cs" />
     <Compile Include="ApplicationServices\ControlFreezer.cs" />
     <Compile Include="ApplicationServices\JsonFileManager.cs" />
-    <Compile Include="ProfileLabel.cs">
+    <Compile Include="CustomControls\ProfileLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ApplicationServices\Program.cs" />
@@ -127,7 +127,7 @@
     <Compile Include="Views\ScenarioDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Scenarios.cs" />
+    <Compile Include="ApplicationServices\Scenarios.cs" />
     <Compile Include="Views\View.cs">
       <SubType>Component</SubType>
     </Compile>
