@@ -89,7 +89,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ApplicationServices\JsonBuilder.cs" />
-    <Compile Include="LLMServerClient.cs" />
+    <Compile Include="ApplicationServices\LLMServerClient.cs" />
     <Compile Include="CustomControls\ChatLog.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -120,7 +120,7 @@
     <Compile Include="ProfileLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ApplicationServices\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApplicationServices\ColorManager.cs" />
     <Compile Include="ApplicationServices\FileSystem.cs" />
