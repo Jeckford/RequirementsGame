@@ -33,7 +33,6 @@ class ControlFreezer {
     /// <summary>
     /// Recursively unfreezes the specified control and all its child controls
     /// </summary>
-
     public static void Unfreeze(Control Control) {
 
         // Unfreeze all child controls first

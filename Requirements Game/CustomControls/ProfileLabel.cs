@@ -24,14 +24,15 @@ public class ProfileLabel : UserControl {
 
         this.Size = new Size(200, 80);
         this.Margin = new Padding(0);
-        this.ProfileImage = null;
-
+        
         // -- ProfilePictureBox --
 
         ProfilePictureBox = new PictureBox();
         ProfilePictureBox.SizeMode = PictureBoxSizeMode.Zoom;
         this.Controls.Add(ProfilePictureBox);
-    
+
+        this.ProfileImage = null;
+
         // -- ProfilePictureBox --
 
         ProfileNameLabel = new Label();

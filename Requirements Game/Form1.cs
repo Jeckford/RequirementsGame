@@ -165,7 +165,7 @@ namespace Requirements_Game {
 
             // Freeze UI so that the user doesn't see flicker and to slightly improve performance
 
-            ControlFreezer.Freeze(MainTableLayoutPanel);
+            FreezeUi();
 
             // Allow Chat to be created on demand
             if (!ViewDictionary.ContainsKey(newViewTitle) && newViewTitle != "Chat")
@@ -266,7 +266,44 @@ namespace Requirements_Game {
 
             // Unfreeze Ui
 
-            ControlFreezer.Unfreeze(MainTableLayoutPanel);
+            UnfreezeUi();
+
+        }
+
+        /// <summary>
+        /// Provides methods to temporarily freeze the MainTableLayoutPanel
+        /// to prevent UI redrawing or flickering during updates
+        /// </summary>
+        private void FreezeUi() {
+
+            if (MainTableLayoutPanel == null) return;
+
+            this.Cursor = Cursors.WaitCursor;
+
+            Message message = Message.Create(MainTableLayoutPanel.Handle, 11, IntPtr.Zero, IntPtr.Zero);
+            NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
+
+            nativeWindow.DefWndProc(ref message);
+
+        }
+
+        /// <summary>
+        /// Methods to unfreeze the MainTableLayoutPanel
+        /// </summary>
+        private void UnfreezeUi() {
+
+            if (MainTableLayoutPanel == null) return;
+
+            IntPtr wparam = new IntPtr(1);
+            Message message = Message.Create(MainTableLayoutPanel.Handle, 11, wparam, IntPtr.Zero);
+            NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
+
+            nativeWindow.DefWndProc(ref message);
+
+            MainTableLayoutPanel.Invalidate();
+            MainTableLayoutPanel.Refresh();
+
+            this.Cursor = Cursors.Default;
 
         }
 

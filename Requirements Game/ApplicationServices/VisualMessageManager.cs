@@ -18,6 +18,7 @@ class VisualMessageManager {
         MessageForm.TransparencyKey = Color.AliceBlue; // Make AliceBlue (form color) transparent
         MessageForm.Owner = GlobalVariables.MainForm;
         MessageForm.AutoScroll = false;
+        MessageForm.ShowInTaskbar = false;
         MessageForm.Show();
 
         UpdateMessageFormPosition();
