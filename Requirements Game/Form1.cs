@@ -8,10 +8,15 @@ using System.Windows.Forms;
 using Requirements_Game.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
-namespace Requirements_Game
-{
-    public partial class Form1 : Form
-    {
+namespace Requirements_Game {
+
+    /// <summary>
+    /// The main application window for the *Requirements Elicitation Game*.
+    /// Manages layout, navigation, and dynamic view switching between different screens
+    /// such as Home, Scenarios, Create/Edit Scenario, Chat, Help, and Credits.
+    /// Also initializes the title bar, button icons, and handles imports/exports and manual access.
+    /// </summary>
+    public partial class Form1 : Form {
 
         public Form1() { InitializeComponent(); }
 
@@ -25,10 +30,13 @@ namespace Requirements_Game
         private Dictionary<string, Control> ViewDictionary;
         private Dictionary<string, CustomPictureBox> CustomPictureBoxDictionary;
 
-        // On form load (on start-up)
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// Handles all initialization logic when the main form loads.  
+        /// Sets up global references, loads saved scenarios, creates the main UI layout  
+        /// (title bar and content area), initializes navigation icons and view controls,  
+        /// and displays the default "Home" view on startup.
+        /// </summary>
+        private void Form1_Load(object sender, EventArgs e) {
 
             GlobalVariables.MainForm = this;
 
@@ -41,7 +49,11 @@ namespace Requirements_Game
             this.CurrentViewTitle = "";
             this.BackViewTitle = "";
 
+            // -- Load Scenarios
+            // Load scenarios from application local computer storage
+
             Scenarios.LoadFromFile(FileSystem.ScenariosFilePath);
+
             // -- MainTableLayoutPanel
             // Split into two row parts, the title bar and the main sectin
             // Main section will be where the different views are added and removed
@@ -92,8 +104,9 @@ namespace Requirements_Game
             TitleBarTableLayoutPanel.Controls.Add(TitleLabel, 3, 0);
 
             // -- Picture Buttons
-            // This are created an added to a dictionary for faster access later
-            // These buttons are not immediately added to the form, but will be added or removed as needed
+            // These buttons are created and added to a dictionary for quick access later.
+            // They are not immediately displayed on the form but are dynamically added or
+            // removed depending on the active view
 
             CustomPictureBoxDictionary = new Dictionary<string, CustomPictureBox>();
 
@@ -120,7 +133,6 @@ namespace Requirements_Game
             // This are created an added to a dictionary for faster access later
 
             ViewDictionary = new Dictionary<string, Control>();
-
             ViewDictionary.Add("Home", new ViewHome());
             ViewDictionary.Add("Scenarios", new ViewScenarios());
             ViewDictionary.Add("Manage Scenarios", new ViewManageScenarios());
@@ -135,8 +147,12 @@ namespace Requirements_Game
 
         }
 
-        public void ChangeView(string newViewTitle, Scenario Scenario = null)
-        {
+        /// <summary>
+        /// Switches the main application view to the specified screen (e.g., Home, Scenarios, Chat, etc.).
+        /// Handles dynamic navigation updates, UI freezing to prevent flicker, title bar visibility,
+        /// and view-specific button configuration
+        /// </summary>
+        public void ChangeView(string newViewTitle, Scenario Scenario = null) {
 
             // Update back button navigation
 
@@ -149,31 +165,36 @@ namespace Requirements_Game
 
             // Freeze UI so that the user doesn't see flicker and to slightly improve performance
 
-            FreezeUi();
+            ControlFreezer.Freeze(MainTableLayoutPanel);
 
             // Allow Chat to be created on demand
             if (!ViewDictionary.ContainsKey(newViewTitle) && newViewTitle != "Chat")
                 throw new Exception("View not found");
 
             // Remove current view
-            if (!string.IsNullOrEmpty(CurrentViewTitle) && ViewDictionary.ContainsKey(CurrentViewTitle))
-            {
+
+            if (!string.IsNullOrEmpty(CurrentViewTitle) && ViewDictionary.ContainsKey(CurrentViewTitle)) {
+
                 MainTableLayoutPanel.Controls.Remove(ViewDictionary[CurrentViewTitle]);
+
             }
 
             // Always recreate Chat so it uses the latest selected scenario
-            if (newViewTitle == "Chat")
-            {
+
+            if (newViewTitle == "Chat") {
+
                 if (Scenario != null) GlobalVariables.CurrentScenario = Scenario;
 
-                if (ViewDictionary.ContainsKey("Chat"))
-                {
+                if (ViewDictionary.ContainsKey("Chat")) {
+
                     var old = ViewDictionary["Chat"];
                     old.Dispose();
                     ViewDictionary.Remove("Chat");
+
                 }
 
                 ViewDictionary["Chat"] = new ViewChat();
+
             }
 
             // Add new view to form
@@ -183,8 +204,7 @@ namespace Requirements_Game
 
             // Remove all icons expect the back button
 
-            foreach (CustomPictureBox CustomPictureBox in CustomPictureBoxDictionary.Values)
-            {
+            foreach (CustomPictureBox CustomPictureBox in CustomPictureBoxDictionary.Values) {
 
                 if (CustomPictureBox.Name == "back" || CustomPictureBox.Parent == null) continue;
 
@@ -194,32 +214,27 @@ namespace Requirements_Game
 
             // Update title and hide the title bar if 'Home' view
 
-            if (newViewTitle == "Home")
-            {
+            if (newViewTitle == "Home") {
 
                 TitleBarVisible = false;
 
-            }
-            else
-            {
+            } else {
 
                 TitleBarVisible = true;
                 TitleLabel.Text = newViewTitle;
 
             }
 
-            // Add view specific picture buttons
+            // -- View specific button and setup logic
+            // Dynamically configures title bar buttons and behavior based on the active view
 
             int lastColumn = TitleBarTableLayoutPanel.ColumnCount - 2;
 
-            if (newViewTitle == "Scenarios")
-            {
+            if (newViewTitle == "Scenarios") {
 
                 TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["edit"], lastColumn, 0);
 
-            }
-            else if (newViewTitle == "Manage Scenarios")
-            {
+            } else if (newViewTitle == "Manage Scenarios") {
 
                 int exportColumn = lastColumn;
                 int importColumn = exportColumn - 1;
@@ -228,27 +243,21 @@ namespace Requirements_Game
                 TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["create"], createColumn, 0);
                 TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["import"], importColumn, 0);
                 TitleBarTableLayoutPanel.Controls.Add(CustomPictureBoxDictionary["export"], exportColumn, 0);
-                // Set export to have a background colour as the icon for some reason is not visible.
-                // CustomPictureBoxDictionary["export"].BackColor = Color.Blue;
 
-            }
-            else if (newViewTitle == "Edit Scenario")
-            {
+            } else if (newViewTitle == "Edit Scenario") {
 
                 ViewEditScenario editScenario = (ViewEditScenario)ViewDictionary["Edit Scenario"];
 
                 editScenario.ChangeScenario(ref Scenario);
 
-            } 
-            else if (newViewTitle == "Create Scenario") {
+            } else if (newViewTitle == "Create Scenario") {
 
                 ViewCreateScenario createScenario = (ViewCreateScenario)ViewDictionary["Create Scenario"];
 
                 createScenario.Clear();
 
-            }
-            else if (newViewTitle == "Help")
-            {
+            } else if (newViewTitle == "Help") {
+
                 TitleBarVisible = true;
                 TitleLabel.Text = newViewTitle;
 
@@ -257,156 +266,126 @@ namespace Requirements_Game
 
             // Unfreeze Ui
 
-            UnfreezeUi();
+            ControlFreezer.Unfreeze(MainTableLayoutPanel);
 
         }
 
-        // Freeze and unfreeze UI
-
-        private void FreezeUi()
-        {
-
-            if (MainTableLayoutPanel == null) return;
-
-            this.Cursor = Cursors.WaitCursor;
-
-            Message message = Message.Create(MainTableLayoutPanel.Handle, 11, IntPtr.Zero, IntPtr.Zero);
-            NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
-
-            nativeWindow.DefWndProc(ref message);
-
-        }
-
-        private void UnfreezeUi()
-        {
-
-            if (MainTableLayoutPanel == null) return;
-
-            IntPtr wparam = new IntPtr(1);
-            Message message = Message.Create(MainTableLayoutPanel.Handle, 11, wparam, IntPtr.Zero);
-            NativeWindow nativeWindow = NativeWindow.FromHandle(MainTableLayoutPanel.Handle);
-
-            nativeWindow.DefWndProc(ref message);
-
-            MainTableLayoutPanel.Invalidate();
-            MainTableLayoutPanel.Refresh();
-
-            this.Cursor = Cursors.Default;
-
-        }
-
-        // Function to hide or show the title bar
-
-        private bool TitleBarVisible
-        {
+        /// <summary>
+        /// Hide/Unhides the title bar by adjusting its row height.
+        /// </summary>
+        private bool TitleBarVisible {
 
             set { MainTableLayoutPanel.RowStyles[0].Height = value ? 60 : 0; }
 
         }
 
-        // CustomPictureBox mouse click event
+        /// <summary>
+        /// Handles mouse click events for all title bar <see cref="CustomPictureBox"/> buttons.
+        /// Performs navigation and file-related actions such as importing, exporting, and opening the manual.
+        /// </summary>
+        private void CustomPictureBox_MouseClick(object sender, MouseEventArgs e) {
 
-        private void CustomPictureBox_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            // Exit if not left mouse click
+            // -- Verify Mouse Input --
+            // Only continue if the user clicked the left mouse button
 
             if (e.Button != MouseButtons.Left) return;
 
-            // Assign sender as CustomPictureBox to access it's properties 
+            // -- Identify Clicked Button --
+            // Cast the sender to a CustomPictureBox and retrieve its name for comparison
 
             CustomPictureBox CustomPictureBox = (CustomPictureBox)sender;
             string CustomPictureBoxName = CustomPictureBox.Name;
 
-            if (CustomPictureBoxName == "back")
-            {
+            if (CustomPictureBoxName == "back") { 
 
                 ChangeView(BackViewTitle);
 
-            }
-            else if (CustomPictureBoxName == "edit")
-            {
+            }  else if (CustomPictureBoxName == "edit") {
 
                 ChangeView("Manage Scenarios");
 
-            }
-            else if (CustomPictureBoxName == "create")
-            {
+            } else if (CustomPictureBoxName == "create") {
 
                 ChangeView("Create Scenario");
 
-            }
-            else if (CustomPictureBoxName == "import")
-            {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
+            } else if (CustomPictureBoxName == "import") {
+
+                // Opens a dialog for importing scenarios from a JSON file
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog()) {
+
                     openFileDialog.Filter = "JSON Files (*.json)|*.json";
                     openFileDialog.Title = "Import Scenarios";
 
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string path = openFileDialog.FileName;
-                        var importedScenarios = JsonFileManager.LoadScenarios(path);
-                        var existingScenarios = Scenarios.GetScenarios();
+                    if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
-                        foreach (var scenario in importedScenarios)
-                        {
-                            // Simple check if exact scenario exists it skips adding it
-                            bool isDuplicate = existingScenarios.Any(existing =>
-                                existing.Name == scenario.Name &&
-                                existing.Description == scenario.Description &&
-                                existing.Prompt == scenario.Prompt &&
-                                Enumerable.SequenceEqual(existing.FunctionalRequirements, scenario.FunctionalRequirements) &&
-                                Enumerable.SequenceEqual(existing.NonFunctionalRequirements, scenario.NonFunctionalRequirements) &&
-                                existing.ListStakeholders.Count == scenario.ListStakeholders.Count &&
-                                !existing.ListStakeholders.Where((s, i) =>
-                                    s.Name != scenario.ListStakeholders[i].Name ||
-                                    s.Role != scenario.ListStakeholders[i].Role ||
-                                    s.Personality != scenario.ListStakeholders[i].Personality
-                                ).Any()
-                            );
+                    string path = openFileDialog.FileName;
+                    var importedScenarios = JsonFileManager.LoadScenarios(path);
+                    var existingScenarios = Scenarios.GetScenarios();
 
-                            if (!isDuplicate)
-                            {
-                                Scenarios.Add(scenario);
-                            }
-                        }
+                    foreach (var scenario in importedScenarios) {
+
+                        // -- Duplicate Check --
+                        // Skips adding a scenario if an identical one already exists
+
+                        bool isDuplicate = existingScenarios.Any(existing =>
+                            existing.Name == scenario.Name &&
+                            existing.Description == scenario.Description &&
+                            existing.Prompt == scenario.Prompt &&
+                            Enumerable.SequenceEqual(existing.FunctionalRequirements, scenario.FunctionalRequirements) &&
+                            Enumerable.SequenceEqual(existing.NonFunctionalRequirements, scenario.NonFunctionalRequirements) &&
+                            existing.ListStakeholders.Count == scenario.ListStakeholders.Count &&
+                            !existing.ListStakeholders.Where((s, i) =>
+                                s.Name != scenario.ListStakeholders[i].Name ||
+                                s.Role != scenario.ListStakeholders[i].Role ||
+                                s.Personality != scenario.ListStakeholders[i].Personality
+                            ).Any()
+                        );
+
+                        if (!isDuplicate) Scenarios.Add(scenario);
+
                     }
+                    
                 }
-            }
-            else if (CustomPictureBoxName == "export")
-            {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                {
+
+            } else if (CustomPictureBoxName == "export") {
+
+                // Allows the user to export all scenarios to a JSON file
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
+
                     saveFileDialog.Title = "Export Scenarios";
                     saveFileDialog.Filter = "JSON Files (*.json)|*.json";
                     saveFileDialog.FileName = "Scenarios_Requirements_Game.json";
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+
                         string selectedPath = saveFileDialog.FileName;
                         Scenarios.SaveToFile(selectedPath, Scenarios.GetScenarios().ToList());
+
                     }
                 }
 
-            }
-            else if (CustomPictureBoxName == "manual")
-            {
-                try
-                {
+            } else if (CustomPictureBoxName == "manual") {
+
+                // Opens the embedded User Manual PDF using the system's default PDF viewer
+
+                try {
+
                     string tempPath = Path.Combine(Path.GetTempPath(), "UserManual.pdf");
                     File.WriteAllBytes(tempPath, Resources.UserManual); // Embedded PDF as byte[]
 
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo {
                         FileName = tempPath,
                         UseShellExecute = true
                     });
-                }
-                catch (Exception ex)
-                {
+
+                } catch (Exception ex) {
+
                     MessageBox.Show("Unable to open manual: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
+
             }
 
         }
