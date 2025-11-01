@@ -1,13 +1,3 @@
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.AssemblyReference.cache
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Form1.resources
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Properties.Resources.resources
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.GenerateResource.cache
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.CoreCompileInputs.cache
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Requirements Game.exe.config
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Requirements Game.exe
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Requirements Game.pdb
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.exe
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.pdb
 C:\Users\jarron.eckford\Downloads\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.AssemblyReference.cache
 C:\Users\jarron.eckford\Downloads\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Form1.resources
 C:\Users\jarron.eckford\Downloads\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Properties.Resources.resources
@@ -28,29 +18,6 @@ C:\Users\Jarron Eckford\Documents\Requirements Game\Requirements Game\obj\Debug\
 C:\Users\Jarron Eckford\Documents\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.CoreCompileInputs.cache
 C:\Users\Jarron Eckford\Documents\Requirements Game\Requirements Game\obj\Debug\Requirements Game.exe
 C:\Users\Jarron Eckford\Documents\Requirements Game\Requirements Game\obj\Debug\Requirements Game.pdb
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Buffers.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.CodeDom.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.IO.Pipelines.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Memory.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Encodings.Web.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Json.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.ValueTuple.dll
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Buffers.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.CodeDom.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.IO.Pipelines.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Memory.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Encodings.Web.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Json.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.ValueTuple.xml
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.CopyComplete
 C:\Users\jarron.eckford\Downloads\Project 02-09-2025\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.AssemblyReference.cache
 C:\Users\jarron.eckford\Downloads\Project 02-09-2025\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Form1.resources
 C:\Users\jarron.eckford\Downloads\Project 02-09-2025\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Properties.Resources.resources
@@ -203,5 +170,38 @@ C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin
 C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ScenarioDetailsPage.png
 C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_ScenarioSelectionPage.png
 C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\Help_TitlePage.png
-C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\manual.png
 C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\packages.config
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Resources\manual.png
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Requirements Game.exe.config
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Requirements Game.exe
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Requirements Game.pdb
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Buffers.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.CodeDom.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.IO.Pipelines.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Memory.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Json.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.ValueTuple.dll
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Buffers.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.CodeDom.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.IO.Pipelines.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Memory.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Text.Json.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\bin\Debug\System.ValueTuple.xml
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.AssemblyReference.cache
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Form1.resources
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements_Game.Properties.Resources.resources
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.GenerateResource.cache
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.CoreCompileInputs.cache
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.csproj.CopyComplete
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.exe
+C:\Users\Jarron Eckford\Desktop\Programs\Requirements Game\Requirements Game\obj\Debug\Requirements Game.pdb
