@@ -31,6 +31,24 @@ public class ChatLog : Panel {
     /// </summary>
     public void SendMessage(string message, MessageActor actor) {
 
+        // Remove whitespace and random characters from start of message
+
+        int messageStartIndex = 0;
+
+        foreach (char character in message.ToCharArray()) {
+
+            if (char.IsLetterOrDigit(character)) break;
+
+            messageStartIndex++;
+
+        }
+
+        message = message.Substring(messageStartIndex).TrimEnd();
+
+        if (message.Length == 0) message = "...";
+
+        // Get action string name
+
         string actorName = actor == MessageActor.System ? "System" : "User";
 
         // Start a new bubble group if this is the first message or the actor changed

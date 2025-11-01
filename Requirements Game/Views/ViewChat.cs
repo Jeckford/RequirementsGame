@@ -4,9 +4,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Management;
 using System.Windows.Forms;
 
+/// <summary>
+/// Chat view panel that hosts persona selection, a streaming chat log,
+/// and a requirements capture workspace. Binds to the currently selected
+/// scenario and switches context per persona with separate histories.
+/// </summary>
 public class ViewChat : Panel {
 
     private ChatLog ChatLog;
@@ -16,20 +20,23 @@ public class ViewChat : Panel {
     private string _personaKey;
     private ProfileLabel _selectedProfileLabel;
 
+    /// <summary>
+    /// Builds the full chat UI: persona list (left), chat area (right),
+    /// requirements panel, and event wiring. Requires an active scenario.
+    /// </summary>
     public ViewChat() {
+
+        // View properties
 
         this.Dock = DockStyle.Fill;
         this.Margin = new Padding(0);
-
-        // A scenario must be selected before constructing ViewChat
-        _activeScenario = GlobalVariables.CurrentScenario
-            ?? throw new InvalidOperationException("No scenario selected before opening Chat.");
-
-        //
-
         this.BackColor = Color.White;
 
-        // Main Divider
+        // A scenario must be selected before constructing ViewChat
+
+        _activeScenario = GlobalVariables.CurrentScenario ?? throw new InvalidOperationException("No scenario selected before opening Chat.");
+
+        // Main Layout
 
         CustomTableLayoutPanel verticalDivider = new CustomTableLayoutPanel();
         verticalDivider.Dock = DockStyle.Fill;
@@ -47,18 +54,37 @@ public class ViewChat : Panel {
 
         // Divider
 
-        Panel mainDivider = new Panel();
-        mainDivider.Dock = DockStyle.Fill;
-        mainDivider.Margin = new Padding(0);
-        mainDivider.BackColor = GlobalVariables.ColorLight;
+        Panel mainDividerLine = new Panel();
+        mainDividerLine.Dock = DockStyle.Fill;
+        mainDividerLine.Margin = new Padding(0);
+        mainDividerLine.BackColor = GlobalVariables.ColorLight;
 
-        verticalDivider.Controls.Add(mainDivider, 1, 0);
+        verticalDivider.Controls.Add(mainDividerLine, 1, 0);
 
         // Left Panel
+
+        ViewChat_CreateLeftPanel(verticalDivider);
+
+        // Right Panel
+
+        ViewChat_CreateRightPanel(verticalDivider);
+
+    }
+
+    /// <summary>
+    /// Builds and initialises the left-hand panel of the chat interface.  
+    /// Includes the “Chats” header label, dynamic list of stakeholder profiles  
+    /// (generated from the active scenario), a divider, and a fixed Senior Software Engineer profile
+    /// </summary>
+    private void ViewChat_CreateLeftPanel(CustomTableLayoutPanel verticalDivider) {
+
+        // Create the left-side layout panel that will contain all sidebar elements
 
         CustomTableLayoutPanel leftPanel = new CustomTableLayoutPanel();
         leftPanel.Dock = DockStyle.Fill;       
         leftPanel.Margin = new Padding(0);
+
+        // Define column and row layout structure
 
         leftPanel.ColumnCount = 1;
         leftPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
@@ -71,7 +97,7 @@ public class ViewChat : Panel {
 
         verticalDivider.Controls.Add(leftPanel, 0, 0);
 
-        // Left Panel - Chat Label
+        // Chats Header Label
 
         Label chatsLabel = new Label();
         chatsLabel.Text = "Chats";
@@ -83,7 +109,7 @@ public class ViewChat : Panel {
        
         leftPanel.Controls.Add(chatsLabel, 0, 0);
 
-        // Left Panel - Profile List (dynamic from Scenario)
+        // Dynamic Profile List Section
 
         Panel profilePanel = new Panel();
         profilePanel.Dock = DockStyle.Fill;
@@ -91,83 +117,71 @@ public class ViewChat : Panel {
 
         leftPanel.Controls.Add(profilePanel, 0, 1);
 
-        // Divider
+        BuildProfilePanel(profilePanel); // Dynamically populate the profile list with scenario stakeholders
 
-        Panel LeftPanelDivider = new Panel();
-        LeftPanelDivider.Dock = DockStyle.Fill;
-        LeftPanelDivider.Margin = new Padding(0);
-        LeftPanelDivider.BackColor = GlobalVariables.ColorLight;
+        // Divider Line Between Sections
 
-        leftPanel.Controls.Add(LeftPanelDivider, 0, 2);
+        Panel LeftPanelDividerLine = new Panel();
+        LeftPanelDividerLine.Dock = DockStyle.Fill;
+        LeftPanelDividerLine.Margin = new Padding(0);
+        LeftPanelDividerLine.BackColor = GlobalVariables.ColorLight;
 
-        // Build a list of profiles from the active scenario
-        var profileTuples = new List<(string Name, string Role, Bitmap Img, Stakeholder Person)>();
+        leftPanel.Controls.Add(LeftPanelDividerLine, 0, 2);
 
-        if (_activeScenario != null)
-        {
-            // Validate each stakeholder has name/role, then add a display tuple with:
-            // Name, role, and generated initials avatar
-            foreach (var s in _activeScenario.GetStakeholders())
-            {
-                if (string.IsNullOrWhiteSpace(s.Name) || string.IsNullOrWhiteSpace(s.Role))
-                    throw new InvalidOperationException("Stakeholder must have Name and Role.");
-
-                profileTuples.Add((s.Name, s.Role, MakeAvatarBitmap(s.Name), s));
-            }
-
-        }
-        profileTuples.Reverse();
-
-        foreach (var p in profileTuples)
-        {
-            var profileLabel = new ProfileLabel();
-            profileLabel.Dock = DockStyle.Top;
-            profileLabel.ProfileName = p.Name;
-            profileLabel.ProfileShortDescription = p.Role;
-            profileLabel.ProfileImage = p.Img;
-
-            // Store the Stakeholder so the click handler can switch personas without re-looking it up
-            profileLabel.Tag = p.Person;
-
-            profileLabel.Cursor = Cursors.Hand;
-            AttachClickRecursive(profileLabel, PersonaLabel_Click);
-            profilePanel.Controls.Add(profileLabel);
-        }
-
-        // Left Panel - Senior Software Engineer
+        // Senior Software Engineer Profile
 
         var seniorEngLabel = new ProfileLabel();
         seniorEngLabel.Dock = DockStyle.Top;
 
-        // Must exist and be complete (fail fast if not)
-        var sse = Scenario.SeniorSoftwareEngineer
-                  ?? throw new InvalidOperationException("Scenario has no Senior Software Engineer.");
+        // Ensure the Senior Software Engineer is defined and valid before proceeding
+
+        var sse = Scenario.SeniorSoftwareEngineer ?? throw new InvalidOperationException("Scenario has no Senior Software Engineer.");
+        
         if (string.IsNullOrWhiteSpace(sse.Name) || string.IsNullOrWhiteSpace(sse.Role))
             throw new InvalidOperationException("Senior Software Engineer must have Name and Role.");
+
+        // Set profile display details (name, role, and generated avatar)
 
         seniorEngLabel.ProfileName = sse.Name;
         seniorEngLabel.ProfileShortDescription = sse.Role;
         seniorEngLabel.ProfileImage = MakeAvatarBitmap(sse.Name);
 
-        seniorEngLabel.Tag = sse; // Store persona like with Stakeholders
+        // Store persona like with Stakeholders
+
+        seniorEngLabel.Tag = sse;
+
+        // Make the label clickable to switch persona
 
         seniorEngLabel.Cursor = Cursors.Hand;
         AttachClickRecursive(seniorEngLabel, PersonaLabel_Click);
 
+        // Add the Senior Software Engineer profile to the bottom of the left panel
+
         leftPanel.Controls.Add(seniorEngLabel, 0, 3);
 
-        // Right Panel
+    }
+
+    /// <summary>
+    /// Builds and initialises the right-hand side of the ViewChat panel,
+    /// which contains both the chat interface (messages, persona header, input box)
+    /// and the requirements section.
+    /// </param>
+    private void ViewChat_CreateRightPanel(CustomTableLayoutPanel verticalDivider) {
+
+        // Create the main right panel that holds the chat area (top) and requirements section (bottom)
 
         var rightPanel = new CustomTableLayoutPanel();
         rightPanel.Dock = DockStyle.Fill;
-        rightPanel.ColumnCount = 1;        
+        rightPanel.ColumnCount = 1;
         rightPanel.Margin = new Padding(0);
         rightPanel.RowCount = 2;
         rightPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f)); // Top: chat log + input
         rightPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 260f)); // Bottom: persistent
         verticalDivider.Controls.Add(rightPanel, 2, 0);
 
-        // Top Section: Chat log + Message input
+        // -- Chat Area Setup --
+        // Create layout for chat header, divider, chat log, and message input
+
         var chatAreaPanel = new CustomTableLayoutPanel();
         chatAreaPanel.Dock = DockStyle.Fill;
         chatAreaPanel.ColumnCount = 1;
@@ -178,16 +192,19 @@ public class ViewChat : Panel {
         chatAreaPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 26f));  // Chat
         rightPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 80f));  // Other
 
-        // Header with current persona
+        // -- Header with current persona --
         // Scenario must already be chosen before opening ViewChat, exception if not
+
         _activeScenario = GlobalVariables.CurrentScenario
             ?? throw new InvalidOperationException("No scenario selected.");
 
         // Scenario must define a SSE, exception if missing
+
         _activePersona = Scenario.SeniorSoftwareEngineer
             ?? throw new InvalidOperationException("Scenario missing Senior Software Engineer.");
 
         // Create the large persona header shown on the top right panel
+
         _selectedProfileLabel = new ProfileLabel { Dock = DockStyle.Fill };
         _selectedProfileLabel.ProfileName = _activePersona.Name;
         _selectedProfileLabel.ProfileShortDescription = _activePersona.Role;
@@ -195,16 +212,17 @@ public class ViewChat : Panel {
 
         chatAreaPanel.Controls.Add(_selectedProfileLabel, 0, 0);
 
-        // Divider
+        // Add a light divider line below the profile header
 
-        Panel rightPanelDivider = new Panel();
-        rightPanelDivider.Dock = DockStyle.Fill;
-        rightPanelDivider.Margin = new Padding(0);
-        rightPanelDivider.BackColor = GlobalVariables.ColorLight;
+        Panel rightPanelDividerLine = new Panel();
+        rightPanelDividerLine.Dock = DockStyle.Fill;
+        rightPanelDividerLine.Margin = new Padding(0);
+        rightPanelDividerLine.BackColor = GlobalVariables.ColorLight;
 
-        chatAreaPanel.Controls.Add(rightPanelDivider, 0, 1);
+        chatAreaPanel.Controls.Add(rightPanelDividerLine, 0, 1);
 
-        // Chat log
+        // -- Chat Log Setup --
+        // Create and dock the chat log panel (shows conversation bubbles)
 
         ChatLog = new ChatLog();
         ChatLog.Dock = DockStyle.Fill;
@@ -216,7 +234,8 @@ public class ViewChat : Panel {
         var sysPrompt = BuildPersonaSystemPrompt(_activeScenario, _activePersona);
         LLMServerClient.ActivatePersona(_personaKey, sysPrompt); LoadChatForCurrentPersona();
 
-        // Message input
+        // -- Message Input Setup --
+        // Create a text box for user message input
 
         TextBox messageTextBox = new TextBox();
         messageTextBox.Dock = DockStyle.Fill;
@@ -224,36 +243,57 @@ public class ViewChat : Panel {
         messageTextBox.Font = new Font(GlobalVariables.AppFontName, 12, FontStyle.Regular);
         chatAreaPanel.Controls.Add(messageTextBox, 0, 3);
 
+        // Hook key events for sending messages or handling editing shortcuts
+
         messageTextBox.PreviewKeyDown += MessageTextBox_PreviewKeyDown;
         messageTextBox.KeyDown += TxtRequirement_KeyDown;
 
         rightPanel.Controls.Add(chatAreaPanel, 0, 0);
 
+        // -- Requirements Section --
+        // Create and attach the persistent requirements section below the chat area
+
+        ViewChat_CreateRightPanel_AddRequirementsSection(rightPanel);
+
+    }
+
+    /// <summary>
+    /// Adds the “Requirements” section to the right panel of ViewChat.
+    /// This builds a stacked layout containing:
+    /// a requirements grid, a free-text input box, and a bottom row with a type
+    /// selector (Functional / Non-Functional) plus Delete, Add, Submit, and Export buttons.
+    /// It restores any persona-specific requirements from memory, wires up handlers
+    /// to add/remove rows, submit the compiled list to the LLM (with streamed replies),
+    /// and export the requirements to a text file.
+    /// </summary>
+    private void ViewChat_CreateRightPanel_AddRequirementsSection(CustomTableLayoutPanel RightPanel) {
+
         // Requirements Panel 
 
-        var persistentPanel = new Panel
-        {
+        var persistentPanel = new Panel {
             Dock = DockStyle.Fill,
             BackColor = Color.White,
             Padding = new Padding(20, 16, 20, 16)
         };
 
         // Vertical stack that lays out the grid, textbox, bottom row (drop down & buttons)
-        var reqStack = new TableLayoutPanel
-        {
+
+        var reqStack = new TableLayoutPanel {
             Dock = DockStyle.Fill,
             ColumnCount = 1,
             Padding = new Padding(0),
             AutoSize = true,
             AutoSizeMode = AutoSizeMode.GrowAndShrink
         };
+
         reqStack.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
         reqStack.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Grid
         reqStack.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Textbox
         reqStack.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Drop down & Buttons
 
         // Requirements grid
-        DataGridView gridRequirements = CreateRequirementsGrid();
+
+        DataGridView gridRequirements = GetRequirementsGrid();
         gridRequirements.Dock = DockStyle.Top;
         gridRequirements.Height = 150;
         gridRequirements.Margin = new Padding(0, 0, 0, 12);
@@ -261,18 +301,17 @@ public class ViewChat : Panel {
         reqStack.Controls.Add(gridRequirements, 0, 0);
 
         // Restore previous requirements for this persona
-        if (GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var saved))
-        {
+
+        if (GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var saved)) {
             foreach (var (type, text) in saved)
                 gridRequirements.Rows.Add(true, type, text);
 
             gridRequirements.ClearSelection();
         }
 
-
         // Requirement input textbox
-        TextBox txtRequirement = new TextBox
-        {
+
+        TextBox txtRequirement = new TextBox {
             Dock = DockStyle.Top,
             Font = new Font(GlobalVariables.AppFontName, 10, FontStyle.Regular),
             Margin = new Padding(0, 0, 0, 12),
@@ -283,8 +322,8 @@ public class ViewChat : Panel {
         txtRequirement.KeyDown += TxtRequirement_KeyDown;
 
         // Bottom row: Drop down + buttons
-        TableLayoutPanel bottomRow = new TableLayoutPanel
-        {
+
+        TableLayoutPanel bottomRow = new TableLayoutPanel {
             Dock = DockStyle.Top,
             AutoSize = true,
             AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -303,10 +342,10 @@ public class ViewChat : Panel {
 
         // Type selector
         // Create the ComboBox
-        ComboBox cmbType = new ComboBox
-        {
+
+        ComboBox cmbType = new ComboBox {
             DropDownStyle = ComboBoxStyle.DropDownList,
-            DrawMode = DrawMode.OwnerDrawFixed, 
+            DrawMode = DrawMode.OwnerDrawFixed,
             Width = 160,
             Margin = new Padding(0, 0, 12, 0),
             TabIndex = 1,
@@ -314,14 +353,15 @@ public class ViewChat : Panel {
         };
 
         // Add real items (no placeholder item)
+
         cmbType.Items.AddRange(new object[] { "Functional", "Non-Functional" });
         cmbType.SelectedIndex = -1;
 
         // Draw placeholder when no selection
-        cmbType.DrawItem += (s, e) =>
-        {
-            // Nothing to draw
-            if (e.Index < -1) return;
+
+        cmbType.DrawItem += (s, e) => {
+                     
+            if (e.Index < -1) return; // Nothing to draw
 
             bool hasSelection = cmbType.SelectedIndex >= 0;
             bool isEditPortion = (e.State & DrawItemState.ComboBoxEdit) == DrawItemState.ComboBoxEdit;
@@ -330,8 +370,8 @@ public class ViewChat : Panel {
                                   !isEditPortion;
 
             // Placeholder (no selection, edit portion)
-            if (e.Index < 0 && !hasSelection)
-            {
+
+            if (e.Index < 0 && !hasSelection) {
                 using (var bg = new SolidBrush(cmbType.BackColor))
                     e.Graphics.FillRectangle(bg, e.Bounds);
 
@@ -342,8 +382,8 @@ public class ViewChat : Panel {
             }
 
             // Edit area showing current selection (no highlight)
-            if (e.Index < 0 && hasSelection)
-            {
+
+            if (e.Index < 0 && hasSelection) {
                 using (var bg = new SolidBrush(cmbType.BackColor))
                     e.Graphics.FillRectangle(bg, e.Bounds);
 
@@ -354,16 +394,18 @@ public class ViewChat : Panel {
             }
 
             // Items in the dropdown list
-            if (isHoverInList)
-            {
+
+            if (isHoverInList) {
+
                 // Hovered item - show highlight
+
                 e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
                 using (var brush = new SolidBrush(SystemColors.HighlightText))
                     e.Graphics.DrawString(cmbType.GetItemText(cmbType.Items[e.Index]), e.Font, brush, e.Bounds);
-            }
-            else
-            {
+            } else {
+
                 // Non-hovered item - normal background
+
                 using (var bg = new SolidBrush(cmbType.BackColor))
                     e.Graphics.FillRectangle(bg, e.Bounds);
 
@@ -373,25 +415,29 @@ public class ViewChat : Panel {
         };
 
         // Ensure placeholder repaints when value changes
+
         cmbType.SelectedIndexChanged += (s, e) => cmbType.Invalidate();
 
         // Delete button
-        CustomTextButton btnRemove = CreatePillButton("Delete");
+
+        CustomTextButton btnRemove = GetPillButton("Delete");
         btnRemove.Margin = new Padding(0, 0, 12, 0);
         btnRemove.TabIndex = 2;
 
         // Add button
-        CustomTextButton btnAdd = CreatePillButton("Add");
+
+        CustomTextButton btnAdd = GetPillButton("Add");
         btnAdd.Margin = new Padding(0, 0, 12, 0);
         btnAdd.TabIndex = 3;
 
         // Submit button
-        _btnSubmit = CreatePillButton("Submit");
+
+        _btnSubmit = GetPillButton("Submit");
         _btnSubmit.TabIndex = 4;
         UpdateSubmitVisibility(); // Show/hide based on active persona
-        
+
         // Export button
-        CustomTextButton btnExport = CreatePillButton("Export");
+        CustomTextButton btnExport = GetPillButton("Export");
         btnExport.Margin = new Padding(0, 0, 12, 0);
         btnExport.TabIndex = 5;
 
@@ -416,84 +462,6 @@ public class ViewChat : Panel {
 
         persistentPanel.Controls.Add(reqStack);
 
-        // Helper factories
-        DataGridView CreateRequirementsGrid()
-        {
-            var grid = new DataGridView
-            {
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AllowUserToResizeColumns = false,
-                AllowUserToResizeRows = false,
-                RowHeadersVisible = false,
-                SelectionMode = DataGridViewSelectionMode.CellSelect,
-                MultiSelect = false,
-                AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells,
-                BackgroundColor = Color.White,
-                ColumnHeadersVisible = true,
-                EnableHeadersVisualStyles = false,
-                ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single,
-                ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
-                CellBorderStyle = DataGridViewCellBorderStyle.None,
-                Margin = new Padding(0, 0, 0, 0),
-                TabIndex = 5,
-                AccessibleName = "Requirements grid"
-            };
-
-            var colCheck = new DataGridViewCheckBoxColumn
-            {
-                Name = "colSelect",
-                HeaderText = "",
-                Width = 40,
-                SortMode = DataGridViewColumnSortMode.NotSortable
-            };
-
-            var colType = new DataGridViewTextBoxColumn
-            {
-                Name = "colType",
-                HeaderText = "Type",
-                Width = 120,
-                ReadOnly = true,
-                SortMode = DataGridViewColumnSortMode.NotSortable
-            };
-
-            var colDescription = new DataGridViewTextBoxColumn
-            {
-                Name = "colDescription",
-                HeaderText = "Requirement",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                ReadOnly = true,
-                SortMode = DataGridViewColumnSortMode.NotSortable
-            };
-
-            grid.Columns.AddRange(colCheck, colType, colDescription);
-
-            var hdr = grid.ColumnHeadersDefaultCellStyle;
-            hdr.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            hdr.ForeColor = Color.Black;
-            hdr.Padding = new Padding(6, 8, 6, 8);
-
-            return grid;
-        }
-
-        CustomTextButton CreatePillButton(string text)
-        {
-            return new CustomTextButton {
-                Text = text,
-                AutoSize = true,
-                Dock = DockStyle.None,
-                Anchor = AnchorStyles.Left | AnchorStyles.Top,
-                Font = new Font(GlobalVariables.AppFontName, 9f),
-                Padding = new Padding(10, 4, 10, 4),
-                Margin = new Padding(0),
-                BackColor = Color.FromArgb(50, 50, 50),
-                InteractionEffect = ButtonInteractionEffect.Lighten,
-                ForeColor = Color.White,
-                CornerRadius = 12,
-                AccessibleName = text + " button"
-            };
-        }
-
         // Assemble the stack
         reqStack.Controls.Add(gridRequirements, 0, 0);
         reqStack.Controls.Add(txtRequirement, 0, 1);
@@ -501,9 +469,12 @@ public class ViewChat : Panel {
 
         UpdateSubmitVisibility();
 
-        // Event Handlers
-        btnAdd.Click += (s, e) =>
-        {
+        // -- Event Handlers --
+
+        // Add button event
+
+        btnAdd.Click += (s, e) => {
+
             var text = txtRequirement.Text.Trim();
             if (string.IsNullOrEmpty(text)) return;
             var type = cmbType.SelectedItem?.ToString() ?? "Functional";
@@ -515,26 +486,26 @@ public class ViewChat : Panel {
             gridRequirements.ClearSelection();
 
             // Persist this requirement per persona key (not scenario)
-            if (!GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var list))
-            {
+            if (!GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var list)) {
                 list = new List<(string Type, string Text)>();
                 GlobalVariables.PersonaRequirements[_personaKey] = list;
             }
 
             list.Add((type, text));
+
         };
 
-        btnRemove.Click += (s, e) =>
-        {
+        // Remove button event
+
+        btnRemove.Click += (s, e) => {
+
             if (!GlobalVariables.PersonaRequirements.TryGetValue(_personaKey, out var list))
                 return;
 
-            for (int i = gridRequirements.Rows.Count - 1; i >= 0; i--)
-            {
+            for (int i = gridRequirements.Rows.Count - 1; i >= 0; i--) {
                 var row = gridRequirements.Rows[i];
                 if (row.Cells[0] is DataGridViewCheckBoxCell chk &&
-                    chk.Value is bool isChecked && isChecked)
-                {
+                    chk.Value is bool isChecked && isChecked) {
                     string type = row.Cells[1].Value?.ToString();
                     string desc = row.Cells[2].Value?.ToString();
 
@@ -544,8 +515,9 @@ public class ViewChat : Panel {
             }
         };
 
-        _btnSubmit.Click += (s, e) =>
-        {
+        // Submit button event
+
+        _btnSubmit.Click += (s, e) => {
 
             if (LLMServerClient.IsBusy) {
                 VisualMessageManager.ShowMessage("LLM is busy, please wait", true);
@@ -553,17 +525,17 @@ public class ViewChat : Panel {
             }
 
             // Build a message from all rows
+
             var lines = new List<string>();
-            foreach (DataGridViewRow row in gridRequirements.Rows)
-            {
+            foreach (DataGridViewRow row in gridRequirements.Rows) {
                 if (row.IsNewRow) continue;
 
                 // Column indices: 0 = checkbox, 1 = Type, 2 = Requirement
+
                 string type = row.Cells[1]?.Value?.ToString()?.Trim() ?? "";
                 string desc = row.Cells[2]?.Value?.ToString()?.Trim() ?? "";
 
-                if (!string.IsNullOrEmpty(desc))
-                {
+                if (!string.IsNullOrEmpty(desc)) {
                     var label = string.IsNullOrEmpty(type) ? "" : "[" + type + "] ";
                     lines.Add("- " + label + desc);
                 }
@@ -576,70 +548,76 @@ public class ViewChat : Panel {
             System.Diagnostics.Debug.WriteLine("Sending to LLM: " + msg);
 
             // Send into the chat using the same flow as Enter
+
             ChatLog.SendMessage(msg, ChatLog.MessageActor.User);
             ChatLog.SendMessage("...", ChatLog.MessageActor.System);
 
             // Persist into transcript
+
             List<GlobalVariables.ChatMsg> msgs3;
-            if (!GlobalVariables.PersonaChatLogs.TryGetValue(_personaKey, out msgs3))
-            {
+
+            if (!GlobalVariables.PersonaChatLogs.TryGetValue(_personaKey, out msgs3)) {
+
                 msgs3 = new List<GlobalVariables.ChatMsg>();
                 GlobalVariables.PersonaChatLogs[_personaKey] = msgs3;
+
             }
+
             msgs3.Add(new GlobalVariables.ChatMsg(ChatLog.MessageActor.User, msg));
 
             // Persona aware send
+
             var sendKey = _personaKey;
 
             // Background worker for LLM
+
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += delegate { LLMServerClient.SendMessage(sendKey, msg); };
             worker.RunWorkerAsync();
 
             // Persona aware timer for streaming reply
+
             var timer = new Timer { Interval = 100, Enabled = true, Tag = sendKey };
-            timer.Tick += (ts, te) =>
-            {
+            timer.Tick += (ts, te) => {
                 var t = (Timer)ts;
                 var key = (string)t.Tag;
 
                 string reply;
                 if (GlobalVariables.PersonaLiveReply.TryGetValue(key, out reply) &&
-                    !string.IsNullOrEmpty(reply))
-                {
-                    if (reply == "[DONE]")
-                    {
+                    !string.IsNullOrEmpty(reply)) {
+                    if (reply == "[DONE]") {
                         GlobalVariables.PersonaLiveReply[key] = "";
                         t.Dispose();
                         return;
                     }
 
                     // Persist into transcript
+
                     List<GlobalVariables.ChatMsg> list;
-                    if (!GlobalVariables.PersonaChatLogs.TryGetValue(key, out list))
-                    {
+                    if (!GlobalVariables.PersonaChatLogs.TryGetValue(key, out list)) {
                         list = new List<GlobalVariables.ChatMsg>();
                         GlobalVariables.PersonaChatLogs[key] = list;
                     }
 
-                    if (list.Count > 0 && list[list.Count - 1].Actor == ChatLog.MessageActor.System)
-                    {
+                    if (list.Count > 0 && list[list.Count - 1].Actor == ChatLog.MessageActor.System) {
+
                         // Append to last assistant reply
+
                         var old = list[list.Count - 1];
                         list[list.Count - 1] = new GlobalVariables.ChatMsg(
                             ChatLog.MessageActor.System,
                             old.Text + reply
                         );
-                    }
-                    else
-                    {
+
+                    } else {
+
                         // First system reply
                         list.Add(new GlobalVariables.ChatMsg(ChatLog.MessageActor.System, reply));
+
                     }
 
                     // Only update UI if persona is active
-                    if (key == _personaKey)
-                    {
+                    if (key == _personaKey) {
                         ChatLog.SendMessage(list[list.Count - 1].Text, ChatLog.MessageActor.System);
                     }
 
@@ -649,30 +627,26 @@ public class ViewChat : Panel {
             timer.Start();
         };
 
-        btnExport.Click += (s, e) =>
-        {
-            if (gridRequirements.Rows.Count == 0)
-            {
+        // Export button event
+
+        btnExport.Click += (s, e) => {
+            if (gridRequirements.Rows.Count == 0) {
                 MessageBox.Show("No requirements to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
                 saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
                 saveFileDialog.Title = "Export Requirements";
                 saveFileDialog.FileName = $"{_activeScenario.Name}_Requirements.txt";
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
-                    {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                    using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName)) {
                         writer.WriteLine($"Scenario: {_activeScenario.Name}");
                         writer.WriteLine("\nRequirements List");
                         writer.WriteLine(new string('-', 18));
 
-                        foreach (DataGridViewRow row in gridRequirements.Rows)
-                        {
+                        foreach (DataGridViewRow row in gridRequirements.Rows) {
                             if (row.IsNewRow) continue;
 
                             string type = row.Cells["colType"]?.Value?.ToString() ?? "";
@@ -690,27 +664,27 @@ public class ViewChat : Panel {
             }
         };
 
-
-
         // Alow checkbox click
+
         gridRequirements.SelectionMode = DataGridViewSelectionMode.CellSelect;
         gridRequirements.DefaultCellStyle.SelectionBackColor = gridRequirements.DefaultCellStyle.BackColor;
         gridRequirements.DefaultCellStyle.SelectionForeColor = gridRequirements.DefaultCellStyle.ForeColor;
 
         // Prevent selection when clicking the checkbox
-        gridRequirements.CellMouseDown += (s, e) =>
-        {
+
+        gridRequirements.CellMouseDown += (s, e) => {
+
             if (e.RowIndex >= 0 && e.ColumnIndex == 0) // Only for checkbox column
             {
                 gridRequirements.ClearSelection();
             }
+
         };
 
         // Toggle checkbox manually and clear selection
-        gridRequirements.CellContentClick += (s, e) =>
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
-            {
+
+        gridRequirements.CellContentClick += (s, e) => {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0) {
                 var cell = gridRequirements.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
                 bool value = cell.Value is bool b && b;
                 cell.Value = !value;
@@ -718,20 +692,146 @@ public class ViewChat : Panel {
             }
         };
 
-        rightPanel.Controls.Add(persistentPanel, 0, 1);
+        RightPanel.Controls.Add(persistentPanel, 0, 1);
 
     }
 
-    // Helpers:
+    /// <summary>
+    /// Populates the given panel with clickable ProfileLabel tiles for each stakeholder
+    /// in the active scenario (newest first), validating name/role and attaching persona
+    /// switch handlers. Generates initials-based avatars per stakeholder
+    /// </summary>
+    private void BuildProfilePanel(Panel ProfilePanel) {
 
-    // Persona Management
+        // Build a list of profiles from the active scenario
 
-    /* 
-     * Switch the current chat persona (updates header UI, activates LLM persona,
-     * reloads that persona’s transcript, and updates Submit visibility)
-     */
-    private void SetActivePersona(Stakeholder person)
-    {
+        var profileTuples = new List<(string Name, string Role, Bitmap Img, Stakeholder Person)>();
+
+        if (_activeScenario != null) {
+
+            // Validate each stakeholder has name/role, then add a display tuple with:
+            // Name, role, and generated initials avatar
+
+            foreach (var s in _activeScenario.GetStakeholders()) {
+                if (string.IsNullOrWhiteSpace(s.Name) || string.IsNullOrWhiteSpace(s.Role))
+                    throw new InvalidOperationException("Stakeholder must have Name and Role.");
+
+                profileTuples.Add((s.Name, s.Role, MakeAvatarBitmap(s.Name), s));
+            }
+
+        }
+
+        profileTuples.Reverse();
+
+        foreach (var p in profileTuples) {
+
+            var profileLabel = new ProfileLabel();
+            profileLabel.Dock = DockStyle.Top;
+            profileLabel.ProfileName = p.Name;
+            profileLabel.ProfileShortDescription = p.Role;
+            profileLabel.ProfileImage = p.Img;
+
+            // Store the Stakeholder so the click handler can switch personas without re-looking it up
+
+            profileLabel.Tag = p.Person;
+
+            profileLabel.Cursor = Cursors.Hand;
+            AttachClickRecursive(profileLabel, PersonaLabel_Click);
+            ProfilePanel.Controls.Add(profileLabel);
+
+        }
+
+    }
+
+    /// <summary>
+    /// Creates a compact “pill” style CustomTextButton with consistent typography,
+    /// padding, rounded corners, and accessible name, suitable for toolbar rows
+    /// </summary>
+    private CustomTextButton GetPillButton(string text) {
+        
+        return new CustomTextButton {
+            Text = text,
+            AutoSize = true,
+            Dock = DockStyle.None,
+            Anchor = AnchorStyles.Left | AnchorStyles.Top,
+            Font = new Font(GlobalVariables.AppFontName, 9f),
+            Padding = new Padding(10, 4, 10, 4),
+            Margin = new Padding(0),
+            BackColor = Color.FromArgb(50, 50, 50),
+            InteractionEffect = ButtonInteractionEffect.Lighten,
+            ForeColor = Color.White,
+            CornerRadius = 12,
+            AccessibleName = text + " button"
+        };
+
+    }
+
+    /// <summary>
+    /// Builds and returns a read-only requirements DataGridView with checkbox select,
+    /// Type, and Requirement columns, styled for compact headers and no row headers
+    /// </summary>
+    private DataGridView GetRequirementsGrid() {
+
+        var grid = new DataGridView {
+            AllowUserToAddRows = false,
+            AllowUserToDeleteRows = false,
+            AllowUserToResizeColumns = false,
+            AllowUserToResizeRows = false,
+            RowHeadersVisible = false,
+            SelectionMode = DataGridViewSelectionMode.CellSelect,
+            MultiSelect = false,
+            AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells,
+            BackgroundColor = Color.White,
+            ColumnHeadersVisible = true,
+            EnableHeadersVisualStyles = false,
+            ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single,
+            ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
+            CellBorderStyle = DataGridViewCellBorderStyle.None,
+            Margin = new Padding(0, 0, 0, 0),
+            TabIndex = 5,
+            AccessibleName = "Requirements grid"
+        };
+
+        var colCheck = new DataGridViewCheckBoxColumn {
+            Name = "colSelect",
+            HeaderText = "",
+            Width = 40,
+            SortMode = DataGridViewColumnSortMode.NotSortable
+        };
+
+        var colType = new DataGridViewTextBoxColumn {
+            Name = "colType",
+            HeaderText = "Type",
+            Width = 120,
+            ReadOnly = true,
+            SortMode = DataGridViewColumnSortMode.NotSortable
+        };
+
+        var colDescription = new DataGridViewTextBoxColumn {
+            Name = "colDescription",
+            HeaderText = "Requirement",
+            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+            ReadOnly = true,
+            SortMode = DataGridViewColumnSortMode.NotSortable
+        };
+
+        grid.Columns.AddRange(colCheck, colType, colDescription);
+
+        var hdr = grid.ColumnHeadersDefaultCellStyle;
+        hdr.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        hdr.ForeColor = Color.Black;
+        hdr.Padding = new Padding(6, 8, 6, 8);
+
+        return grid;
+    }
+
+    /// <summary>
+    /// Switches the active chat persona, updates the header card,
+    /// activates the LLM persona/system prompt, reloads that persona’s
+    /// transcript, and refreshes Submit button visibility.
+    /// </summary>
+    private void SetActivePersona(Stakeholder person) {
+
         _activePersona = person ?? _activePersona;
         _personaKey = GlobalVariables.PersonaKey(_activeScenario, _activePersona);
 
@@ -754,12 +854,11 @@ public class ViewChat : Panel {
         UpdateSubmitVisibility();
     }
 
-    /*
-     * Show/hide the Submit button depending on whether the current chat persona
-     * is the scenario’s SSE
-     */
-    private void UpdateSubmitVisibility()
-    {
+    /// <summary>
+    /// Shows or hides the Submit button depending on whether the
+    /// current persona is the scenario’s Senior Software Engineer.
+    /// </summary>
+    private void UpdateSubmitVisibility() {
         var sse = Scenario.SeniorSoftwareEngineer;
         bool isSse =
             ReferenceEquals(_activePersona, sse) ||
@@ -772,11 +871,12 @@ public class ViewChat : Panel {
         if (_btnSubmit != null) _btnSubmit.Visible = isSse;
     }
 
-    /*
-     * Clear the UI chat and re-render all messages stored for the active persona
-     */
-    private void LoadChatForCurrentPersona()
-    {
+    /// <summary>
+    /// Clears the chat UI and re-renders all stored transcript
+    /// messages for the currently active persona.
+    /// </summary>
+    private void LoadChatForCurrentPersona() {
+
         ChatLog.Clear();
 
         if (!GlobalVariables.PersonaChatLogs.TryGetValue(_personaKey, out var list)) return;
@@ -784,13 +884,13 @@ public class ViewChat : Panel {
             ChatLog.SendMessage(m.Text, m.Actor);
     }
 
-    /*
-     * Build the system prompt that instructs the LLM to role-play as the given persona
-     * inside the given scenario (Neutral fallback text if fields are empty)
-     */ 
-  
-    private string BuildPersonaSystemPrompt(Scenario scenario, Stakeholder persona)
-    {
+    /// <summary>
+    /// Builds a system prompt instructing the LLM to role-play as
+    /// the provided persona within the given scenario, including
+    /// style/rule constraints and SSE- or stakeholder-specific guidance.
+    /// </summary>
+    private string BuildPersonaSystemPrompt(Scenario scenario, Stakeholder persona) {
+
         if (scenario == null)
             scenario = new Scenario { Name = "Unnamed Scenario", Description = "" };
         if (persona == null)
@@ -891,18 +991,13 @@ public class ViewChat : Panel {
         }
     }
 
-        
-
-    // Event handlers
-    /*
-     * When user presses Enter in the input box:
-     * 1) show the user bubble + a placeholder system bubble,
-     * 2) persist the user message to this persona’s transcript,
-     * 3) ask the LLM in a background worker,
-     * 4) start a timer to stream partial replies into the UI.
-     */
-        private void MessageTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-    {
+    /// <summary>
+    /// Handles Enter/Return in the message textbox: posts the user
+    /// message, persists it to the persona transcript, dispatches it
+    /// to the LLM in a background worker, and starts a timer to stream
+    /// partial replies back into the UI.
+    /// </summary>
+    private void MessageTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
         if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Return) return;
         if (LLMServerClient.IsBusy) {
             VisualMessageManager.ShowMessage("LLM is busy, please wait", true);
@@ -935,10 +1030,10 @@ public class ViewChat : Panel {
         t.Start();
     }
 
-    /*
-     * Handle clicks on a persona profile tile, finds the ProfileLabel and
-     * switches the active chat persona to its bound Stakeholder
-     */
+    /// <summary>
+    /// Handles clicks on any persona tile (ProfileLabel or its children),
+    /// resolves the bound Stakeholder, and switches the active persona.
+    /// </summary>
     private void PersonaLabel_Click(object sender, EventArgs e)
     {
         var lbl = GetProfileLabelFromSender(sender);
@@ -946,12 +1041,13 @@ public class ViewChat : Panel {
             SetActivePersona(person);
     }
 
-    /*
-     * Read streamed chunks for the specific persona, append them
-     * to the transcript (and the last visible bubble), stop when “[DONE]”
-     */
-    private void TempTimer_Tick(object sender, EventArgs e)
-    {
+    /// <summary>
+    /// Timer tick handler that reads streamed partial LLM output for the
+    /// specific persona key, appends it to the transcript (and visible bubble
+    /// if active), and stops when a completion sentinel is received.
+    /// </summary>
+    private void TempTimer_Tick(object sender, EventArgs e) {
+
         var timer = (Timer)sender;
         var sendKey = (string)timer.Tag;  // Persona key stored in Tag
 
@@ -989,12 +1085,11 @@ public class ViewChat : Panel {
         }
     }
 
-    /*
-     * Send the message to the LLM with the correct
-     * persona key so the server uses the right system prompt/history
-     */
-    private void TempWorker_DoWork(object sender, DoWorkEventArgs e)
-    {
+    /// <summary>
+    /// Background worker entry point that sends a message to the LLM using
+    /// the provided persona key so the correct system prompt and history apply.
+    /// </summary>
+    private void TempWorker_DoWork(object sender, DoWorkEventArgs e) {
         var args = ((string, string))e.Argument;
         var sendKey = args.Item1;
         var message = args.Item2;
@@ -1003,34 +1098,32 @@ public class ViewChat : Panel {
 
     // UI helper utilities
 
-    /*
-     * Attach the same click handler to a root control and all of its descendants,
-     * so a click anywhere inside the visual element triggers the same action.
-     */
-    private void AttachClickRecursive(Control root, EventHandler handler)
-    {
+    /// <summary>
+    /// Recursively attaches a click handler to a root control and all of its
+    /// descendants so clicks anywhere inside trigger the same action.
+    /// </summary>
+    private void AttachClickRecursive(Control root, EventHandler handler) {
         root.Click += handler;
         foreach (Control child in root.Controls)
             AttachClickRecursive(child, handler);
     }
 
-    /*
-     * Starts from the clicked control (sender) and keeps checking its Parent
-     * until ProfileLabel is found, returns that ProfileLabel (or null if none)
-     */
-    private ProfileLabel GetProfileLabelFromSender(object sender)
-    {
+    /// <summary>
+    /// Travels up the control hierarchy from the sender to find the owning
+    /// ProfileLabel container for persona selection; returns null if none found.
+    /// </summary>
+    private ProfileLabel GetProfileLabelFromSender(object sender) {
         var c = sender as Control;
         while (c != null && !(c is ProfileLabel))
             c = c.Parent;
         return c as ProfileLabel;
     }
 
-    /*
-     * Create a circular avatar with initials from the name and a background colour
-     */
-    private Bitmap MakeAvatarBitmap(string name)
-    {
+    /// <summary>
+    /// Generates a circular avatar bitmap using initials derived from the
+    /// supplied name and a deterministic background color based on the name hash.
+    /// </summary>
+    private Bitmap MakeAvatarBitmap(string name) {
         string initials = "?";
         if (!string.IsNullOrWhiteSpace(name))
         {
@@ -1060,8 +1153,11 @@ public class ViewChat : Panel {
         return bmp;
     }
 
-    private void TxtRequirement_KeyDown(object sender, KeyEventArgs e)
-    {
+    /// <summary>
+    /// Textbox handler that implements Ctrl+Backspace behavior: deletes the
+    /// previous word (including preceding whitespace) without affecting other text.
+    /// </summary>
+    private void TxtRequirement_KeyDown(object sender, KeyEventArgs e) {
         var tb = sender as TextBox;
         if (e.KeyCode == Keys.Back && e.Control)
         {
