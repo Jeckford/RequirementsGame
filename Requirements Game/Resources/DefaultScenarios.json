@@ -1,0 +1,135 @@
+[
+  {
+    "Name": "Book Discussion Platform",
+    "Description": "The Book Discussion Platform is envisioned as a digital ecosystem where readers can come together to share insights, opinions, and emotions surrounding their reading experiences. It caters to book clubs, classroom reading groups, and casual communities of literature enthusiasts. \n\nThe platform will provide a unified space for reading progress tracking, collaborative annotations, and real-time discussions that simulate the atmosphere of in-person gatherings. Users will be able to create or join both private and public clubs, curate reading lists, and follow group milestones, such as chapter completion goals or scheduled discussions. Features like threaded chat, emoji reactions, and comment highlighting will keep conversations engaging yet organised. \n\nTo further enrich the shared experience, the system will allow participants to annotate book excerpts, attach media, and view aggregated community insights on popular passages. For organisers and moderators, administrative tools will include event scheduling, poll creation, and content moderation dashboards to maintain inclusivity and civility within groups. Accessibility and readability will be central to the design, ensuring that the platform encourages both social interaction and individual reflection without overwhelming users.",
+    "Prompt": "How can we design an engaging and modular interface that supports shared reading experiences while keeping discussions organised and inclusive?",
+    "ListStakeholders": [
+      {
+        "Name": "Jordan",
+        "Role": "UX Designer",
+        "Personality": "Empathetic and visual thinker who focuses on clarity and emotional connection in design."
+      },
+      {
+        "Name": "Samira",
+        "Role": "Community Manager",
+        "Personality": "Engaging, people-first, and feedback-driven; values accessibility, inclusivity, and active user participation."
+      },
+      {
+        "Name": "Alex Chen",
+        "Role": "Software Developer",
+        "Personality": "Analytical and detail-oriented, emphasises scalability, clean architecture, and responsive UI performance."
+      }
+    ],
+    "FunctionalRequirements": [
+      "The system shall allow users to create and join book clubs with private or public visibility settings.",
+      "The system shall support real-time chat with emoji reactions and threaded discussions.",
+      "The system shall provide progress tracking with percentage completion, chapter markers, and reading goals.",
+      "The system shall enable users to annotate book excerpts and share notes within a discussion thread.",
+      "The system shall allow organisers to schedule events, polls, and reading milestones."
+    ],
+    "NonFunctionalRequirements": [
+      "The system shall be responsive across desktop, tablet, and mobile browsers.",
+      "The system shall store user data securely and comply with privacy regulations (e.g., GDPR).",
+      "The system shall scale to support at least 1,000 concurrent users per discussion room.",
+      "The system shall maintain consistent performance, loading core pages within 2 seconds.",
+      "The interface shall meet WCAG 2.1 accessibility standards."
+    ]
+  },
+  {
+    "Name": "Astronomy Tracker",
+    "Description": "The Astronomy Tracker is a multi-platform educational and observational tool that empowers amateur astronomers, educators, and students to engage deeply with celestial phenomena. \n\nBeyond serving as a simple logbook, it acts as a bridge between science and exploration, allowing users to visualise and interact with astronomical data in real time. The system will enable users to record celestial events such as eclipses, meteor showers, and equinoxes, while offering predictive tools to calculate upcoming occurrences based on geographic coordinates and time zones. \n\nThrough intuitive graphs and interactive sky maps, the interface will visualise concepts like solar declination, planetary motion, and horizon geometry. Users can annotate celestial paths, overlay historical data, and export visuals or datasets for teaching, research, or club presentations. Educators can use these features to demonstrate complex astronomical patterns with clarity and interactivity, making abstract data more tangible for learners. \n\nThe systems offline functionality ensures usability in field environments, where network access is limited. It will be optimised for dark mode to preserve night vision and will maintain high accuracy in its predictive models. \n\nOverall, Astronomy Tracker aims to merge scientific precision with educational accessibility, inspiring curiosity and fostering collaboration within astronomy communities.",
+    "Prompt": "How can we design a teachable interface that visualises astronomical data clearly for both enthusiasts and students?",
+    "ListStakeholders": [
+      {
+        "Name": "Lena",
+        "Role": "Educational Designer",
+        "Personality": "Clarity-focused and pedagogically intuitive, passionate about making scientific data visually understandable."
+      },
+      {
+        "Name": "Dr. Tomas Rivera",
+        "Role": "Astronomy Lecturer",
+        "Personality": "Analytical and supportive, seeks educational tools that combine scientific accuracy with accessibility."
+      }
+    ],
+    "FunctionalRequirements": [
+      "The system shall allow users to log celestial events (e.g., meteor showers, eclipses, solstices).",
+      "The system shall provide interactive graphs showing solar declination and celestial paths over time.",
+      "The system shall calculate and predict equinoxes and solstices for any given year and location.",
+      "The system shall allow annotations on the sky map for educational demonstrations.",
+      "The system shall support exporting event logs and visual data as images or CSV files."
+    ],
+    "NonFunctionalRequirements": [
+      "The system shall support offline operation for data logging in field environments.",
+      "The interface shall be optimised for dark mode viewing to reduce light interference during observations.",
+      "The system shall function on web and mobile platforms with identical feature parity.",
+      "The system shall maintain 99.5% uptime and accurate calculations within a margin of \u00B10.5 degrees.",
+      "The visual interface shall remain clear and interactive even with datasets of over 10,000 data points."
+    ]
+  },
+  {
+    "Name": "StudySpace",
+    "Description": "During busy periods such as exam weeks, ECU students often struggle to find available study rooms or computers within the library. Many students spend significant time walking through different levels searching for a vacant seat or device, resulting in frustration, noise, and overcrowded areas. At the same time, library staff lack accurate data on room occupancy, computer availability, and peak usage patterns, making it difficult to manage demand or plan future expansions.\n\nComputer availability is only visible on-site, and students cannot reserve workstations in advance. This leads to frequent disputes over usage time, inefficient allocation of spaces, and poor accessibility for students with specific needs such as quiet areas.\n\nThe StudySpace system aims to provide a unified web and mobile application that enables students and staff to view real-time availability of study rooms, computers, and shared facilities across the library. Users can search by location, room type, group size, noise level, or equipment (e.g., whiteboards, screens, or power outlets). Students will be able to book individual computers or small rooms for study sessions, receive confirmation and reminders, and check in by scanning student ID upon arrival.\n\nThe system will update availability in real time as users check in or out, ensuring fair access and preventing double bookings. Integration with ECU\u2019s authentication service will allow students and staff to log in using their existing university accounts. Library staff will have an administrative dashboard to manage bookings, monitor current occupancy, and generate reports on usage trends, peak hours, and equipment utilisation.\n\nBy digitizing the booking process and improving visibility, StudySpace will help distribute library traffic more evenly, reduce congestion in high-demand zones, and enhance the overall study experience. The data gathered will also assist Facilities and Library Management in making informed decisions about space planning, technology upgrades, and service improvements.",
+    "Prompt": "How can we streamline the study room and computer booking process to improve access and reduce on-site congestion?",
+    "ListStakeholders": [
+      {
+        "Name": "Hannah Lee",
+        "Role": "Library Services Coordinator",
+        "Personality": "Formal"
+      },
+      {
+        "Name": "Ravi Patel",
+        "Role": "Facilities Technician",
+        "Personality": "Skeptical"
+      }
+    ],
+    "FunctionalRequirements": [
+      "The system shall allow users to authenticate using ECU Single Sign-On (SSO) credentials.",
+      "The system shall display real-time availability of study rooms, individual computers, and shared workspaces.",
+      "The system shall allow users to search for available spaces based on date, time, duration, group size, room type, and equipment features.",
+      "The system shall prevent double booking by automatically validating time overlaps before confirming reservations.",
+      "The system shall generate and send booking confirmation and reminder notifications to users via email or push message."
+    ],
+    "NonFunctionalRequirements": [
+      "The system must maintain at least 99.5% uptime during library operating hours.",
+      "The system must display updated availability data within 10 seconds of any booking, check-in, or cancellation.",
+      "The system must process booking requests within 2 seconds for 95% of transactions.",
+      "The system shall support at least 500 concurrent users across all ECU campuses."
+    ]
+  },
+  {
+    "Name": "PawfectMatch",
+    "Description": "PawfectMatch is a compassionate digital platform dedicated to improving the animal adoption process by uniting shelters, foster carers, volunteers, and adopters in one streamlined ecosystem. \n\nIts goal is to make pet adoption more transparent, efficient, and humane while supporting shelters in managing their day-to-day operations effectively. \n\nThrough the platform, shelters can maintain detailed animal profiles and update them dynamically as the animals progress through care stages. Prospective adopters can browse animals with rich filtering options such as breed, age, size, and compatibility with children or other pets, and then apply directly through the system. \n\nThe platform also manages foster placements and volunteer coordination, ensuring tasks like feeding, transport, or medical checkups are tracked and scheduled efficiently. Administrators can oversee donations, generate reports on adoption trends, and gain insights into animal welfare data to improve operations. \n\nPawfectMatch emphasises trust and transparency between shelters and adopters through clear communication channels, status tracking, and notifications. With a mobile-responsive design and accessibility compliance, it ensures that anyone can easily engage with the adoption journey from start to finish.",     
+    "Prompt": "How can we design an efficient and transparent adoption system that prioritises animal welfare while simplifying the process for users?",
+    "ListStakeholders": [
+      {
+        "Name": "Sarah Bennett",
+        "Role": "Shelter Manager",
+        "Personality": "Organised and compassionate; focuses on animal welfare and streamlined operations."
+      },
+      {
+        "Name": "Tom Rivera",
+        "Role": "Prospective Adopter",
+        "Personality": "Friendly and empathetic; values an easy application process and clear communication."
+      },
+      {
+        "Name": "Anita Patel",
+        "Role": "Volunteer Coordinator",
+        "Personality": "Practical and detail-oriented; needs efficient tools to schedule and manage volunteers."
+      }
+    ],
+    "FunctionalRequirements": [
+      "The system shall allow shelters to register animals with details such as name, breed, age, and medical history.",
+      "The system shall enable users to search and filter available animals by species, breed, location, and adoption status.",
+      "The system shall allow users to submit adoption applications and track their status.",
+      "The system shall allow shelters to schedule meetups, update adoption outcomes, and manage foster placements.",
+      "The system shall support online donations and display total contributions toward animal care."
+    ],
+    "NonFunctionalRequirements": [
+      "The system shall maintain 99.5% uptime to ensure shelters can operate daily without interruption.",
+      "All user and animal data shall be securely stored in compliance with data protection regulations.",
+      "The system shall load search results within 2 seconds for 90% of queries.",
+      "The interface shall be mobile-responsive and accessible to users with assistive technologies.",
+      "The system shall scale to support at least 200 shelters and 10,000 active users concurrently."
+    ]
+  }
+]

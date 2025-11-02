@@ -43,7 +43,7 @@ public class ViewHelp : View {
         // Hardcoded ordered filenames, include file extension
 
         string[] orderedFileNames = new[] {
-            "Help_TitlePage.png", // 1
+            "Help_TitlePage.png",
             "Help_ScenarioSelectionPage.png",
             "Help_ScenarioDetailsPage.png",
             "Help_ManageScenarioPage.png",
@@ -51,8 +51,8 @@ public class ViewHelp : View {
             "Help_EditScenarioPage.png",
             "Help_ChatPage_Left.png",
             "Help_ChatPage_Top.png",
-            "Help_ChatPage_bottom.png"
-
+            "Help_ChatPage_bottom.png",
+            "Help_ChatPage_SeniorDev.png"
         };
 
         string[] candidateDirs = new[] {
